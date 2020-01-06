@@ -112,4 +112,10 @@
     SELECT *
     FROM tb_user
   </select>
+
+    <select id="selectUserByUserNameAndPassword" parameterType="com.fiften.news.model.User" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM tb_user
+        WHERE user_name = #{userName} and password = #{password}
+    </select>
 </mapper>

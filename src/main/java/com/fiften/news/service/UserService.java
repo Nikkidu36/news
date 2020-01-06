@@ -9,4 +9,6 @@ public interface UserService {
     Result insertUser(User user);
 
     Result updateUser(User user);
+
+    Result hasUser(User user);
 }

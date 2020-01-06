@@ -57,4 +57,14 @@ public class UserServiceImpl  implements UserService {
             return Result.createByFailure(e.getMessage());
         }
     }
+
+    @Override
+    public Result hasUser(User user) {
+        User baseUser = userMapper.selectUserByUserNameAndPassword(user);
+        if (baseUser!=null){
+            return Result.createSuccessResult(user);
+        }else {
+            return Result.createByFailure("用户名或者密码错误");
+        }
+    }
 }
