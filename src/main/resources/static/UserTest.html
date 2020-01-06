@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+<from>
+    <input type="text" id="userName" placeholder="userName">
+    <input type="password" id="password" placeholder="password">
+    <input type="text" id="userId" placeholder="id">
+    <button id="insert">提交</button>
+    <button id="update">更新</button>
+</from>
+</body>
+<script>
+    $(function () {
+        $.ajax({
+            url: "/getUser",
+            type: "post",
+
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+            },
+            error: function () {
+                alert("请求错误");
+            }
+        })
+
+
+        $("#insert").click(function () {
+            $.ajax({
+                url:"/insertUser",
+                type:"post",
+                data: {userName:$("#userName").val(),password:$("#password").val(),userId:$("#userId").val()},
+                dataType: "json",
+                success:function (res) {
+                    console.log(res)
+                }
+            })
+        })
+
+        $("#update").click(function () {
+            $.ajax({
+                url:"/updateUser",
+                type:"post",
+                data: {userName:$("#userName").val(),password:$("#password").val(),userId:$("#userId").val()},
+                dataType: "json",
+                success:function (res) {
+                    console.log(res)
+                }
+            })
+        })
+
+
+
+    })
+
+
+</script>
+</html>
