@@ -8,6 +8,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
          <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script type="text/javascript" src="js/login.js"></script>
+	<link rel="stylesheet" href="layui/css/layui.css">
+	<script src="layui/layui.js"></script>
 </head>
 <body>
 <script>
@@ -48,8 +50,12 @@
 						<input type="text" id="username" class="text" value="用户名" name="username">
 						<input type="text" id="password" name="password" value="密码">
 						<input type="password" id="password1" name="password1" value="password" style="display: none;">
-						<div class="submit">
-						<input type="button" value="登陆" id="loginBtn">
+						<div class="submit" style="border: #0c66ae 1px;
+    						width: 20%;
+    						margin-left: 40%;
+    						height: 40%;
+   							">
+						<input type="button" class="layui-btn" value="登陆" id="loginBtn">
 					</div>	
 					<p>
 						<a href="#">忘记密码 ?</a> &nbsp;&nbsp;&nbsp;
