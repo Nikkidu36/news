@@ -1,3 +1,4 @@
+
 //post请求封装
 function ajaxPost(url, data, fun) {
     $.ajax({
@@ -6,7 +7,7 @@ function ajaxPost(url, data, fun) {
         data: data,
         dataType: "json",
         success: fun,
-        header:getCookies("token"),
+        async:false,
         error: function () {
             alert("请求错误");
         }
@@ -21,7 +22,7 @@ function ajaxPostJson(url,data,fun) {
         dataType: "json",
         contentType:"application/json",
         success: fun,
-        header:getCookies("token"),
+
         error: function () {
             alert("请求错误");
         }
@@ -43,7 +44,7 @@ function RequestParameter() {
     return theRequest
 }
 
-// 先映入jquery-cookies.js
+//先映入jquery-cookies.js
 function getCookies(key) {
     return $.cookie(key)
 }
