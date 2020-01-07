@@ -9,5 +9,4 @@ import com.fiften.news.util.Result;
 
 public interface LoginService {
      Result doLogin(String userName,String password);
-
 }
