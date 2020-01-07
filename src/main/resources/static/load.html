@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>登陆</title>
 		<meta charset="utf-8">
@@ -34,45 +33,44 @@
 								window.location = "/users/users_index.html?userName="+res.data.user.userName
 							},3000)
 						});
+					}
+					if (res.data.flag == 2){
+						setCookies("token",res.data.token)
+						layui.use('layer', function(){
+							var layer = layui.layer;
 
-
+							layer.alert('媒体你好，登录成功');
+							setTimeout(function () {
+								window.location = "/Media_index.html"
+							},3000)
+						});
+					}
+					if (res.data.flag == 3){
+						if(res.data.manager.type==="news_manager"){
+							setCookies("token",res.data.token)
+							layui.use('layer', function(){
+								var layer = layui.layer;
+								layer.alert('新闻管理员你好，登录成功');
+								setTimeout(function () {
+									window.location = "newsManager/newsManager_index.html"
+								},3000)
+							});
+						}
+						if(res.data.manager.type==="user_manager"){
+							setCookies("token",res.data.token)
+							layui.use('layer', function(){
+								var layer = layui.layer;
+								layer.alert('账号管理员你好，登录成功');
+								setTimeout(function () {
+									window.location = "user_manager_index.html"
+								},3000)
+							});
+						}
 					}
 				}else{
 					console.log("失败");
 				}
-
 			})
-            // $.ajax({
-            //     url: "/login",
-            //     type: "post",
-            //     data: {userName:$("#username").val(),password:$("#password1").val()},
-            //     dataType: "json",
-            //     success: function (res) {
-			//
-            //         if(res.code == 0){
-            //             console.log(res)
-			// 			if (res.data.flag == 1){
-			//
-			// 				layui.use('layer', function(){
-			// 					var layer = layui.layer;
-			//
-			// 					layer.alert('用户你好，登录成功');
-			// 					setTimeout(function () {
-			// 						window.location = "/users_index.html?userName="+res.data.user.userName
-			// 					},3000)
-			// 				});
-			//
-			//
-			// 			}
-            //         }else{
-            //             console.log("失败");
-            //         }
-			//
-            //     },
-            //     error: function () {
-            //         alert("请求错误");
-            //     }
-            // })
         })
 
     })
@@ -100,12 +98,9 @@
 					</p>
 				</form>
 			</div>
-			<!--//End-login-form-->
    			<div class="copy-right">
 				<p><a> &nbsp;&nbsp;&nbsp;Copyright &copy; 2020</a></p>
 			</div>
 		</div>
-			 <!-----//end-main---->
 </body>
-
 </html>
