@@ -11,4 +11,6 @@ public interface UserService {
     Result updateUser(User user);
 
     Result hasUser(User user);
+
+    User findUserById(int parseInt);
 }
