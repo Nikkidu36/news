@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="xxxxx">
+    <meta name="author" content="xxxxx">
+    <meta name="keyword" content="xxxxx">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>新闻详情</title>
+    <!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
+    <!-- plugins -->
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/simple-line-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
+    <link href="asset/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+
+</head>
+
+<body id="mimin" class="dashboard">
+<!-- start: Header -->
+<nav class="navbar navbar-default header navbar-fixed-top">
+    <div class="col-md-12 nav-wrapper">
+        <div class="navbar-header" style="width:100%;">
+            <div class="opener-left-menu is-open"> <span class="top"></span> <span class="middle"></span> <span class="bottom"></span> </div>
+            <a href="index.html" class="navbar-brand"> <b>返回首页</b> </a>
+            <ul class="nav navbar-nav navbar-right user-nav">
+                <li class="user-name"><span><%=username%></span></li>
+                <li class="dropdown avatar-dropdown"> <img src="asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+                    <ul class="dropdown-menu user-dropdown">
+                        <li><a href="#"><p value="<%=username%>" id="backli" onclick="back()"><span class="fa fa-power-off"></span> 退出登录</p></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- end: Header -->
+<div class="container-fluid mimin-wrapper">
+    <div id="left-menu">
+        <div class="sub-left-menu scroll">
+            <ul class="nav nav-list">
+                <li>
+                    <div class="left-bg"></div>
+                </li>
+                <li class="active ripple">
+                    <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 首页
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                </li>
+                <li class="ripple">
+                    <a href="auditNewslist.html" ><span class="fa fa-pencil fa-fw"></span>审核新闻
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                </li>
+                <li class="ripple">
+                    <a href="publishNewslist.html"><span class="fa fa-check-square-o"></span>发布新闻
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                </li>
+                <li class="ripple">
+                    <a href="rejectNewslist.html" ><span class="fa fa-ban fa-fw"></span>驳回新闻
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                </li>
+                <li class="ripple">
+                    <a href="deleteNewslist.html" ><span class="fa fa fa-trash-o fa-fw"></span>删除新闻
+                        <span class="fa-angle-right fa right-arrow text-right"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div id="content">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <h3 class="animated fadeInLeft">新闻详情</h3>
+                    <p class="animated fadeInDown"> 业务 <span class="fa-angle-right fa"></span> 审核新闻 </p>
+                </div>
+            </div>
+        </div>
+        <div class="form-element">
+            <div class="col-md-12 padding-0">
+                <div class="col-md-12">
+                    <div class="panel form-element-padding">
+                        <div class="panel-heading" style="text-align: center;">
+                            <h3><%=newsList.get(id).getNewsitem()%></h3>
+                            <p>作者：<%=newsList.get(id).getNewsauthor()%>&nbsp;&nbsp;&nbsp;&nbsp;发表日期：<%=newsList.get(id).getNewsdate()%></p>
+                        </div>
+                        <div class="panel-body" style="padding-bottom:30px;">
+                            <div class="panel-body-main">
+                                <%=readFile.getResultstr()%>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form class="layui-form">
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label" style="width: 100px; font-weight: bold;font-size: 15px;color:dodgerblue ">审核结果</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- end: content -->
+
+</div>
+<style>
+    .panel-body-main{
+        width: 60%;
+        height: 100%;
+        margin-left: 20%;
+        /*background-color: red;*/
+    }
+</style>
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>
+<script src="asset/js/bootstrap.min.js"></script>
+<!-- plugins -->
+<script src="asset/js/plugins/jquery.nicescroll.js"></script>
+<!-- custom -->
+<script src="asset/js/main.js"></script>
+<script src="asset/js/moment.js"></script>
+<script src="js/Confim.js"></script>
+<!-- end: Javascript -->
+<script src="layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+<script>
+    $("#left-menu-2").click() ;
+</script>
+</body>
+</html>
