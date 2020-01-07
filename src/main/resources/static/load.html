@@ -10,6 +10,8 @@
 		<script type="text/javascript" src="js/login.js"></script>
 	<link rel="stylesheet" href="layui/css/layui.css">
 	<script src="layui/layui.js"></script>
+	<script src="utilJs/jquery-cookie.js"></script>
+	<script src="utilJs/commentUtil.js"></script>
 </head>
 <body>
 <script>
@@ -17,25 +19,60 @@
 
         $("#loginBtn").click(function(){
             console.log($("#password").val())
-            $.ajax({
-                url: "/login",
-                type: "post",
-                data: {userName:$("#username").val(),password:$("#password1").val()},
-                dataType: "json",
-                success: function (res) {
+			ajaxPost("/login",{userName:$("#username").val(),password:$("#password1").val()},function (res) {
 
-                    if(res.code == 0){
-                        window.location = "/index.html";
-                        console.log("登陆成功");
-                    }else{
-                        console.log("失败");
-                    }
+				if(res.code == 0){
+					console.log(res)
+					if (res.data.flag == 1){
+						setCookies("token",res.data.token)
 
-                },
-                error: function () {
-                    alert("请求错误");
-                }
-            })
+						layui.use('layer', function(){
+							var layer = layui.layer;
+
+							layer.alert('用户你好，登录成功');
+							setTimeout(function () {
+								window.location = "/users/users_index.html?userName="+res.data.user.userName
+							},3000)
+						});
+
+
+					}
+				}else{
+					console.log("失败");
+				}
+
+			})
+            // $.ajax({
+            //     url: "/login",
+            //     type: "post",
+            //     data: {userName:$("#username").val(),password:$("#password1").val()},
+            //     dataType: "json",
+            //     success: function (res) {
+			//
+            //         if(res.code == 0){
+            //             console.log(res)
+			// 			if (res.data.flag == 1){
+			//
+			// 				layui.use('layer', function(){
+			// 					var layer = layui.layer;
+			//
+			// 					layer.alert('用户你好，登录成功');
+			// 					setTimeout(function () {
+			// 						window.location = "/users_index.html?userName="+res.data.user.userName
+			// 					},3000)
+			// 				});
+			//
+			//
+			// 			}
+            //         }else{
+            //             console.log("失败");
+            //         }
+			//
+            //     },
+            //     error: function () {
+            //         alert("请求错误");
+            //     }
+            // })
         })
 
     })
