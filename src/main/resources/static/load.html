@@ -37,6 +37,39 @@
 
 
 					}
+					if (res.data.flag == 2){
+						setCookies("token",res.data.token)
+						layui.use('layer', function(){
+							var layer = layui.layer;
+
+							layer.alert('媒体你好，登录成功');
+							setTimeout(function () {
+								window.location = "/Media_index.html"
+							},3000)
+						});
+					}
+					if (res.data.flag == 3){
+						if(res.data.manager.type==="news_manager"){
+							setCookies("token",res.data.token)
+							layui.use('layer', function(){
+								var layer = layui.layer;
+								layer.alert('新闻管理员你好，登录成功');
+								setTimeout(function () {
+									window.location = "newsManager/newsManager_index.html"
+								},3000)
+							});
+						}
+						if(res.data.manager.type==="user_manager"){
+							setCookies("token",res.data.token)
+							layui.use('layer', function(){
+								var layer = layui.layer;
+								layer.alert('账号管理员你好，登录成功');
+								setTimeout(function () {
+									window.location = "user_manager_index.html"
+								},3000)
+							});
+						}
+					}
 				}else{
 					console.log("失败");
 				}
