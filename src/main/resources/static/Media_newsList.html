@@ -63,7 +63,7 @@
                     <div class="left-bg"></div>
                 </li>
                 <li class="active ripple">
-                    <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 首页
+                    <a class="tree-toggle nav-header"><span class="fa-home fa"></span> <a href="media_index.html"> 首页</a>
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                 </li>
@@ -81,9 +81,9 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="newslist.html">新闻列表</a></li>
-                        <li><a href="newsupload.html">发表新闻</a></li>
-                        <li><a href="Media_newsList.html">我的新闻</a></li>
+                        <li><a href="media_newslist.html">新闻列表</a></li>
+                        <li><a href="media_newsupload.html">发表新闻</a></li>
+                        <!--<li><a href="Media_newsList.html">我的新闻</a></li>-->
 
                     </ul>
                 </li>
@@ -148,7 +148,7 @@
                                                                 <td><%=news.getNewsreadnum()%></td>
                                                                 <td style="display: none"><input id="filetd1" type="text" value="<%=newsList.get(2).getNewsfile()%>"></td>
                                                                 <td><h7>已发布</h7></td>
-                                                                <td><a href="newsitem.html?newsid=<%=news.getNewsid()%>">查看</a></td>
+                                                                <td><a href="media_newsdetail.html">查看</a></td>
                                                             </tr>
                                                             <%}%>
                                                             </tbody>
