@@ -67,4 +67,9 @@ public class UserServiceImpl  implements UserService {
             return Result.createByFailure("用户名或者密码错误");
         }
     }
+
+    @Override
+    public User findUserById(int parseInt) {
+        return userMapper.selectByPrimaryKey(parseInt);
+    }
 }
