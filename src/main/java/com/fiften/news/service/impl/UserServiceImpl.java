@@ -15,16 +15,7 @@ public class UserServiceImpl  implements UserService {
     UserMapper userMapper;
 
 
-    @Override
-    public Result selectAllUser() {
 
-        List<User> users = userMapper.selectAllUser();
-        if (users.size()<1){
-            return Result.createByFailure("用户太少了");
-        }
-
-        return Result.createSuccessResult(users.size(),users);
-    }
 
     @Override
     public Result insertUser(User user) {

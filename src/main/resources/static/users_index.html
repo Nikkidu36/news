@@ -15,7 +15,16 @@
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="utilJs/commentUtil.js"></script>
 </head>
+<script>
+    var param =  RequestParameter()
+    console.log(param.userName)
+     //$("#user-name").text(param.userName+"，你好。")
+    console.log($("#user-name").text())
+</script>
 <body id="mimin" class="dashboard">
     <!-- start: Header -->
     <nav class="navbar navbar-default header navbar-fixed-top">
@@ -28,7 +37,7 @@
                 </div>
                 <a href="#" class="navbar-brand"> <b>首页</b> </a>
                 <ul class="nav navbar-nav navbar-right user-nav">
-                    <li class="user-name"><span>美丽的小姐</span></li>
+                    <li class="user-name"><span id="user-name">美丽的小姐</span></li>
                     <li class="dropdown avatar-dropdown">
                         <img src="asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                         <ul class="dropdown-menu user-dropdown">

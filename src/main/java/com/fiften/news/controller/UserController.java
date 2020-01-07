@@ -13,11 +13,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/getUser")
-    Result getUser(){
+//    @PostMapping("/getUser")
+//    Result getUser(){
 
-        return userService.selectAllUser();
-    }
+//        return userService.selectAllUser();
+//    }
 
     @PostMapping("/insertUser")
     Result insertUser(User user){

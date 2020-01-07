@@ -4,9 +4,12 @@ import com.fiften.news.util.FileUploadUtil;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.HashMap;
 
 /**
  * @author 刘佳昇
@@ -32,4 +35,11 @@ public class TestControllet {
 
 
     }
+
+    @PostMapping("/testJsonPost")
+    public Result testJsonPost(@RequestBody HashMap parm){
+        System.out.println(parm);
+        return Result.createSuccessResult(parm);
+    }
+
 }
