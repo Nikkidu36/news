@@ -119,4 +119,13 @@
       type = #{type,jdbcType=VARCHAR}
     where manager_id = #{managerId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectManagerByUserNameAndPassword" parameterType="com.fiften.news.model.Manager" resultMap="BaseResultMap">
+
+
+    select <include refid="Base_Column_List"/>
+    from  manager
+
+   where user_name = #{userName} and password = #{password}
+  </select>
 </mapper>

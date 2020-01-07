@@ -154,4 +154,10 @@
       available_status = #{availableStatus,jdbcType=VARCHAR}
     where media_id = #{mediaId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectMediaByUserNameAndPassword" parameterType="com.fiften.news.model.Media" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from media
+    where password = #{password} and user_name = #{userName}
+  </select>
 </mapper>

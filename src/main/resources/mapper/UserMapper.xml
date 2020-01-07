@@ -119,10 +119,7 @@
       email = #{email,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <select id="selectAllUser" resultMap="BaseResultMap">
-    SELECT *
-    FROM user
-  </select>
+
 
     <select id="selectUserByUserNameAndPassword" parameterType="com.fiften.news.model.User" resultMap="BaseResultMap">
         SELECT <include refid="Base_Column_List" />
