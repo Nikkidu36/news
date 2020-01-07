@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="xxxxx">
+    <meta name="author" content="xxxxx">
+    <meta name="keyword" content="xxxxx">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>新闻详情</title>
+
+    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/simple-line-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
+    <link href="asset/css/style.css" rel="stylesheet">
+</head>
+<body id="mimin" class="dashboard">
+    <!-- start: Header -->
+    <nav class="navbar navbar-default header navbar-fixed-top">
+        <div class="col-md-12 nav-wrapper">
+            <div class="navbar-header" style="width:100%;">
+                <div class="opener-left-menu is-open"> <span class="top"></span> <span class="middle"></span> <span class="bottom"></span> </div>
+                <a href="index.html" class="navbar-brand"> <b>新闻详情</b> </a>
+                <ul class="nav navbar-nav navbar-right user-nav">
+                    <li class="user-name"><span>美丽的小姐</span></li>
+                    <li class="dropdown avatar-dropdown"> <img src="asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+                        <ul class="dropdown-menu user-dropdown">
+                            <li><a href="#"><p value="<%=username%>" id="backli" onclick="back()"><span class="fa fa-power-off"></span> 退出登录</p></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end: Header -->
+    <div class="container-fluid mimin-wrapper">
+        <div id="left-menu">
+            <div class="sub-left-menu scroll">
+                <ul class="nav nav-list">
+                    <li>
+                        <div class="left-bg"></div>
+                    </li>
+                    <li class="active ripple">
+                        <a href="users_index.html"><span class="fa-home fa"></span> 首页
+                            <span class="fa-angle-right fa right-arrow text-right"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="col-md-6 col-sm-12">
+                        <h3 class="animated fadeInLeft">欢迎您：美丽的小姐</h3>
+                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 新闻详情</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-element">
+                <div class="col-md-12 padding-0">
+                    <div class="col-md-12">
+                        <div class="panel form-element-padding">
+                            <div class="panel-heading" style="text-align: center;">
+                                <h3>作为IP，《小时代》能留下什么？</h3>
+                                <p>作者：网易娱乐&nbsp;&nbsp;&nbsp;&nbsp;发表日期：2020-01-07&nbsp;18:40:06&nbsp;&nbsp;&nbsp;&nbsp;收藏次数：269</p>
+                            </div>
+                            <button type="button" class="layui-btn layui-btn-normal">收藏</button>
+                            <button type="button" class="layui-btn layui-btn-normal">举报</button>
+                            <div class="panel-body" style="padding-bottom:30px;">
+                                <div class="panel-body-main">
+                                    <p>随着《小时代4》的上映，这个争议巨大的系列电影终于画上了句号。这个系列电影究竟算是成功还是失败，每个影迷心中都有自己的评价，笔者一向不喜欢以意见领袖的方式去引导影迷的观感。今儿咱既不做影评，也不探讨争议，咱就聊聊，作为一个IP概念还没爆红的年代就已经取得了令人艳羡成绩的超级IP，《小时代》能给如今多如“过江之鲫”的各种IP们，留下什么样的“前车之鉴”。
+                                        既然又说起了IP，那咱首先还是得普及一下IP的概念。根据官方的解释，这被无数投资人和影视剧制作团队奉为神明的IP，是IntellectualProperty的缩写，翻译过来就叫做“知识产权”。用大白话来讲，就是平时咱老百姓茶余饭后聊起来的那些故事啊传说啊小说啊人物啊，把它们改编成电影的影视版权，就可以称作IP了。
+                                        虽然很早以前，内地就已经开始了这类影视剧的制作，比如86版《西游记》和87版《红楼梦》，那都是已经被如今的影视剧发烧友当做“神作”的经典作品了，但IP这么一个摩登理念真正意义上粉墨登场，却是在2014年。
+                                        2014年，随着互联网生态的建立，IP这个原本在游戏界被当做是市场敲门砖的概念，逐渐开始出现在影视剧市场，并在一年时间内，迅速成为了时下最火热的名词。好像一部新鲜出炉的影视剧不跟IP沾亲带故都不好意思跟观众打招呼一样。以至于在上海电影节期间，有投资人感慨着IP都快贵的买不起了。</p>
+                                </div>
+                                <hr>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end: content -->
+
+    </div>
+    <style>
+        .panel-body-main{
+            width: 60%;
+            height: 100%;
+            margin-left: 20%;
+            /*background-color: red;*/
+        }
+    </style>
+    <!-- start: Javascript -->
+    <script src="asset/js/jquery.min.js"></script>
+    <script src="asset/js/jquery.ui.min.js"></script>
+    <script src="asset/js/bootstrap.min.js"></script>
+    <!-- plugins -->
+    <script src="asset/js/plugins/jquery.nicescroll.js"></script>
+    <!-- custom -->
+    <script src="asset/js/main.js"></script>
+    <script src="asset/js/moment.js"></script>
+    <script src="js/Confim.js"></script>
+    <!-- end: Javascript -->
+    <script>
+        $("#left-menu-2").click() ;
+    </script>
+</body>
+</html>
