@@ -1,4 +1,5 @@
 
+import com.fiften.news.model.ReportList;
 import com.fiften.news.service.ReportService;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ public class ReportController {
     ReportService reportService;
 
     @PostMapping("/ReportNews")
-    public Result ReportNews(int media_id,int  news_id,String reason){
-        return reportService.doReport(media_id, news_id, reason);
+    public Result ReportNews(ReportList reportList){
+        return reportService.doReport(reportList.getNewsId(), reportList.getReason());
     }
 
 }

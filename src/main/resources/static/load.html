@@ -16,21 +16,33 @@
 <script>
     $(function () {
 
-        $("#loginBtn").click(function () {
-            console.log($("#password").val())
-            ajaxPost("/login", {userName: $("#username").val(), password: $("#password1").val()}, function (res) {
+		$("#loginBtn").click(function () {
+			console.log($("#password").val())
+			ajaxPost("/login", {userName: $("#username").val(), password: $("#password1").val()}, function (res) {
 
-                if (res.code == 0) {
-                    console.log(res)
-                    if (res.data.flag == 1) {
-                        setCookies("token", res.data.token)
+				if (res.code == 0) {
+					console.log(res)
+					if (res.data.flag == 1) {
+						setCookies("token", res.data.token)
 
-                        layui.use('layer', function () {
-                            var layer = layui.layer;
+						layui.use('layer', function () {
+							var layer = layui.layer;
 
+							layer.alert('用户你好，登录成功');
+							setTimeout(function () {
+								window.location = "/users/users_index.html?userName=" + res.data.user.userName
+							}, 3000)
+						});
+					}
+					if (res.data.flag == 2) {
+						setCookies("token", res.data.token)
+						layui.use('layer', function () {
+							var layer = layui.layer;
                             layer.alert('用户你好，登录成功');
+                            setCookies("username",res.data.user.userName)
                             setTimeout(function () {
-                                window.location = "/users_index.html?userName=" + res.data.user.userName
+
+                                window.location = "/users_index.html?userName="
                             }, 3000)
                         });
                     }
@@ -40,6 +52,7 @@
                             var layer = layui.layer;
 
                             layer.alert('媒体你好，登录成功');
+                            setCookies("username",res.data.media.userName)
                             setTimeout(function () {
                                 window.location = "/media_index.html?userName=" + res.data.media.userName
                             }, 3000)
@@ -51,17 +64,18 @@
                             layui.use('layer', function () {
                                 var layer = layui.layer;
                                 layer.alert('新闻管理员你好，登录成功');
+                                setCookies("username",res.data.manager.userName)
                                 setTimeout(function () {
-                                    window.location = "newsManager/newsManager_index.html?userName=" + res.data.manager.userName
+                                    window.location = "newsManager/newsManager_index.html?userName"
                                 }, 3000)
                             });
                         }
                         if (res.data.manager.type === "user_manager") {
                             setCookies("token", res.data.token)
-                            setCookies("username",res.data.userName)
                             layui.use('layer', function () {
                                 var layer = layui.layer;
                                 layer.alert('账号管理员你好，登录成功');
+                                setCookies("username",res.data.manager.userName)
                                 setTimeout(function () {
                                     window.location = "/userManager/user_manager_index.html?userName=" + res.data.manager.userName
                                 }, 3000)
@@ -76,33 +90,32 @@
 
     })
 </script>
-
-<div class="main">
-    <div class="login-form">
-        <h1>用户登陆</h1>
-        <div class="head">
-            <img src="images/user.png" alt=""/>
-        </div>
-        <form>
-            <input type="text" id="username" class="text" value="用户名" name="username">
-            <input type="text" id="password" name="password" value="密码">
-            <input type="password" id="password1" name="password1" value="password" style="display: none;">
-            <div class="submit" style="border: #0c66ae 1px;
+	 <div class="main">
+		<div class="login-form">
+			<h1>用户登陆</h1>
+					<div class="head">
+						<img src="images/user.png" alt=""/>
+					</div>
+				<form>
+						<input type="text" id="username" class="text" value="用户名" name="username">
+						<input type="text" id="password" name="password" value="密码">
+						<input type="password" id="password1" name="password1" value="password" style="display: none;">
+						<div class="submit" style="border: #0c66ae 1px;
     						width: 20%;
     						margin-left: 40%;
     						height: 40%;
    							">
-                <input type="button" class="layui-btn" value="登陆" id="loginBtn">
-            </div>
-            <p>
-                <a href="#">忘记密码 ?</a> &nbsp;&nbsp;&nbsp;
-                <a href="login.html">注册</a>
-            </p>
-        </form>
-    </div>
-    <div class="copy-right">
-        <p><a> &nbsp;&nbsp;&nbsp;Copyright &copy; 2020</a></p>
-    </div>
-</div>
+						<input type="button" class="layui-btn" value="登陆" id="loginBtn">
+					</div>
+					<p>
+						<a href="#">忘记密码 ?</a> &nbsp;&nbsp;&nbsp;
+						<a href="login.html">注册</a>
+					</p>
+				</form>
+			</div>
+   			<div class="copy-right">
+				<p><a> &nbsp;&nbsp;&nbsp;Copyright &copy; 2020</a></p>
+			</div>
+		</div>
 </body>
 </html>

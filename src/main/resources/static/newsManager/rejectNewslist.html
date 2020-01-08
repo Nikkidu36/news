@@ -7,6 +7,15 @@
     <meta name="keyword" content="xxxxx">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新闻列表</title>
+
+    <script src="../js/jQuery/jquery-3.4.1.min.js"></script>
+
+    <script src="../utilJs/commentUtil.js"></script>
+
+    <link rel="stylesheet" href="../layui/css/layui.css">
+
+    <script src="../layui/layui.js"></script>
+
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
     <!-- plugins -->
@@ -15,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/fullcalendar.min.css"/>
     <link href="../asset/css/style.css" rel="stylesheet">
+    <script src="../utilJs/jquery-cookie.js"></script>
     <!-- end: Css -->
 
 </head>
@@ -26,7 +36,7 @@
             <div class="opener-left-menu is-open"> <span class="top"></span> <span class="middle"></span> <span class="bottom"></span> </div>
             <a href="newsManager_index.html" class="navbar-brand"> <b>返回首页</b> </a>
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span><%=username%></span></li>
+                <li class="user-name"><span id="user-name"></span></li>
                 <li class="dropdown avatar-dropdown"> <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
                         <li><a href="#"><p value="<%=username%>" id="backli" onclick="back()"><span class="fa fa-power-off"></span> 退出登录</p></a></li>
@@ -110,18 +120,15 @@
                                                     <th class="sorting"  style="width: 64px;">点击驳回</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <%
-                                                for (News news:newsList){%>
-                                                <tr role="row" class="odd">
-                                                    <td class="sorting_1"><%=news.getNewsitem()%></td>
-                                                    <td><%=news.getNewsauthor()%></td>
-                                                    <td><%=news.getNewsdate()%></td>
-                                                    <td><%=news.getNewsreadnum()%></td>
-                                                    <td><a style="color: red"><h7>未通过</h7></a></td>
-                                                    <td><a href="../newsitem.html?newsid=<%=news.getNewsid()%>">驳回</a></td>
-                                                </tr>
-                                                <%}%>
+                                                <tbody id="waitRejectNewsList">
+                                                <!--<tr role="row" class="odd">-->
+                                                    <!--<td class="sorting_1"><%=news.getNewsitem()%></td>-->
+                                                    <!--<td><%=news.getNewsauthor()%></td>-->
+                                                    <!--<td><%=news.getNewsdate()%></td>-->
+                                                    <!--<td><%=news.getNewsreadnum()%></td>-->
+                                                    <!--<td><a style="color: red"><h7>未通过</h7></a></td>-->
+                                                    <!--<td><a href="../newsitem.html?newsid=<%=news.getNewsid()%>">驳回</a></td>-->
+                                                <!--</tr>-->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -136,6 +143,30 @@
     </div>
     <!-- end: content -->
 </div>
+
+<script>
+
+    $(function () {
+        $("#user-name").text(getCookies("username"))
+        ajaxPost("/getAllWaitRejectNewslist",null,function (res) {
+            if (res.code == 0 ){
+                for (let i = 0; i < res.data.length; i++) {
+                    $("#waitRejectNewsList").append(`<tr role="row" class="odd">
+                                                    <td class="sorting_1"  style="width: 300px;">`+res.data[i].title+`</td>
+                                                    <td>`+res.data[i].user_name+`</td>
+                                                    <td>`+res.data[i].news_key+`</td>
+                                                    <td>`+res.data[i].submit_Date+`</td>
+                                                    <td><a style="color: red"><h7>未通过</h7></a></td>
+                                                    <td><a href="../newsitem.html?news_Id=`+res.data[i].news_id+`">驳回</a></td>
+                                                </tr>`)
+                }
+            }else {
+                alert("请求失败")
+            }
+        })
+    })
+</script>
+
 <!-- start: Javascript -->
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>

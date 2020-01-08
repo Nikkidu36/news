@@ -18,7 +18,15 @@
     <link href="../asset/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
 
+    <script src="../utilJs/commentUtil.js"></script>
+
 </head>
+<script>
+    $(function () {
+        $("#user-name").text(getCookies("username"))
+    })
+
+</script>
 
 <body id="mimin" class="dashboard">
 <!-- start: Header -->
@@ -28,7 +36,7 @@
             <div class="opener-left-menu is-open"> <span class="top"></span> <span class="middle"></span> <span class="bottom"></span> </div>
             <a href="../index.html" class="navbar-brand"> <b>返回首页</b> </a>
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span><%=username%></span></li>
+                <li class="user-name"><span id="user-name"></span></li>
                 <li class="dropdown avatar-dropdown"> <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
                         <li><a href="#"><p value="<%=username%>" id="backli" onclick="back()"><span class="fa fa-power-off"></span> 退出登录</p></a></li>
@@ -134,6 +142,7 @@
 <script src="../layui/layui.js"></script>
 <script src="../js/jQuery/jquery.cookie.js"></script>
 <script src="../utilJs/commentUtil.js"></script>
+
 <script>
     $(function () {
         var param =  RequestParameter()

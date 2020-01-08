@@ -174,8 +174,7 @@
 
         $("#UploadBtn").click(function () {
             ajaxPost("/UploadNews", {title: $("#title").val(), key: $("#key").val(),detail:$("#detail")}, function (res) {
-
-
+                window.location = "/media_newsList.html"
             })
         })
 

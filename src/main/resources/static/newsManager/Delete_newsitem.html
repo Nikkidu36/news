@@ -16,9 +16,15 @@
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/fullcalendar.min.css"/>
     <link href="../asset/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="../utilJs/commentUtil.js"></script>
 
 </head>
+<script>
+    $(function () {
+        $("#user-name").text(getCookies("username"))
+    })
 
+</script>
 <body id="mimin" class="dashboard">
 <!-- start: Header -->
 <nav class="navbar navbar-default header navbar-fixed-top">
@@ -80,25 +86,25 @@
         <div class="panel-body">
             <div class="col-md-12">
                 <h3 class="animated fadeInLeft">新闻详情</h3>
-                <p class="animated fadeInDown"> 业务 <span class="fa-angle-right fa"></span> 审核新闻 </p>
+                <p class="animated fadeInDown"> 业务 <span class="fa-angle-right fa"></span> 审核被举报新闻 </p>
             </div>
         </div>
     </div>
     <div class="form-element">
         <div class="col-md-12 padding-0">
             <div class="col-md-12">
-                <div class="panel form-element-padding">
-                    <div class="panel-heading" style="text-align: center;">
-                        <h3><%=newsList.get(id).getNewsitem()%></h3>
-                        <p>作者：<%=newsList.get(id).getNewsauthor()%>&nbsp;&nbsp;&nbsp;&nbsp;发表日期：<%=newsList.get(id).getNewsdate()%></p>
-                    </div>
-                    <div class="panel-body" style="padding-bottom:30px;">
-                        <div class="panel-body-main">
-                            <%=readFile.getResultstr()%>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
+                <div class="panel form-element-padding" id="news_Detail">
+                    <!--<div class="panel-heading" style="text-align: center;">-->
+                        <!--<h3><%=newsList.get(id).getNewsitem()%></h3>-->
+                        <!--<p>作者：<%=newsList.get(id).getNewsauthor()%>&nbsp;&nbsp;&nbsp;&nbsp;发表日期：<%=newsList.get(id).getNewsdate()%></p>-->
+                    <!--</div>-->
+                    <!--<div class="panel-body" style="padding-bottom:30px;">-->
+                        <!--<div class="panel-body-main">-->
+                            <!--<%=readFile.getResultstr()%>-->
+                        <!--</div>-->
+                        <!--<hr>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
@@ -114,11 +120,11 @@
                                 <th class="sorting" style="width: 60px;">举报原因</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr role="row" class="odd">
-                                <td class="sorting_1"><%=news.getNewsitem()%></td>
-                                <td><%=news.getNewsauthor()%></td>
-                            </tr>
+                            <tbody id="reportlist">
+                            <!--<tr role="row" class="odd">-->
+                                <!--<td class="sorting_1"><%=news.getNewsitem()%></td>-->
+                                <!--<td><%=news.getNewsauthor()%></td>-->
+                            <!--</tr>-->
                             </tbody>
                         </table>
                     </div>
@@ -126,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div style="margin-left: 46%">
+    <div style="margin-left:42%">
         <button class="layui-btn" lay-submit="" lay-filter="demo1" style="background-color: red">删除新闻</button>
     </div>
 </div>
@@ -145,6 +151,67 @@
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>
 <script src="../asset/js/bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+        var param =  RequestParameter()
+
+        ajaxPost("/getOneNewsByID",{ID:param.news_Id},function (res) {
+            if (res.code == 0 ){
+                $("#news_Detail").append(`<div class="panel-heading" style="text-align: center;">
+                            <h3>`+res.data.title+`</h3>
+                            <p>作者：`+res.data.user_name+`&nbsp;&nbsp;&nbsp;&nbsp;发表日期：`+res.data.submit_Date+`</p>
+                        </div>
+                        <div class="panel-body" style="padding-bottom:30px;">
+                            <div class="panel-body-main">
+                               `+res.data.detail+`
+                            </div>
+                            <hr>
+                        </div>`)
+
+
+            }else {
+                alert("请求错误");
+            }
+        })
+
+        ajaxPost("/getNewsReportlistByID",{ID:param.news_Id},function (res) {
+            if (res.code == 0 ){
+                for (let i = 0; i < res.data.length; i++){
+                    $("#reportlist").append(`<tr role="row" class="odd">
+                                <td class="sorting_1">`+(i+1)+`</td>
+                                <td>`+res.data[i].reason+`</td>
+                            </tr>`)
+                }
+
+            }else {
+                alert("请求错误");
+            }
+        })
+
+        $("#submit_auditResult").click(function () {
+
+            ajaxPost("/deleteReportedNews", {auditResult: $("#audit_result").val(),ID:param.news_Id},function (res) {
+                if (res.code == 0 ){
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+
+                        layer.alert('删除成功！');
+
+                    });
+                }else {
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.alert('审核失败，请再次操作！');
+                        setTimeout(3000);
+                    });
+                }
+            } )
+        })
+
+    })
+</script>
+
 <!-- plugins -->
 <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
 <!-- custom -->

@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.List;
+
 import java.util.List;
 
 @Mapper
@@ -65,5 +68,9 @@ public interface ReportListMapper {
     Integer getReportCountByMediaId(@Param("mediaId") Integer mediaId);
 
     List<ReportList> getReportByMediaId(@Param("mediaId") Integer mediaId);
+
+    ReportList ReportNews(int media_id,int news_id,String reason);
+
+    List<HashMap> getNewsReports(Integer ID);
 
 }

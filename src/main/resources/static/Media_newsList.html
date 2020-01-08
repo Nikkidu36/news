@@ -183,7 +183,6 @@
             dataType: "json",
             headers: {"token":getCookies("token")},
             success: function (res) {
-
                 if (res.code == 0 ){
                     for (let i = 0; i < res.data.length; i++) {
                         $("#AllMyNews").append(`<tr role="row" class="odd" >
@@ -192,7 +191,7 @@
                                                     <td>`+res.data[i].publish_Date+`</td>
                                                     <td>`+res.data[i].news_key+`</td>
                                                     <td>`+res.data[i].publish_status+`</td>
-                                                    <td><a href="/Media_newsdetail.html?newId=`+res.data[i].news_id+`">查看</a></td>
+                                                    <td><a href="/users/users_newsdetail.html?news_id=`+res.data[i].news_id+`">查看</a></td>
                                                 </tr>`)
 
                     }

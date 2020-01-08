@@ -9,4 +9,10 @@ public interface NewsDetailService {
     NewsDetail doUpload(String title, String key, String detail);
 
     Result getAllMyNews(HttpServletRequest httpServletRequest);
+
+    Result searchNewsByTitle(String title);
+
+    Result showNewsById(int id);
+
+    Result showNewsListById();
 }

@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.List;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Mapper
 @Repository
 public interface NewsDetailMapper {
@@ -71,4 +74,9 @@ public interface NewsDetailMapper {
 
     boolean updateSubmitDateByID(Integer ID);
 
+    NewsDetail searchNewsByTitle(@Param("title") String title);
+
+    List<HashMap> showNewsById(@Param("id") int id);
+
+    List<HashMap> showNewsListById();
 }
