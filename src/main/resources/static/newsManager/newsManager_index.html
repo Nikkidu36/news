@@ -20,11 +20,10 @@
 </head>
 <script>
     $(function () {
-        var param =  RequestParameter()
-        console.log(param.userName)
-        $("#user-name").text(param.userName+"，你好。")
-        $("#user-name-2").text("欢迎您："+param.userName+"，你好。")
-        $("#user-name-3").text("欢迎您："+param.userName+"，你好。")
+
+        $("#user-name").text(getCookies("username")+"，你好。")
+        $("#user-name-2").text("欢迎您："+getCookies("username")+"，你好。")
+        $("#user-name-3").text("欢迎您："+getCookies("username")+"，你好。")
         console.log($("#user-name").text())
 
         ajaxPost("/getIndexNewsNum",null,function (res) {
@@ -33,7 +32,7 @@
                 $("#waitPublishNum").text(res.data.waitPublishNum+"");
                 $("#waitRejectNum").text(res.data.waitRejectNum+"");
             }else{
-                alert("找學長")
+                alert("请求失败！")
             }
         })
     })
