@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author 刘佳昇
+ * @author dwq
  * @Date 2020/1/8 0:27
  */
 @RestController
@@ -21,9 +21,8 @@ public class MediaController {
     @PostMapping("/getAllNotAvailableMedia")
     Result getUser() {
         return mediaService.getAllNotAvailableMedia();
-
-
     }
+
     @PostMapping("/getMediaById")
      public Result getMediaById(@RequestParam("mediaId") Integer mediaId){
         return  mediaService.getMediaById(mediaId);
@@ -33,4 +32,18 @@ public class MediaController {
     public Result passMediaById(@RequestParam("mediaId") Integer mediaId){
         return mediaService.passMediaById(mediaId);
     }
+
+    @PostMapping("/logoutMediaById")
+    public Result LogoutMediaById(@RequestParam("mediaId") Integer mediaId){
+        return mediaService.passMediaById(mediaId);
+    }
+
+    @PostMapping("/sumreportMediaById")
+    public Result sumreportMediaById(){
+        return mediaService.sumreportMediaByID();
+    }
+
+
+
+
 }

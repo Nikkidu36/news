@@ -1,4 +1,3 @@
-package com.fiften.news.controller;
 
 import com.fiften.news.service.ReportService;
 import com.fiften.news.util.Result;

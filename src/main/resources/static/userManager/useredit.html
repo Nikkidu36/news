@@ -7,7 +7,7 @@
 <meta name="author" content="xxxxx">
 <meta name="keyword" content="xxxxx">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>用户编辑</title>
+<title>被举报列表</title>
 <!-- start: Css -->
 <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
 <!-- plugins -->
@@ -119,8 +119,25 @@
     </div>
       </form>
   </div>
-  <!-- end: content --> 
-  
+  <!-- end: content -->
+  <script src="../js/jQuery/jquery.cookie.js"></script>
+
+  <script>
+
+    $(function () {
+      ajaxPost("/getAllNotAvailableMedia", null, function (res) {
+
+        for (var i = 0; i < res.data.length; i++) {
+          $("#mediaList").append(`<tr role="row" class="odd" >
+                                                    <td class="sorting_1">` + res.data[i].userName + `</td>
+                                                    <td>` + res.data[i].email + `</td>
+                                                    <td><img src="` + res.data[i].applyQualification + `" alt="" style="height: 40px;width:40px;"></td>
+                                                    <td><a href="/userManager/apply_detail.html?mediaId=` + res.data[i].mediaId + `">审核</a></td>
+                                                </tr>`)
+        }
+      })
+    })
+  </script>
 </div>
 
 <!-- start: Javascript --> 

@@ -31,6 +31,12 @@
     from report_list
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectSumReportMediaById" resultMap="BaseResultMap">
+    select<include refid="Base_Column_List">
+    from report_list
+    where ID = #{id,jdbcType=INTEGER}
+    group by ReportList.media_id
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

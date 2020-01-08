@@ -171,4 +171,5 @@
     from  media
     where email = #{email}
   </select>
+
 </mapper>
