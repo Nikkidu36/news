@@ -108,4 +108,10 @@
       news_id = #{newsId,jdbcType=INTEGER}
     where collection_id = #{collectionId,jdbcType=INTEGER}
   </update>
+  <select id="selectCollectionByUidAndNid" parameterType="com.fiften.news.model.Collection" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from collection
+    where user_id=#{userId} and news_id=#{newsId}
+
+  </select>
 </mapper>

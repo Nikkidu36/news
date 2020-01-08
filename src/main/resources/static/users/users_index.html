@@ -6,27 +6,86 @@
     <meta name="author" content="12">
     <meta name="keyword" content="12">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>首页</title>
-    <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="asset/css/plugins/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="asset/css/plugins/simple-line-icons.css"/>
-    <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
-    <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
-    <link href="asset/css/style.css" rel="stylesheet">
+    <title>用户首页</title>
 
+    <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../asset/css/plugins/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../asset/css/plugins/simple-line-icons.css"/>
+    <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../asset/css/plugins/fullcalendar.min.css"/>
+    <link href="../asset/css/style.css" rel="stylesheet">
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
-    <script src="utilJs/commentUtil.js"></script>
+    <script src="../utilJs/commentUtil.js"></script>
 </head>
 <script>
+    <!--显示登陆用户的用户名-->
     $(function () {
         var param =  RequestParameter()
         console.log(param.userName)
-        $("#user-name").text(param.userName+"，你好。")
-        $("#user-name-2").text("欢迎您："+param.userName+"，你好。")
-        $("#user-name-3").text("欢迎您："+param.userName+"，你好。")
+        console.log(param)
+        $("#user-name").text(param.userName)
+        $("#user-name-2").text("欢迎您："+param.userName)
+        $("#user-name-3").text(param.userName)
         console.log($("#user-name").text())
     })
+
+    $(function () {
+
+        $('#searchBtn').click(function () {
+            var param =  RequestParameter()
+            ajaxPost("/search",{searchContent:$("#searchContent").val()},function (res) {
+                if(res.code==0){
+                    console.log(res)
+                    window.location="/users/users_newsdetail.html?news_id="+res.data.ID+"&userName="+param.userName
+                }else {
+                    alert("???")
+                }
+            })
+        })
+    })
+
+    $(function () {
+        ajaxPost("/showNewsList",{news_id:1},function (res) {
+            if(res.code==0){
+                $("#newsCard1").append(`<div class="panel-heading bg-white border-none">
+                                        <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                                            <h4 class="text-left">`+res.data[0].user_name+`</h4>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                            <h4> <span class="icon-user icons icon text-right"></span> </h4>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body text-center">
+                                        <ul class="normal-list">
+                                            `+res.data[0].title+`
+                                            <li class="text-left"><span class="right">`+res.data[0].publish_Date+`</span>
+                                                <a href=/users/users_newsdetail.html><span class="fa fa-angle-right"></span></a>
+                                            </li>
+                                        </ul>
+                                        <ul class="normal-list">
+                                            央视财经频道推进“新时代 新作为 新篇章”主题宣传
+                                            <li class="text-left"><span class="right">2020-01-07 08:23:12</span>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                            </li>
+                                        </ul>
+                                        <p><a href="/users/users_newsList.html">更多信息</a></p>
+                                        <hr/>
+                                    </div>`)
+            }
+        })
+    })
+
+    // $("#collection").click(function () {
+    //     var param =  RequestParameter()
+    //     window.location = "/users/users_collection.html?userId="+param.userId
+    // })
+    //
+    // $('#detail1').click(function () {
+    //     var param =  RequestParameter()
+    //     window.location = "/users/users_newsdetail.html?userId="+param.userId
+    // })
 
 </script>
 <body id="mimin" class="dashboard">
@@ -39,11 +98,11 @@
                     <span class="middle"></span>
                     <span class="bottom"></span>
                 </div>
-                <a href="#" class="navbar-brand"> <b>首页</b> </a>
+                <a href="/users/users_index.html" class="navbar-brand"> <b>首页</b> </a>
                 <ul class="nav navbar-nav navbar-right user-nav">
                     <li class="user-name"><span id="user-name">美丽的小姐</span></li>
                     <li class="dropdown avatar-dropdown">
-                        <img src="asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+                        <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                         <ul class="dropdown-menu user-dropdown">
                             <li><a href="#"><p value="<%=username%>" id="backli" onclick="back()"><span class="fa fa-power-off"></span> 退出登录</p></a></li>
                         </ul>
@@ -76,7 +135,14 @@
                 <div class="panel-body">
                     <div class="col-md-6 col-sm-12">
                         <h3 class="animated fadeInLeft" id="user-name-2">欢迎您：美丽的小姐</h3>
-                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 首页</p>
+                        <p class="animated fadeInDown"><span class="fa fa-map-marker"></span> 首页</p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <h3 class="animated fadeInLeft">
+                            <input type="text" class="text" id="searchContent"/>
+                            <input type="button" id="searchBtn" style="text-align: center;width: 80px;height: 30px;" value="搜索"/>
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -86,35 +152,8 @@
                         <div class="col-md-12 padding-0">
                             <!--strat:newsCard-->
                             <div class="col-md-6">
-                                <div class="panel box-v1">
-                                    <div class="panel-heading bg-white border-none">
-                                        <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-                                            <h4 class="text-left">央视网</h4>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-                                            <h4> <span class="icon-user icons icon text-right"></span> </h4>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body text-center">
-                                        <ul class="normal-list">
-                                            美媒：柬埔寨军事代表团低调访华 或求援对抗越南
-                                            <li class="text-left"><span class="right">2020-01-07 14:27:46</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                            </li>
-                                        </ul>
-                                        <ul class="normal-list">
-                                            央视财经频道推进“新时代 新作为 新篇章”主题宣传
-                                            <li class="text-left"><span class="right">2020-01-07 08:23:12</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                            </li>
-                                        </ul>
-                                        <p><a href="/users_newsList.html">更多信息</a></p>
-                                        <hr/>
-                                    </div>
+                                <div class="panel box-v1"  id="newsCard1">
+
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -131,20 +170,20 @@
                                         <ul class="normal-list">
                                             当务之急是“恢复股市流动性”
                                             <li class="text-left"><span class="right">2020-01-06 02:24:20</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                             </li>
                                         </ul>
                                         <ul class="normal-list">
                                             意大利驻开罗领馆遭汽车炸弹袭击：1死4伤
                                             <li class="text-left"><span class="right">2020-01-07 10:24:10</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                             </li>
                                         </ul>
-                                        <p><a href="/users_newsList.html">更多信息</a></p>
+                                        <p><a href="/users/users_newsList.html">更多信息</a></p>
                                         <hr/>
                                     </div>
                                 </div>
@@ -163,20 +202,20 @@
                                         <ul class="normal-list">
                                             习近平举行仪式欢迎基里巴斯共和国总统访华并同其会谈
                                             <li class="text-left"><span class="right">2020-01-07 11:23:34</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                             </li>
                                         </ul>
                                         <ul class="normal-list">
                                             连骂人都看稿 韩国瑜痛批蔡英文是读稿机
                                             <li class="text-left"><span class="right">2020-01-07 16:24:56</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                             </li>
                                         </ul>
-                                        <p><a href="/users_newsList.html">更多信息</a></p>
+                                        <p><a href="/users/users_newsdetail.html">更多信息</a></p>
                                         <hr/>
                                     </div>
                                 </div>
@@ -195,20 +234,20 @@
                                         <ul class="normal-list">
                                             全国工商联主席高云龙：凝心聚力 服务大局 助力打造乡村振兴齐鲁样板
                                             <li class="text-left"><span class="right">2020-01-07 14:23:55</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                             </li>
                                         </ul>
                                         <ul class="normal-list">
                                             新华时评：重整行装再出发
                                             <li class="text-left"><span class="right">2020-01-07 00:21:39</span>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
-                                                <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                             </li>
                                         </ul>
-                                        <p><a href="/users_newsList.html">更多信息</a></p>
+                                        <p><a href="/users/users_newsList.html">更多信息</a></p>
                                         <hr/>
                                     </div>
                                 </div>
@@ -220,8 +259,8 @@
                     <div class="col-md-4">
                         <div class="col-md-12 padding-0">
                             <div class="panel box-v2">
-                                <div class="panel-heading padding-0"> <img src="asset/img/bg2.jpg" class="box-v2-cover img-responsive"/>
-                                    <div class="box-v2-detail"> <img src="asset/img/avatar.jpg" class="img-responsive"/>
+                                <div class="panel-heading padding-0"> <img src="../asset/img/bg2.jpg" class="box-v2-cover img-responsive"/>
+                                    <div class="box-v2-detail"> <img src="../asset/img/avatar.jpg" class="img-responsive"/>
                                         <h4 id="user-name-3">美丽的小姐</h4>
                                     </div>
                                 </div>
@@ -233,7 +272,7 @@
                                             <p></p>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                            <h3><a href="users_collection.html"> 1000</a></h3>
+                                            <h3><a href="/users/users_collection.html"> 1000</a></h3>
                                             <p>已收藏新闻</p>
                                         </div>
                                         <!--make the second one cener-->
@@ -253,15 +292,15 @@
         <!-- end: content -->
     </div>
     <!-- start: Javascript -->
-    <script src="asset/js/jquery.min.js"></script>
-    <script src="asset/js/jquery.ui.min.js"></script>
-    <script src="asset/js/bootstrap.min.js"></script>
+    <script src="../asset/js/jquery.min.js"></script>
+    <script src="../asset/js/jquery.ui.min.js"></script>
+    <script src="../asset/js/bootstrap.min.js"></script>
     <!-- plugins -->
-    <script src="asset/js/plugins/jquery.nicescroll.js"></script>
+    <script src="../asset/js/plugins/jquery.nicescroll.js"></script>
     <!-- custom -->
-    <script src="asset/js/main.js"></script>
-    <script src="asset/js/moment.js"></script>
-    <script src="js/Confim.js"></script>
+    <script src="../asset/js/main.js"></script>
+    <script src="../asset/js/moment.js"></script>
+    <script src="../js/Confim.js"></script>
     <!-- end: Javascript -->
 </body>
 </html>
