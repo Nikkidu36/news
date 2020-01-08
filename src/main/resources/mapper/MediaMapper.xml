@@ -166,4 +166,9 @@
     from  media
     where available_status = "N"
   </select>
+  <select id="selectByEamil" parameterType="string" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/>
+    from  media
+    where email = #{email}
+  </select>
 </mapper>
