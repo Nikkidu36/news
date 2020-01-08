@@ -22,4 +22,8 @@ public interface NewsManageService {
     Boolean publishNewsByID(Integer ID);
 
     Result deleteReportedNewsByID(Integer ID);
+
+    Boolean rejectNewsByID(Integer ID);
+
+
 }

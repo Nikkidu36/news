@@ -77,5 +77,7 @@ public interface NewsManageMapper {
 
     boolean publishNewsByID(@Param("ID") Integer ID);
 
+    boolean rejectNewsByID(@Param("ID") Integer ID);
+
     int deleteReportedNewsByID(@Param("oooppp") Integer ID);
 }

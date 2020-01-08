@@ -121,4 +121,10 @@ public class NewsManageServiceImpl implements NewsManageService {
         }
         return Result.createByFailure();
     }
+
+    @Override
+    public Boolean rejectNewsByID(Integer ID){
+        Boolean publish_news = newsManageMapper.rejectNewsByID(ID);
+        return publish_news;
+    }
 }
