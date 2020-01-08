@@ -31,6 +31,16 @@
         console.log($("#user-name").text())
     })
 
+    $(function () {
+        $('#searchBtn').click(function () {
+            ajaxPost("/search",{searchContent:$("#searchContent").val()},function (res) {
+                if(res.code==0){
+
+                }
+            })
+        })
+    })
+
     // $("#collection").click(function () {
     //     var param =  RequestParameter()
     //     window.location = "/users/users_collection.html?userId="+param.userId
@@ -89,7 +99,14 @@
                 <div class="panel-body">
                     <div class="col-md-6 col-sm-12">
                         <h3 class="animated fadeInLeft" id="user-name-2">欢迎您：美丽的小姐</h3>
-                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 首页</p>
+                        <p class="animated fadeInDown"><span class="fa fa-map-marker"></span> 首页</p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <h3 class="animated fadeInLeft">
+                            <input type="text" class="text" id="searchContent"/>
+                            <input type="button" id="searchBtn" style="text-align: center;width: 80px;height: 30px;" value="搜索"/>
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -246,7 +263,7 @@
                                             <p></p>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                            <h3><a href="users_collection.html"> 1000</a></h3>
+                                            <h3><a href="/users/users_collection.html"> 1000</a></h3>
                                             <p>已收藏新闻</p>
                                         </div>
                                         <!--make the second one cener-->
