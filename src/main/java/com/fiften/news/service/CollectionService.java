@@ -6,7 +6,9 @@ import com.fiften.news.util.Result;
 import javax.servlet.http.HttpServletRequest;
 
 public interface CollectionService {
-    Result isCollection(int uid,int nid);
+    Result isCollection(String userName,int nid);
+
+    Result addCollection(int uid,int nid);
 
     Result getMyCollectionList(HttpServletRequest httpServletRequest);
 

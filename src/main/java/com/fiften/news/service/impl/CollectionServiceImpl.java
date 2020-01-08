@@ -3,6 +3,7 @@ package com.fiften.news.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.fiften.news.dao.CollectionMapper;
 import com.fiften.news.model.Collection;
+import com.fiften.news.model.User;
 import com.fiften.news.service.CollectionService;
 import com.fiften.news.service.TokenService;
 import com.fiften.news.util.Result;
@@ -23,23 +24,31 @@ public class CollectionServiceImpl implements CollectionService {
     TokenService tokenService;
 
     @Override
-    public Result isCollection(int uid,int nid) {
+    public Result isCollection(String userName,int nid) {
 
-        Collection collection=new Collection();
-        collection.setUserId(uid);
-        collection.setNewsId(nid);
-
-        Collection baseCollection=collectionMapper.selectCollectionByUidAndNid(collection);
+        Collection baseCollection=collectionMapper.selectCollectionByUsernameAndNid(userName,nid);
 
         if(baseCollection!=null){
             JSONObject res = new JSONObject();
+
             res.put("type",1);
             return Result.createSuccessResult(res);
         }else{
             JSONObject res = new JSONObject();
+            res.put("uid",baseCollection.getUserId());
             res.put("type",2);
             return Result.createSuccessResult(res);
         }
+    }
+
+    @Override
+    public Result addCollection(int uid, int nid) {
+
+        Collection collection = new Collection();
+        collection.setNewsId(nid);
+        collection.setUserId(uid);
+
+        return Result.createSuccessResult(collectionMapper.insertSelective(collection));
     }
 
     @Override
