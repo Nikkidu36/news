@@ -114,4 +114,16 @@
     where user_id=#{userId} and news_id=#{newsId}
 
   </select>
+  <select id="getMyCollectionList" resultType="hashmap" parameterType="integer">
+    select nd.title,nd.publish_Date,media.user_name
+    from news_detail as nd,media,collection,news_manage as nm
+    where collection.user_id=#{id} and collection.news_id=nd.ID and nm.news_id=nd.ID and nd.media_id=media.media_id and nm.audit_status="Y" and nm.audit_result="Y" and nm.publish_status="Y"
+  </select>
+  <select id="totalCollection" resultType="hashmap" parameterType="integer">
+    select COUNT(*) as collectionTimes
+    from collection
+    where collection.user_id=#{id}
+    group by collection.user_id
+  </select>
+
 </mapper>

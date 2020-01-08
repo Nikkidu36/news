@@ -2,6 +2,7 @@ package com.fiften.news.dao;
 
 import com.fiften.news.model.NewsManage;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -74,4 +75,5 @@ public interface NewsManageMapper {
 
     List<HashMap> getAllWaitRejectNewslist();
 
+    boolean publishNewsByID(@Param("ID") Integer ID);
 }
