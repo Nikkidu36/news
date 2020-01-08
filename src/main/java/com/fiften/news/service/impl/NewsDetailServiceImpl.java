@@ -6,6 +6,9 @@ import com.fiften.news.service.NewsDetailService;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class NewsDetailServiceImpl implements NewsDetailService {
 
     @Autowired
@@ -17,9 +20,7 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     @Override
     public Result searchNewsByTitle(String title) {
 
-        NewsDetail newsDetail = new NewsDetail();
-        newsDetail.setTitle(title);
-
+        NewsDetail newsDetail=newsDetailMapper.searchNewsByTitle(title);
         return null;
     }
 }
