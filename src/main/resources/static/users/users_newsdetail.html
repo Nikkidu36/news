@@ -24,7 +24,7 @@
     <script>
         $(function () {
             var param =  RequestParameter()
-            ajaxPost("/showDetail",{news_id:$(param.news_id)},function (res) {
+            ajaxPost("/showDetail",{news_id:param.news_id},function (res) {
                 $("#details").append(`<div class="panel-heading" style="text-align: center;">
                                 <h3>作为IP，《小时代》能留下什么？xxxxx</h3>
                                 <p>作者：网易娱乐&nbsp;&nbsp;&nbsp;&nbsp;发表日期：2020-01-07&nbsp;18:40:06&nbsp;&nbsp;&nbsp;&nbsp;收藏次数：269</p>

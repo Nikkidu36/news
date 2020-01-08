@@ -172,8 +172,8 @@
     where detail like '%${title}%'
   </select>
   <select id="showNewsById" parameterType="integer" resultType="hashmap">
-      select nd.title,nd.news_key,nd.publish_Date,nd.detail,nd.news_image,media.username
-      from news_detail as nd media
+      select nd.title,nd.news_key,nd.publish_Date,nd.detail,nd.news_image,media.user_name
+      from news_detail as nd,media
       where nd.ID=#{id} and nd.media_id=media.media_id
   </select>
 </mapper>
