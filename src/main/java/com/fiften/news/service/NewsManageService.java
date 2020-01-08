@@ -2,6 +2,6 @@ package com.fiften.news.service;
 
 import com.fiften.news.util.Result;
 
-public interface ManageNewsService {
+public interface NewsManageService {
     Result getAuditNum();
 }
