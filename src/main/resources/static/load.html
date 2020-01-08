@@ -38,8 +38,21 @@
 						setCookies("token", res.data.token)
 						layui.use('layer', function () {
 							var layer = layui.layer;
+                            layer.alert('用户你好，登录成功');
+                            setCookies("username",res.data.user.userName)
+                            setTimeout(function () {
+
+                                window.location = "/users_index.html?userName="
+                            }, 3000)
+                        });
+                    }
+                    if (res.data.flag == 2) {
+                        setCookies("token", res.data.token)
+                        layui.use('layer', function () {
+                            var layer = layui.layer;
 
                             layer.alert('媒体你好，登录成功');
+                            setCookies("username",res.data.media.userName)
                             setTimeout(function () {
                                 window.location = "/media_index.html?userName=" + res.data.media.userName
                             }, 3000)
@@ -51,8 +64,9 @@
                             layui.use('layer', function () {
                                 var layer = layui.layer;
                                 layer.alert('新闻管理员你好，登录成功');
+                                setCookies("username",res.data.manager.userName)
                                 setTimeout(function () {
-                                    window.location = "newsManager/newsManager_index.html?userName=" + res.data.manager.userName
+                                    window.location = "newsManager/newsManager_index.html?userName"
                                 }, 3000)
                             });
                         }
@@ -61,6 +75,7 @@
                             layui.use('layer', function () {
                                 var layer = layui.layer;
                                 layer.alert('账号管理员你好，登录成功');
+                                setCookies("username",res.data.manager.userName)
                                 setTimeout(function () {
                                     window.location = "/userManager/user_manager_index.html?userName=" + res.data.manager.userName
                                 }, 3000)

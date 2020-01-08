@@ -67,4 +67,11 @@ public interface NewsManageMapper {
     boolean savePassAuditResult(Integer ID);
 
     boolean saveNotAuditResult(Integer ID);
+
+    List<HashMap> getAllDeleteNewslist();
+
+    List<HashMap> getAllWaitPublishNewslist();
+
+    List<HashMap> getAllWaitRejectNewslist();
+
 }

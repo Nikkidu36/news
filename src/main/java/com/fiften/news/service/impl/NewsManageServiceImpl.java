@@ -51,6 +51,9 @@ public class NewsManageServiceImpl implements NewsManageService {
         return Result.createSuccessResult(newsMap.size(),newsMap);
     }
 
+
+
+
     @Override
     public Result getOneNews(Integer ID) {
         HashMap news=newsDetailMapper.getOneNewsByID(ID);
@@ -63,9 +66,30 @@ public class NewsManageServiceImpl implements NewsManageService {
         if(auditResult.equals("通过")){
             newsDetailMapper.updateSubmitDateByID(ID);
             yn= newsManageMapper.savePassAuditResult(ID);
-        }else{
+        }else if (auditResult.equals("未通过")){
             yn = newsManageMapper.saveNotAuditResult(ID);
+        }else{
+            yn=false;
+            return Result.createByFailure("审核失败！");
         }
         return Result.createSuccessResult(yn);
+    }
+
+    @Override
+    public Result getAllDeleteNewslist() {
+        List<HashMap> newsMap = newsManageMapper.getAllDeleteNewslist();
+        return Result.createSuccessResult(newsMap.size(),newsMap);
+    }
+
+    @Override
+    public Result getAllWaitPublishNewslist() {
+        List<HashMap> newsMap = newsManageMapper.getAllWaitPublishNewslist();
+        return Result.createSuccessResult(newsMap.size(),newsMap);
+    }
+
+    @Override
+    public Result getAllWaitRejectNewslist() {
+        List<HashMap> newsMap = newsManageMapper.getAllWaitRejectNewslist();
+        return Result.createSuccessResult(newsMap.size(),newsMap);
     }
 }
