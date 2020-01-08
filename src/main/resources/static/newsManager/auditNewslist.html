@@ -7,6 +7,13 @@
     <meta name="keyword" content="xxxxx">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新闻列表</title>
+
+    <script src="../js/jQuery/jquery-3.4.1.min.js"></script>
+
+    <script src="../utilJs/commentUtil.js"></script>
+
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
     <!-- plugins -->
@@ -15,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/fullcalendar.min.css"/>
     <link href="../asset/css/style.css" rel="stylesheet">
+    <script src="../utilJs/jquery-cookie.js"></script>
     <!-- end: Css -->
 
 </head>
@@ -109,18 +117,14 @@
                                                     <th class="sorting"  style="width: 64px;">点击审核</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <%
-                                                for (News news:newsList){%>
-                                                <tr role="row" class="odd">
-                                                    <td class="sorting_1"><%=news.getNewsitem()%></td>
-                                                    <td><%=news.getNewsauthor()%></td>
-                                                    <td><%=news.getNewsdate()%></td>
-                                                    <td><%=news.getNewsreadnum()%></td>
-                                                    <td><a href="Audit_newsitem.html">审核</a></td>
-                                                    <!--?newsid=<%=news.getNewsid()%>-->
+                                                <tbody id="auditNewslist">
+                                                <tr role="row" class="odd" >
+                                                    <td class="sorting_1">qweqwe</td>
+                                                    <td>asdasd</td>
+                                                    <td>asasdasd</td>
+                                                    <td>asdasd</td>
+                                                    <td><a href="/Media_newsList.html">审核</a></td>
                                                 </tr>
-                                                <%}%>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -135,6 +139,31 @@
     </div>
     <!-- end: content -->
 </div>
+
+
+<script>
+
+    $(function () {
+        ajaxPost("/getAllAuditNewslist",null,function (res) {
+            if (res.code == 0 ){
+
+                for (let i = 0; i < res.data.length; i++) {
+                    $("#auditNewslist").append(`<tr role="row" class="odd" >
+                                                    <td class="sorting_1">`+res.data[i].title+`</td>
+                                                    <td>`+res.data[i].user_name+`</td>
+                                                    <td>asasdasd</td>
+                                                    <td>asdasd</td>
+                                                    <td><a href="/Media_newsList.html?newId=`+res.data[i].news_id+`">审核</a></td>
+                                                </tr>`)
+
+                }
+            }else {
+                alert("不太行")
+            }
+        })
+    })
+</script>
+
 <!-- start: Javascript -->
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>

@@ -34,6 +34,7 @@
     from news_manage
     where ID = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
@@ -154,4 +155,18 @@
       report_status = #{reportStatus,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getAuditNum" resultType="java.lang.Integer">
+   select count (*)
+   from news_manage
+   where audit_status="N"
+
+  </select>
+
+  <select id="getAllAuditNewslist" resultType="hashmap">
+    select nd.*,nm.*,m.user_name
+    from news_detail as nd ,news_manage as nm,media as m
+    where nm.audit_status = "N" and  nm.news_id  = nd.ID and m.media_id = nd.media_id
+    order by nd.submit_Date desc
+  </select>
 </mapper>
