@@ -10,4 +10,10 @@ public interface NewsManageService {
     Result getOneNews(Integer ID);
 
     Result saveAuditResult(String auditResult,Integer ID);
+
+    Result getAllDeleteNewslist();
+
+    Result getAllWaitPublishNewslist();
+
+    Result getAllWaitRejectNewslist();
 }

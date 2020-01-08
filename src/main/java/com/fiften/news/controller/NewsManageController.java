@@ -33,4 +33,19 @@ public class NewsManageController {
         return newsManageService.saveAuditResult(auditResult,ID);
     }
 
+    @PostMapping("/getAllDeleteNewslist")
+    public Result getAllDeleteNewslist(){
+        return newsManageService.getAllDeleteNewslist();
+    }
+
+    @PostMapping("/getAllWaitPublishNewslist")
+    public Result getAllWaitPublishNewslist(){
+        return newsManageService.getAllWaitPublishNewslist();
+    }
+
+    @PostMapping("/getAllWaitRejectNewslist")
+    public Result getAllWaitRejectNewslist(){
+        return newsManageService.getAllWaitRejectNewslist();
+    }
+
 }

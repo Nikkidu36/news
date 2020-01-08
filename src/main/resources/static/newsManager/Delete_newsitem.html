@@ -16,9 +16,15 @@
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/fullcalendar.min.css"/>
     <link href="../asset/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="../utilJs/commentUtil.js"></script>
 
 </head>
+<script>
+    $(function () {
+        $("#user-name").text(getCookies("username"))
+    })
 
+</script>
 <body id="mimin" class="dashboard">
 <!-- start: Header -->
 <nav class="navbar navbar-default header navbar-fixed-top">

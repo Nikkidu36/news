@@ -14,5 +14,5 @@ public interface NewsDetailService {
 
     Result showNewsById(int id);
 
-    Result showNewsListById(int id);
+    Result showNewsListById();
 }

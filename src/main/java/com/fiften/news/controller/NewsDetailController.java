@@ -37,8 +37,8 @@ public class NewsDetailController {
     }
 
     @PostMapping("/showNewsList")
-    Result showNewsListById(@RequestParam("news_id") int id){
-        return newsDetailService.showNewsListById(id);
+    Result showNewsListById(){
+        return newsDetailService.showNewsListById();
     }
 
 }
