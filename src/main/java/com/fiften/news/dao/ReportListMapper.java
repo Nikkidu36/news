@@ -61,4 +61,5 @@ public interface ReportListMapper {
     ReportList ReportNews(int media_id,int news_id,String reason);
 
     List<HashMap> getNewsReports(Integer ID);
+
 }

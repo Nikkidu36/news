@@ -1,8 +1,14 @@
 package com.fiften.news.dao;
 
 import com.fiften.news.model.Collection;
+import com.fiften.news.util.Result;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
 
 @Mapper
 @Repository
@@ -56,4 +62,8 @@ public interface CollectionMapper {
     int updateByPrimaryKey(Collection record);
 
     Collection selectCollectionByUidAndNid(Collection collection);
+
+    List<HashMap> getMyCollectionList(@Param("id") Integer id);
+
+    List<HashMap> totalCollection(@Param("id") Integer id);
 }

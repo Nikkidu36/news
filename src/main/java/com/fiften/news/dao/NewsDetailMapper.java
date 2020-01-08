@@ -78,5 +78,5 @@ public interface NewsDetailMapper {
 
     List<HashMap> showNewsById(@Param("id") int id);
 
-    List<HashMap> showNewsListById(@Param("id") int id);
+    List<HashMap> showNewsListById();
 }
