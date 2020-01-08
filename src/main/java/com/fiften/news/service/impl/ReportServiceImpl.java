@@ -1,6 +1,8 @@
 package com.fiften.news.service.impl;
 
+import com.fiften.news.dao.NewsDetailMapper;
 import com.fiften.news.dao.ReportListMapper;
+import com.fiften.news.model.NewsDetail;
 import com.fiften.news.model.ReportList;
 import com.fiften.news.service.ReportService;
 import com.fiften.news.util.Result;
@@ -12,16 +14,21 @@ public class ReportServiceImpl implements ReportService {
     @Autowired
     ReportListMapper reportListMapper;
 
+    @Autowired
+    NewsDetailMapper newsDetailMapper;
 
     @Override
-    public Result doReport(int  media_id,int  news_id,String reason){
+    public Result doReport(int  news_id,String reason){
         ReportList reportList = new ReportList();
-
-        reportList.setMediaId(media_id);
         reportList.setNewsId(news_id);
         reportList.setReason(reason);
 
-        return Result.createSuccessResult(reportListMapper.ReportNews(media_id,news_id,reason));
+        NewsDetail newsDetail = newsDetailMapper.selectByPrimaryKey(news_id);
+
+        reportList.setMediaId(newsDetail.getMediaId());
+
+
+        return Result.createSuccessResult(reportListMapper.insertSelective(reportList));
 
 
     }

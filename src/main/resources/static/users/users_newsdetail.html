@@ -116,7 +116,7 @@
                                 <p>作者：` + res.data[0].user_name + `&nbsp;&nbsp;&nbsp;&nbsp;发表日期：` + res.data[0].publish_Date + `&nbsp;&nbsp;&nbsp;&nbsp;收藏次数：` + res.data[0].collectionTimes + `</p>
                             </div>
                             <button type="button" class="layui-btn layui-btn-normal" id="collectionButt">收藏</button>
-                            <button type="button" class="layui-btn layui-btn-normal">举报</button>
+                            <button type="button" class="layui-btn layui-btn-normal" ><a href="../user_report.html?news_id=`+RequestParameter().news_id+`">举报</a></button>
                             <div class="panel-body" style="padding-bottom:30px;">
                                 <div class="panel-body-main">
                                     <p>` + res.data[0].detail + `</p>
