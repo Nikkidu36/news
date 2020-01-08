@@ -6,4 +6,6 @@ public interface NewsManageService {
     Result getIndexNewsNum();
 
     Result getAllAuditNewslist();
+
+    Result getOneNews(Integer ID);
 }

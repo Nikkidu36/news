@@ -89,12 +89,20 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Result register(Media media) {
-        media.setCheckStatus("on");
-        media.setAvailableStatus("N");
-        if (mediaMapper.insertSelective(media)>0){
-            return Result.createSuccessResult();
-        }else {
-            return Result.createByFailure();
+        try{
+            if (mediaMapper.selectByEamil(media.getEmail()) !=null ){
+                return Result.createByFailure("该邮箱注册过啦！");
+            }
+            media.setCheckStatus("on");
+            media.setAvailableStatus("N");
+            if (mediaMapper.insertSelective(media)>0){
+                return Result.createSuccessResult();
+            }else {
+                return Result.createByFailure();
+            }
+        }catch (Exception e ){
+            e.printStackTrace();
+            return Result.createByFailure(e.getMessage());
         }
 
 

@@ -23,8 +23,6 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     @Override
     public Result searchNewsByTitle(String title) {
 
-
-
         NewsDetail baseNewsDetail1= newsDetailMapper.searchNewsByTitle(title);
 
         if(baseNewsDetail1!=null){
@@ -34,5 +32,13 @@ public class NewsDetailServiceImpl implements NewsDetailService {
         }
 
         return Result.createByFailure("找不到新闻");
+    }
+
+    @Override
+    public Result showNewsById(int id) {
+
+        List<HashMap> NewsDetailList=newsDetailMapper.showNewsById(id);
+
+        return Result.createSuccessResult(NewsDetailList.size(),NewsDetailList);
     }
 }

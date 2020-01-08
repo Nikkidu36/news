@@ -22,4 +22,9 @@ public class NewsManageController {
         return newsManageService.getAllAuditNewslist();
     }
 
+    @PostMapping("/getOneNewsByID")
+    public Result getOneNews(Integer ID){
+        return newsManageService.getOneNews(ID);
+    }
+
 }

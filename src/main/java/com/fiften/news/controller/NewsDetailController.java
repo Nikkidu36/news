@@ -17,4 +17,10 @@ public class NewsDetailController {
     Result searchNewsByTitle(@RequestParam("searchContent") String title){
         return newsDetailService.searchNewsByTitle(title);
     }
+
+    @PostMapping("/showDetail")
+    Result showNewsById(@RequestParam("news_id") int id){
+        return newsDetailService.showNewsById(id);
+    }
+
 }
