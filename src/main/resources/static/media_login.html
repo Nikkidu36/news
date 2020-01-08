@@ -4,7 +4,7 @@
 <head>
     <title>注册</title>
     <meta charset="utf-8">
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/jQuery/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
@@ -15,7 +15,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+    <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all">
     <script src="utilJs/commentUtil.js"></script>
 
 </head>
@@ -34,29 +34,53 @@
 
 
         $("#onSentCode").click(function () {
-            ajaxPost("/sentEmailCode",{email:$("#email").val()},function (res) {
-                if (res.code == 0){
-                        layui.use('layer',function () {
-                            var layer = layui.layer;
-                            layer.alert("发送成功");
-                        })
-                      $("#baseCode").val(res.data)
+            ajaxPost("/sentEmailCode", {email: $("#email").val()}, function (res) {
+                if (res.code == 0) {
+                    layui.use('layer', function () {
+                        var layer = layui.layer;
+                        layer.alert("发送成功");
+                    })
+                    $("#baseCode").val(res.data)
 
                 } else {
-                    alert("错误"+res.msg);
+                    alert("错误" + res.msg);
                 }
             })
         })
 
         $("#media_register").click(function () {
-                if ($("#baseCode").val() == $("#code").val()){
 
-                } else {
-                    layui.use("layer",function () {
+            if ($("#baseCode").val() == $("#code").val() && $("#code").val() != "" && $("#code").val() != null) {
+
+                if ($("#imgUrl").val() == "" || $("#imgUrl").val() == null) {
+                    layui.use("layer", function () {
                         var layer = layui.layer;
-                        layer.msg("验证码有误，请检查")
+                        layer.msg("请上传凭证")
+                    })
+                } else {
+                    ajaxPost("/registerMedia", {
+                        userName: $("#username").val(),
+                        password: $("#password1").val(),
+                        email: $("#email").val(),
+                        applyQualification: $("#imgUrl").val()
+                    }, function (res) {
+                        layui.use('layer', function () {
+                            var layer = layui.layer;
+                            if (res.code == 0) {
+                                layer.alert("恭喜宁，请等待审核")
+                                window.location = "/index.html"
+                            } else {
+                                layer.alert(res.msg)
+                            }
+                        })
                     })
                 }
+            } else {
+                layui.use("layer", function () {
+                    var layer = layui.layer;
+                    layer.msg("验证码有误，请检查")
+                })
+            }
         })
     })
 </script>
@@ -72,16 +96,19 @@
                 <input type="text" id="username" class="text" value="用户名" name="username">
                 <input type="text" id="password" name="password" value="密码">
                 <input type="password" id="password1" name="password1" style="display: none;">
-                <input type="text" id="email" class="text" value="邮箱" name="username" >
-                <input type="text" id="code" class="text" value="验证码" name="username" style="width: 60%;float: left" >
+                <input type="text" id="email" class="text" value="邮箱" name="username">
+                <input type="text" id="code" class="text" value="验证码" name="username" style="width: 60%;float: left">
                 <input type="hidden" id="baseCode">
-                <button type="button" class="layui-btn layui-btn-sm"  style="margin-top: 7px;margin-left: 50px" id="onSentCode">验证码</button>
+                <button type="button" class="layui-btn layui-btn-sm" style="margin-top: 7px;margin-left: 50px"
+                        id="onSentCode">验证码
+                </button>
 
 
                 <div class="layui-upload">
                     <button type="button" class="layui-btn" id="test1">上传媒体资质</button>
                     <div class="layui-upload-list" style="float: right">
-                        <img style="width: 50px;height: 50px;" class="layui-upload-img" id="demo1" src="http://pic.baike.soso.com/p/20090111/20090111120000-104768.jpg">
+                        <img style="width: 50px;height: 50px;" class="layui-upload-img" id="demo1"
+                             src="http://pic.baike.soso.com/p/20090111/20090111120000-104768.jpg">
                         <input type="hidden" id="imgUrl">
                         <p id="demoText"></p>
                     </div>
@@ -101,7 +128,7 @@
     </div>
 </div>
 <script>
-    layui.use('upload', function() {
+    layui.use('upload', function () {
         var $ = layui.jquery
             , upload = layui.upload;
 
@@ -120,11 +147,10 @@
                 if (res.code !== 0) {
                     return layer.msg('上传失败');
                     console.log(res.data);
-                }else {
+                } else {
 
                     $("#imgUrl").val(res.data);
 
-                    alert($("#imgUrl").val())
 
                 }
                 //上传成功
@@ -142,7 +168,8 @@
 </script>
 <!-----//end-main---->
 </body>
-</html><html lang="en">
+</html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
