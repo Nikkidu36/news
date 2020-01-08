@@ -32,15 +32,48 @@
     })
 
     $(function () {
+
         $('#searchBtn').click(function () {
+            var param =  RequestParameter()
             ajaxPost("/search",{searchContent:$("#searchContent").val()},function (res) {
                 if(res.code==0){
                     console.log(res)
-                    window.location="/users/users_newsdetail.html?news_id="+res.data.ID
+                    window.location="/users/users_newsdetail.html?news_id="+res.data.ID+"&userName="+param.userName
                 }else {
                     alert("???")
                 }
             })
+        })
+    })
+
+    $(function () {
+        ajaxPost("/showNewsList",{news_id:1},function (res) {
+            if(res.code==0){
+                $("#newsCard1").append(`<div class="panel-heading bg-white border-none">
+                                        <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                                            <h4 class="text-left">央视网</h4>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6 text-right">
+                                            <h4> <span class="icon-user icons icon text-right"></span> </h4>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body text-center">
+                                        <ul class="normal-list">
+                                            美媒：柬埔寨军事代表团低调访华 或求援对抗越南
+                                            <li class="text-left"><span class="right">2020-01-07 14:27:46</span>
+                                                <a href=/users/users_newsdetail.html><span class="fa fa-angle-right"></span></a>
+                                            </li>
+                                        </ul>
+                                        <ul class="normal-list">
+                                            央视财经频道推进“新时代 新作为 新篇章”主题宣传
+                                            <li class="text-left"><span class="right">2020-01-07 08:23:12</span>
+                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
+                                            </li>
+                                        </ul>
+                                        <p><a href="/users/users_newsList.html">更多信息</a></p>
+                                        <hr/>
+                                    </div>`)
+            }
         })
     })
 
@@ -119,7 +152,7 @@
                         <div class="col-md-12 padding-0">
                             <!--strat:newsCard-->
                             <div class="col-md-6">
-                                <div class="panel box-v1">
+                                <div class="panel box-v1"  id="newsCard1">
                                     <div class="panel-heading bg-white border-none">
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
                                             <h4 class="text-left">央视网</h4>
@@ -132,8 +165,6 @@
                                         <ul class="normal-list">
                                             美媒：柬埔寨军事代表团低调访华 或求援对抗越南
                                             <li class="text-left"><span class="right">2020-01-07 14:27:46</span>
-                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right" id="detail1"></span></a>
-                                                <a href="/users/users_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                                 <a href=/users/users_newsdetail.html><span class="fa fa-angle-right"></span></a>
                                             </li>
                                         </ul>

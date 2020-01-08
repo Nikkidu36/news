@@ -172,8 +172,14 @@
     where detail like '%${title}%'
   </select>
   <select id="showNewsById" parameterType="integer" resultType="hashmap">
-      select nd.title,nd.news_key,nd.publish_Date,nd.detail,nd.news_image,media.user_name
-      from news_detail as nd,media
-      where nd.ID=#{id} and nd.media_id=media.media_id
+      select nd.title,nd.news_key,nd.publish_Date,nd.detail,nd.news_image,media.user_name,COUNT(*) as collectionTimes
+      from news_detail as nd,media,collection
+      where nd.ID=#{id} and nd.media_id=media.media_id and collection.news_id=#{id}
+      group by collection.news_id
+  </select>
+  <select id="showNewsListById" parameterType="integer" resultType="hashmap">
+    select nd.title,media.user_name
+    from news_detail as nd,media
+    where nd.ID=#{id} and nd.media_id=media.media_id
   </select>
 </mapper>

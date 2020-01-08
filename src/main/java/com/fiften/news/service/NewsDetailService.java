@@ -7,4 +7,6 @@ public interface NewsDetailService {
     Result searchNewsByTitle(String title);
 
     Result showNewsById(int id);
+
+    Result showNewsListById(int id);
 }
