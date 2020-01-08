@@ -86,4 +86,17 @@ public class LoginServiceImpl implements LoginService {
 
         return Result.createByFailure("找不到用户");
     }
+
+    @Override
+    public Result register(Media media) {
+        media.setCheckStatus("on");
+        media.setAvailableStatus("N");
+        if (mediaMapper.insertSelective(media)>0){
+            return Result.createSuccessResult();
+        }else {
+            return Result.createByFailure();
+        }
+
+
+    }
 }

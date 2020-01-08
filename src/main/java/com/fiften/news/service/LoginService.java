@@ -1,5 +1,6 @@
 package com.fiften.news.service;
 
+import com.fiften.news.model.Media;
 import com.fiften.news.util.Result;
 
 /**
@@ -9,4 +10,6 @@ import com.fiften.news.util.Result;
 
 public interface LoginService {
      Result doLogin(String userName,String password);
+
+     Result register(Media media);
 }

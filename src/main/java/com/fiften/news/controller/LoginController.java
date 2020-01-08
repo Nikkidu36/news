@@ -27,12 +27,18 @@ public class LoginController {
         return loginService.doLogin(userName,password);
     }
 
+
+    @PostMapping("/register")
+    public Result register(){
+        return null;
+    }
+
     @PostMapping("/sentEmailCode")
     Result sentEmailCode(@RequestParam("email") String email){
         try {
 
-            MailUtil.sendEmail(email);
-            return Result.createSuccessResult();
+            String code = MailUtil.sendEmail(email);
+            return Result.createSuccessResult(code);
         }catch (Exception e){
             e.printStackTrace();
             return Result.createByFailure(e.getMessage());
