@@ -140,8 +140,8 @@
                 $("#mediaList").append(`<tr role="row" class="odd" >
                                                     <td class="sorting_1">` + res.data[i].userName + `</td>
                                                     <td>` + res.data[i].email + `</td>
-                                                    <td><img src="` + res.data[i].applyQualification + `" alt="" style="height: 10%"></td>
-                                                    <td><a href="/Media_newsList.html?mediaId=` + res.data[i].mediaId + `">审核</a></td>
+                                                    <td><img src="` + res.data[i].applyQualification + `" alt="" style="height: 40px;width:40px;"></td>
+                                                    <td><a href="userManager/apply_detail.html?mediaId=` + res.data[i].mediaId + `">审核</a></td>
                                                 </tr>`)
             }
         })
