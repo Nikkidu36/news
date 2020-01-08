@@ -13,4 +13,6 @@ public interface UserService {
     Result hasUser(User user);
 
     User findUserById(int parseInt);
+
+
 }

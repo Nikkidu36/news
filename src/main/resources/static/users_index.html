@@ -20,10 +20,15 @@
     <script src="utilJs/commentUtil.js"></script>
 </head>
 <script>
-    var param =  RequestParameter()
-    console.log(param.userName)
-     //$("#user-name").text(param.userName+"，你好。")
-    console.log($("#user-name").text())
+    $(function () {
+        var param =  RequestParameter()
+        console.log(param.userName)
+        $("#user-name").text(param.userName+"，你好。")
+        $("#user-name-2").text("欢迎您："+param.userName+"，你好。")
+        $("#user-name-3").text("欢迎您："+param.userName+"，你好。")
+        console.log($("#user-name").text())
+    })
+
 </script>
 <body id="mimin" class="dashboard">
     <!-- start: Header -->
@@ -71,7 +76,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="col-md-6 col-sm-12">
-                        <h3 class="animated fadeInLeft">欢迎您：美丽的小姐</h3>
+                        <h3 class="animated fadeInLeft" id="user-name-2">欢迎您：美丽的小姐</h3>
                         <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 首页</p>
                     </div>
                 </div>
@@ -218,7 +223,7 @@
                             <div class="panel box-v2">
                                 <div class="panel-heading padding-0"> <img src="asset/img/bg2.jpg" class="box-v2-cover img-responsive"/>
                                     <div class="box-v2-detail"> <img src="asset/img/avatar.jpg" class="img-responsive"/>
-                                        <h4>美丽的小姐</h4>
+                                        <h4 id="user-name-3">美丽的小姐</h4>
                                     </div>
                                 </div>
                                 <div class="panel-body">
