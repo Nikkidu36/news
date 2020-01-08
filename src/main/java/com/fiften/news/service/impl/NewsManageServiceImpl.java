@@ -14,7 +14,9 @@ import java.util.Map;
 public class NewsManageServiceImpl implements NewsManageService {
     /**
      * clould not autowire
-     * Mapper记得注解
+     * Mapper中记得两个注解
+     * @Mapper
+     * @Repository
      */
 
     @Autowired

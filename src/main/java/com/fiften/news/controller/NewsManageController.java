@@ -13,7 +13,7 @@ public class NewsManageController {
     NewsManageService newsManageService;
 
     @PostMapping("/getAuditNum")
-    Result getAuditNum(){
+    Result getIndexNum(){
         return newsManageService.getAuditNum();
     }
 
