@@ -64,4 +64,8 @@ public interface MediaMapper {
     List<Media> selectAllNotAvailableMedia();
 
     Media selectByEamil(@Param("email") String email);
+
+    List<Media> selectAllAvailableMedia();
+
+
 }

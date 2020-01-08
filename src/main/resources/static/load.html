@@ -58,6 +58,7 @@
                         }
                         if (res.data.manager.type === "user_manager") {
                             setCookies("token", res.data.token)
+                            setCookies("username",res.data.userName)
                             layui.use('layer', function () {
                                 var layer = layui.layer;
                                 layer.alert('账号管理员你好，登录成功');
@@ -75,6 +76,7 @@
 
     })
 </script>
+
 <div class="main">
     <div class="login-form">
         <h1>用户登陆</h1>

@@ -3,6 +3,7 @@ package com.fiften.news.controller;
 import com.fiften.news.service.MediaService;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,10 +39,27 @@ public class MediaController {
         return mediaService.passMediaById(mediaId);
     }
 
-    @PostMapping("/sumreportMediaById")
-    public Result sumreportMediaById(){
-        return mediaService.sumreportMediaByID();
+    @PostMapping("/getAllReportMedia")
+    public Result getAllReportMedia(){
+        return mediaService.getAllReportedMedia();
     }
+
+    @GetMapping("/logoutMedia")
+    public String logoutMedia(@RequestParam("mediaId") Integer mediaId){
+        if (mediaService.logoutMedia(mediaId)){
+            return "<script>\n" +
+                    "    alert(\"封号成功\");\n" +
+                    "    window.location = \"/userManager/useredit.html\"\n" +
+                    "</script>";
+        }else {
+            return "<script>\n" +
+                    "    alert(\"封号失败\");\n" +
+                    "    window.location = \"/userManager/useredit.html\"\n" +
+                    "</script>";
+        }
+
+    }
+
 
 
 

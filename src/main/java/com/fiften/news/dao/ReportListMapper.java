@@ -2,6 +2,7 @@ package com.fiften.news.dao;
 
 import com.fiften.news.model.ReportList;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -60,5 +61,9 @@ public interface ReportListMapper {
     ReportList ReportNews();
 
     List<ReportList> selectSumReportMediaById();
+
+    Integer getReportCountByMediaId(@Param("mediaId") Integer mediaId);
+
+    List<ReportList> getReportByMediaId(@Param("mediaId") Integer mediaId);
 
 }

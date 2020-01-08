@@ -172,4 +172,10 @@
     where email = #{email}
   </select>
 
+  <select id="selectAllAvailableMedia"  resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from media
+    where available_status = "Y"
+  </select>
+
 </mapper>

@@ -32,7 +32,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectSumReportMediaById" resultMap="BaseResultMap">
-    select<include refid="Base_Column_List">
+    select <include refid="Base_Column_List"/>
     from report_list
     where ID = #{id,jdbcType=INTEGER}
     group by ReportList.media_id
@@ -129,4 +129,17 @@
   <insert id="ReportNews" parameterType="com.fiften.news.model.ReportList">
       insert into report_list(media_id,news_id,reason) values(media_id=#{media_id},news_id=#{news_id},reason=#{reason})
   </insert>
+
+  <select id="getReportCountByMediaId"  parameterType="integer" resultType="integer">
+    select Count(*)
+    from report_list
+    WHERE media_id = #{mediaId}
+    group by report_list.media_id
+  </select>
+
+  <select id="getReportByMediaId" resultMap="BaseResultMap" parameterType="integer">
+    select <include refid="Base_Column_List"/>
+    from report_list
+    where media_id = #{mediaId}
+  </select>
 </mapper>

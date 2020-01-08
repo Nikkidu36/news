@@ -14,8 +14,13 @@ public interface MediaService {
 
     Result passMediaById(Integer mediaId);
 
-    Result logoutMediaById(Integer mediaId);
 
-    Result sumreportMediaById();
+
+    //查看所有被举报超过5次的用户
+    Result getAllReportedMedia();
+
+
+    //封号
+    boolean logoutMedia(Integer media);
 
 }
