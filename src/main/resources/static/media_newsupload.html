@@ -121,9 +121,9 @@
                                             </div>
                                         </div>
                                         <div class="layui-form-item layui-form-text">
-                                            <label id="detail" class="layui-form-label">正文</label>
+                                            <label  class="layui-form-label">正文</label>
                                             <div class="layui-input-block">
-                                                <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                                                <textarea id="detail" placeholder="请输入内容" class="layui-textarea"></textarea>
                                             </div>
                                         </div>
                                         <div class="layui-form-item">
@@ -174,7 +174,9 @@
 
         $("#UploadBtn").click(function () {
             ajaxPost("/UploadNews", {title: $("#title").val(), key: $("#key").val(),detail:$("#detail")}, function (res) {
-                window.location = "/media_newsList.html"
+                if(res.code==0){
+                    alert("上传成功")
+                }
             })
         })
 

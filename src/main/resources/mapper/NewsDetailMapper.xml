@@ -168,9 +168,6 @@
   </update>
 
 
-  <insert id="UploadNews" parameterType="com.fiften.news.model.NewsDetail">
-    insert into news_detail(title,news_key,detail,submit_Date,publish_Date) values(title=#{title},key=#{key},detail=#{detail},submit_Date=#{submit_Datae},null)
-  </insert>
 
 
   <select id="getAllMyNews" resultType="hashmap">

@@ -62,16 +62,14 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     TokenService tokenService;
 
     @Override
-    public NewsDetail doUpload(String title, String key, String detail) {
+    public Result doUpload(String title, String key, String detail) {
         NewsDetail newsDetail = new NewsDetail();
         newsDetail.setTitle(title);
         newsDetail.setKey(key);
         newsDetail.setDetail(detail);
 
         newsDetail.setSubmitDate(commentUtil.getCurTime());
-
-
-        return newsDetail;
+        return Result.createSuccessResult(newsDetailMapper.insertSelective(newsDetail));
     }
 
     @Override
