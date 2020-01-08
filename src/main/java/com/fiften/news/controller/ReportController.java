@@ -1,4 +1,3 @@
-package com.fiften.news.controller;
 
 import com.fiften.news.model.ReportList;
 import com.fiften.news.service.ReportService;

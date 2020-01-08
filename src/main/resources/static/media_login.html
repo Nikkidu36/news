@@ -67,8 +67,8 @@
                         layui.use('layer', function () {
                             var layer = layui.layer;
                             if (res.code == 0) {
-                                layer.alert("恭喜宁，请等待审核")
-                                window.location = "/index.html"
+                                layer.alert("恭喜您，请等待审核")
+                                window.location = "/load.html"
                             } else {
                                 layer.alert(res.msg)
                             }
@@ -107,7 +107,7 @@
                 <div class="layui-upload">
                     <button type="button" class="layui-btn" id="test1">上传媒体资质</button>
                     <div class="layui-upload-list" style="float: right">
-                        <img style="width: 50px;height: 50px;" class="layui-upload-img" id="demo1"
+                        <img style="width: 50px;height: 50px;" class="layui-upload-img" id="applyImg"
                              src="http://pic.baike.soso.com/p/20090111/20090111120000-104768.jpg">
                         <input type="hidden" id="imgUrl">
                         <p id="demoText"></p>
@@ -138,18 +138,21 @@
             , url: '/testFileUpload'
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
-                    $('#demo1').attr('src', result); //图片链接（base64）
-                });
+                // obj.preview(function (index, file, result) {
+                //     $('#demo1').attr('src', result); //图片链接（base64）
+                // });
             }
             , done: function (res) {
                 //如果上传失败
                 if (res.code !== 0) {
                     return layer.msg('上传失败');
+
                     console.log(res.data);
                 } else {
 
                     $("#imgUrl").val(res.data);
+                    $("#applyImg").src(res.data);
+                    $("#applyImg").attr("src",res.data);
 
 
                 }

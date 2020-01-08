@@ -131,4 +131,17 @@
     where news_id = #{ID,jdbcType=INTEGER}
   </select>
 
+
+  <select id="getReportCountByMediaId"  parameterType="integer" resultType="integer">
+    select Count(*)
+    from report_list
+    WHERE media_id = #{mediaId}
+    group by report_list.media_id
+  </select>
+
+  <select id="getReportByMediaId" resultMap="BaseResultMap" parameterType="integer">
+    select <include refid="Base_Column_List"/>
+    from report_list
+    where media_id = #{mediaId}
+  </select>
 </mapper>
