@@ -90,7 +90,8 @@
             headers: {"token":getCookies("token")},
             success: function (res) {
                 if (res.code == 0 ){
-                    $("#collectionTimes").append(`<span>`+res.data[0].collectionTimes+`</span>`)
+                    var param =  RequestParameter()
+                    $("#collectionTimes").append(`<a href="/users/users_collection.html?userName=`+param.userName+`"> <span>`+res.data[0].collectionTimes+`</span></a>`)
                 }else {
                     alert("不太行")
                 }
@@ -282,7 +283,7 @@
                                             <p></p>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                            <h3><a href="/users/users_collection.html" id="collectionTimes"> </a></h3>
+                                            <h3 id="collectionTimes"> </h3>
                                             <p>已收藏新闻</p>
                                         </div>
                                         <!--make the second one cener-->
