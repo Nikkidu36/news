@@ -6,6 +6,7 @@ function ajaxPost(url, data, fun) {
         type: "post",
         data: data,
         dataType: "json",
+        headers:{"token":getCookies("token")},
         success: fun,
         async:false,
         error: function () {

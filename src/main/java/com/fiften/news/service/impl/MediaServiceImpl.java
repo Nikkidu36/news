@@ -25,4 +25,32 @@ public class MediaServiceImpl implements MediaService {
         List<Media> medias = mediaMapper.selectAllNotAvailableMedia();
         return Result.createSuccessResult(medias.size(),medias);
     }
+
+    @Override
+    public Result getMediaById(Integer mediaId) {
+        try {
+
+            return Result.createSuccessResult(mediaMapper.selectByPrimaryKey(mediaId));
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.createByFailure(e.getMessage());
+        }
+    }
+
+    @Override
+    public Result passMediaById(Integer mediaId) {
+        try {
+            Media baseMedia = mediaMapper.selectByPrimaryKey(mediaId);
+            if (baseMedia != null ){
+                baseMedia.setCheckStatus("pass");
+                baseMedia.setAvailableStatus("Y");
+                mediaMapper.updateByPrimaryKeySelective(baseMedia);
+                return Result.createSuccessResult();
+            }else {
+                return Result.createByFailure("找不到用户");
+            }
+        }catch (Exception e){
+            return Result.createByFailure(e.getMessage());
+        }
+    }
 }
