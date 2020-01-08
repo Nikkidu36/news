@@ -4,6 +4,9 @@ import com.fiften.news.model.NewsManage;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Mapper
 @Repository
 public interface NewsManageMapper {
@@ -56,4 +59,8 @@ public interface NewsManageMapper {
     int updateByPrimaryKey(NewsManage record);
 
     int getAuditNum();
+    int getAuditNum2();
+    int getAuditNum3();
+
+    List<HashMap> getAllAuditNewslist();
 }

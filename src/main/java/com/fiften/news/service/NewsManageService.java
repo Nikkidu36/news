@@ -4,4 +4,6 @@ import com.fiften.news.util.Result;
 
 public interface NewsManageService {
     Result getAuditNum();
+
+    Result getAllAuditNewslist();
 }

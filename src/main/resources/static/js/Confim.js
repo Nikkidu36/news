@@ -10,7 +10,7 @@ function del (argument) {
             .done(function(data) {
                 if (data){
                     alert("删除成功");
-                    window.location.href="../userlist.html";
+                    window.location.href="../uerManager/userlist.html";
                 }
                 else {
                     alert("删除失败");
@@ -43,7 +43,7 @@ function edit (argument) {
             .done(function(data) {
                 if (data){
                     alert("修改成功");
-                    window.location.href="../userlist.html";
+                    window.location.href="../uerManager/userlist.html";
                 }
                 else {
                     alert("修改失败");

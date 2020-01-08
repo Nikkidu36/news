@@ -162,4 +162,11 @@
    where audit_status="N"
 
   </select>
+
+  <select id="getAllAuditNewslist" resultType="hashmap">
+    select nd.*,nm.*,m.user_name
+    from news_detail as nd ,news_manage as nm,media as m
+    where nm.audit_status = "N" and  nm.news_id  = nd.ID and m.media_id = nd.media_id
+    order by nd.submit_Date desc
+  </select>
 </mapper>
