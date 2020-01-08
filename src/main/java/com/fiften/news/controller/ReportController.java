@@ -15,8 +15,8 @@ public class ReportController {
     ReportService reportService;
 
     @PostMapping("/ReportNews")
-    public Result ReportNews(ReportList reportList){
-        return reportService.doReport(reportList.getNewsId(), reportList.getReason());
+    public Result ReportNews(int news_id,String reason){
+        return reportService.doReport(news_id, reason);
     }
 
 }
