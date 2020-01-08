@@ -120,5 +120,7 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
   
-  <insert id=""
+  <insert id="ReportNews" parameterType="com.fiften.news.model.ReportList">
+      insert into report_list(media_id,news_id,reason) values(media_id=#{media_id},news_id=#{news_id},reason=#{reason})
+  </insert>
 </mapper>
