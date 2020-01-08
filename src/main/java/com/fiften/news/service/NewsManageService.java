@@ -8,4 +8,6 @@ public interface NewsManageService {
     Result getAllAuditNewslist();
 
     Result getOneNews(Integer ID);
+
+    Result saveAuditResult(String auditResult,Integer ID);
 }

@@ -9,4 +9,8 @@ import com.fiften.news.util.Result;
 
 public interface MediaService {
     Result getAllNotAvailableMedia();
+
+    Result getMediaById(Integer mediaId);
+
+    Result passMediaById(Integer mediaId);
 }

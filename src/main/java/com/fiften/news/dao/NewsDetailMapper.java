@@ -4,6 +4,13 @@ import com.fiften.news.model.NewsDetail;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import com.fiften.news.util.Result;
+
+import java.util.HashMap;
+import java.util.List;
+
+import java.util.HashMap;
+import java.util.List;
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +65,14 @@ public interface NewsDetailMapper {
      * @mbggenerated Wed Jan 08 16:32:46 CST 2020
      */
     int updateByPrimaryKey(NewsDetail record);
+
+
+    NewsDetail UploadNews(NewsDetail newsDetail);
+
+    List<HashMap> getAllMyNews(@Param("id") Integer id);
+    HashMap getOneNewsByID(Integer ID);
+
+    boolean updateSubmitDateByID(Integer ID);
 
     NewsDetail searchNewsByTitle(@Param("title") String title);
 

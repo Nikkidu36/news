@@ -29,6 +29,11 @@
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="js/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="utilJs/commentUtil.js"></script>
+    <!--<script src="js/jQuery/jquery.cookie.js"></script>-->
+    <!--<script src="js/jQuery/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>-->
+
 
     <!-- end: Css -->
 
@@ -63,7 +68,7 @@
                     <div class="left-bg"></div>
                 </li>
                 <li class="active ripple">
-                    <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 首页
+                    <a  href="media_index.html"><span class="fa-home fa"></span>首页
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                 </li>
@@ -77,13 +82,13 @@
                 <!--</ul>-->
                 <!--</li>-->
                 <li class="ripple">
-                    <a class="tree-toggle nav-header"><span class="fa fa-check-square-o"></span> 新闻管理
+                    <a class="tree-toggle nav-header" ><span class="fa fa-check-square-o"></span> 新闻管理
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="newslist.html">新闻列表</a></li>
-                        <li><a href="newsupload.html">发表新闻</a></li>
-                        <li><a href="Media_newsList.html">我的新闻</a></li>
+                        <li><a href="media_newslist.html">新闻列表</a></li>
+                        <li><a href="media_newsupload.html">发表新闻</a></li>
+                        <!--<li><a href="Media_newsList.html">我的新闻</a></li>-->
 
                     </ul>
                 </li>
@@ -109,7 +114,7 @@
             <ul class="layui-tab-title">
                 <li class="layui-this">全部新闻</li>
                 <li>已发布新闻</li>
-                <li>未发布新闻</li>
+                <!--<li>未发布新闻</li>-->
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
@@ -138,19 +143,16 @@
                                                                 <th class="sorting"  style="width: 61px;">点击查看</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody>
-                                                            <%
-                                                            for (News news:newsList){%>
+                                                            <tbody id="AllMyNews">
                                                             <tr role="row" class="odd">
-                                                                <td class="sorting_1"><%=news.getNewsitem()%></td>
-                                                                <td><%=news.getNewsauthor()%></td>
-                                                                <td><%=news.getNewsdate()%></td>
-                                                                <td><%=news.getNewsreadnum()%></td>
-                                                                <td style="display: none"><input id="filetd1" type="text" value="<%=newsList.get(2).getNewsfile()%>"></td>
-                                                                <td><h7>已发布</h7></td>
-                                                                <td><a href="newsitem.html?newsid=<%=news.getNewsid()%>">查看</a></td>
+                                                                <td class="sorting_1"></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td style="display: none"><input id="filetd1" type="text"></td>
+                                                                <td><h7></h7></td>
+                                                                <td><a href="media_newsdetail.html"></a></td>
                                                             </tr>
-                                                            <%}%>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -171,6 +173,41 @@
     <!-- end: content -->
 </div>
 <!-- start: Javascript -->
+<script>
+
+    $(function () {
+
+        $.ajax({
+            url: "/getAllMyNews",
+            type: "post",
+            dataType: "json",
+            headers: {"token":getCookies("token")},
+            success: function (res) {
+
+                if (res.code == 0 ){
+                    for (let i = 0; i < res.data.length; i++) {
+                        $("#AllMyNews").append(`<tr role="row" class="odd" >
+                                                    <td class="sorting_1">`+res.data[i].title+`</td>
+                                                    <td>`+res.data[i].user_name+`</td>
+                                                    <td>`+res.data[i].publish_Date+`</td>
+                                                    <td>`+res.data[i].news_key+`</td>
+                                                    <td>`+res.data[i].publish_status+`</td>
+                                                    <td><a href="/Media_newsdetail.html?newId=`+res.data[i].news_id+`">查看</a></td>
+                                                </tr>`)
+
+                    }
+                }else {
+                    alert("不太行")
+                }
+            },
+            async:false,
+            error: function () {
+                alert("请求错误");
+            }
+        })
+
+    })
+</script>
 <script src="asset/js/jquery.min.js"></script>
 <script src="asset/js/jquery.ui.min.js"></script>
 <script src="asset/js/bootstrap.min.js"></script>
