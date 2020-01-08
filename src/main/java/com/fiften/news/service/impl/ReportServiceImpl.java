@@ -27,7 +27,6 @@ public class ReportServiceImpl implements ReportService {
 
         reportList.setMediaId(newsDetail.getMediaId());
 
-
         return Result.createSuccessResult(reportListMapper.insertSelective(reportList));
 
 

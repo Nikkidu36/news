@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 public class CollectionController {
     @Autowired
@@ -15,5 +17,15 @@ public class CollectionController {
     @PostMapping("/collection")
     Result collection(@RequestParam("userId") int userId,@RequestParam("newsId") int newsId){
         return collectionService.isCollection(userId,newsId);
+    }
+
+    @PostMapping("/getMyCollectionList")
+    Result getMyCollectionList(HttpServletRequest httpRequest){
+        return collectionService.getMyCollectionList(httpRequest);
+    }
+
+    @PostMapping("/totalCollection")
+    Result totalCollection(HttpServletRequest httpRequest){
+        return collectionService.totalCollection(httpRequest);
     }
 }
