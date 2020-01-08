@@ -167,13 +167,13 @@
   <select id="getWaitPublishNum" resultType="java.lang.Integer">
    select count(*)
    from news_manage
-   where audit_status="Y" and audit_result="Y"
+   where audit_status="Y" and audit_result="Y" and  publish_status="N"
   </select>
 
   <select id="getWaitRejectNum" resultType="java.lang.Integer">
    select count(*)
    from news_manage
-   where audit_status="Y" and audit_result="N"
+   where audit_status="Y" and audit_result="N" and reject_status="N"
   </select>
 
   <select id="getAllAuditNewslist" resultType="hashmap">
