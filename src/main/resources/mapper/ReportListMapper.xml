@@ -119,4 +119,6 @@
       reason = #{reason,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id=""
 </mapper>

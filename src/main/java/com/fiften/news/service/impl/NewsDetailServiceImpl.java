@@ -7,11 +7,13 @@ import com.fiften.news.service.TokenService;
 import com.fiften.news.util.CommentUtil;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
+@Service
 public class NewsDetailServiceImpl implements NewsDetailService {
     @Autowired
     NewsDetailMapper newsDetailMapper;

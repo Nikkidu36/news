@@ -45,10 +45,24 @@ function RequestParameter() {
 }
 
 //先映入jquery-cookies.js
-function getCookies(key) {
-    return $.cookie(key)
+// function getCookies(key) {
+//     return $.cookie(key)
+// }
+
+function setCookies(name,value)
+{
+    document.cookie=name+"="+value;
 }
 
-function setCookies(key,value) {
-    $.cookie(key, value, {path: '/'});
+// function setCookies(key,value) {
+//     $.cookie(key, value, {path: '/'});
+// }
+
+function getCookies(name)
+{
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+    if(arr=document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
 }
