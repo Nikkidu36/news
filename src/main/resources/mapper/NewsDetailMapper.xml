@@ -196,4 +196,8 @@
       publish_Date = #{publishDate,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id = "insertTitleAndKeyAndDetailToNewsDetail" parameterType="com.fiften.news.model.NewsDetail">
+      insert into news_detail(title,key,detail)values()
+  </insert>
 </mapper>

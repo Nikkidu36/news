@@ -41,7 +41,7 @@
 
                             layer.alert('媒体你好，登录成功');
                             setTimeout(function () {
-                                window.location = "/Media_index.html"
+                                window.location = "/media_index.html?userName=" + res.data.media.userName
                             }, 3000)
                         });
                     }

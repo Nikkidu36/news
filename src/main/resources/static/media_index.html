@@ -1,28 +1,12 @@
-<!--<%@ page import="News.NewsDemo" %>-->
-<!--<%@ page import="News.News" %>-->
-<!--<%@ page import="java.util.List" %>-->
 <!DOCTYPE html>
 <html lang="en">
-<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
-<!--<%-->
-<!--String username= (String) session.getAttribute("username");-->
-<!--String userlevel= (String) application.getAttribute("level");-->
-<!--%>-->
-
-<!--<%-->
-<!--NewsDemo newsDemo=new NewsDemo();-->
-<!--newsDemo.select();-->
-<!--List<News> newsList=null;-->
-<!--newsList=newsDemo.getNewsList();-->
-<!--%>-->
-
 <head>
     <meta charset="utf-8">
     <meta name="description" content="12">
     <meta name="author" content="12">
     <meta name="keyword" content="12">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>首页</title>
+    <title>用户首页</title>
 
     <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
 
@@ -31,8 +15,21 @@
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
-</head>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
+    <script src="utilJs/commentUtil.js"></script>
+</head>
+<script>
+    $(function () {
+        var param =  RequestParameter()
+        console.log(param.userName)
+        $("#user-name").text(param.userName)
+        $("#user-name-2").text("欢迎您："+param.userName)
+        $("#user-name-3").text(param.userName)
+        console.log($("#user-name").text())
+    })
+
+</script>
 <body id="mimin" class="dashboard">
 <!-- start: Header -->
 <nav class="navbar navbar-default header navbar-fixed-top">
@@ -43,9 +40,9 @@
                 <span class="middle"></span>
                 <span class="bottom"></span>
             </div>
-            <a href="index.html" class="navbar-brand"> <b>首页</b> </a>
+            <a href="#" class="navbar-brand"> <b>首页</b> </a>
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span><%=username%></span></li>
+                <li class="user-name"><span id="user-name">美丽的小姐</span></li>
                 <li class="dropdown avatar-dropdown">
                     <img src="asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
@@ -66,26 +63,26 @@
                     <div class="left-bg"></div>
                 </li>
                 <li class="active ripple">
-                    <a class="tree-toggle nav-header"><span class="fa-home fa"></span> 首页
+                    <a  href="media_index.html"><span class="fa-home fa"></span>首页
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                 </li>
                 <!--<li class="ripple">-->
-                    <!--<a class="tree-toggle nav-header"><p id="leveljudge" value="<%=userlevel%>" onclick="leveljudge()"> <span class="fa-diamond fa"></span> 用户管理-->
-                        <!--<span class="fa-angle-right fa right-arrow text-right"></span> </p>-->
-                    <!--</a>-->
-                    <!--<ul class="nav nav-list tree">-->
-                        <!--<li id="leveljudge1"><a href="userlist.html">用户列表</a></li>-->
-                        <!--<%&#45;&#45;<li><a href="useredit.html">信息编辑</a></li>&#45;&#45;%>-->
-                    <!--</ul>-->
+                <!--<a class="tree-toggle nav-header"><p id="leveljudge" value="<%=userlevel%>" onclick="leveljudge()"> <span class="fa-diamond fa"></span> 用户管理-->
+                <!--<span class="fa-angle-right fa right-arrow text-right"></span> </p>-->
+                <!--</a>-->
+                <!--<ul class="nav nav-list tree">-->
+                <!--<li id="leveljudge1"><a href="userlist.html">用户列表</a></li>-->
+                <!--<%&#45;&#45;<li><a href="useredit.html">信息编辑</a></li>&#45;&#45;%>-->
+                <!--</ul>-->
                 <!--</li>-->
                 <li class="ripple">
-                    <a class="tree-toggle nav-header"><span class="fa fa-check-square-o"></span> 新闻管理
+                    <a class="tree-toggle nav-header" ><span class="fa fa-check-square-o"></span> 新闻管理
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="Media_newsList.html">新闻列表</a></li>
-                        <li><a href="Media_newsupload.html">发表新闻</a></li>
+                        <li><a href="media_newslist.html">新闻列表</a></li>
+                        <li><a href="media_newsupload.html">发表新闻</a></li>
                         <!--<li><a href="Media_newsList.html">我的新闻</a></li>-->
 
                     </ul>
@@ -99,7 +96,7 @@
         <div class="panel">
             <div class="panel-body">
                 <div class="col-md-6 col-sm-12">
-                    <h3 class="animated fadeInLeft">欢迎您：美丽的小姐</h3>
+                    <h3 class="animated fadeInLeft" id="user-name-2">欢迎您：美丽的小姐</h3>
                     <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 首页</p>
                 </div>
             </div>
@@ -136,7 +133,7 @@
                                             <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                         </li>
                                     </ul>
-                                    <p><a href="/Media_newsList.html">更多信息</a></p>
+                                    <p><a href="/users_newsList.html">更多信息</a></p>
                                     <hr/>
                                 </div>
                             </div>
@@ -168,7 +165,7 @@
                                             <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                         </li>
                                     </ul>
-                                    <p><a href="/Media_newsList.html">更多信息</a></p>
+                                    <p><a href="/users_newsList.html">更多信息</a></p>
                                     <hr/>
                                 </div>
                             </div>
@@ -200,7 +197,7 @@
                                             <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                         </li>
                                     </ul>
-                                    <p><a href="/Media_newsList.html">更多信息</a></p>
+                                    <p><a href="/users_newsList.html">更多信息</a></p>
                                     <hr/>
                                 </div>
                             </div>
@@ -232,7 +229,7 @@
                                             <a href="/Media_newsdetail.html"><span class="fa fa-angle-right"></span></a>
                                         </li>
                                     </ul>
-                                    <p><a href="/Media_newsList.html">更多信息</a></p>
+                                    <p><a href="/users_newsList.html">更多信息</a></p>
                                     <hr/>
                                 </div>
                             </div>
@@ -246,7 +243,7 @@
                         <div class="panel box-v2">
                             <div class="panel-heading padding-0"> <img src="asset/img/bg2.jpg" class="box-v2-cover img-responsive"/>
                                 <div class="box-v2-detail"> <img src="asset/img/avatar.jpg" class="img-responsive"/>
-                                    <h4>美丽的小姐</h4>
+                                    <h4 id="user-name-3">美丽的小姐</h4>
                                 </div>
                             </div>
                             <div class="panel-body">
@@ -262,8 +259,8 @@
                                     </div>
                                     <!--make the second one cener-->
                                     <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                        <h3>12</h3>
-                                        <p>已发布新闻</p>
+                                        <h3></h3>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
@@ -274,7 +271,6 @@
             </div>
         </div>
     </div>
-    <!-- end: content -->
     <!-- end: content -->
 </div>
 <!-- start: Javascript -->

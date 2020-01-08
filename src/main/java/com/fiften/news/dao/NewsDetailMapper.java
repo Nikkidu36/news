@@ -59,4 +59,6 @@ public interface NewsDetailMapper {
      * @mbggenerated Tue Jan 07 19:18:18 CST 2020
      */
     int updateByPrimaryKey(NewsDetail record);
+
+    NewsDetail insertTitleAndKeyAndDetailToNewsDetail(String title,String key,String detail);
 }
