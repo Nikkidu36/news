@@ -13,7 +13,22 @@
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/animate.min.css"/>
     <link rel="stylesheet" type="text/css" href="../asset/css/plugins/fullcalendar.min.css"/>
     <link href="../asset/css/style.css" rel="stylesheet">
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <script src="../utilJs/commentUtil.js"></script>
 </head>
+<script>
+    $(function () {
+        var param =  RequestParameter()
+        console.log(param.userName)
+        $("#user-name").text(param.userName+"，你好。")
+        $("#user-name-2").text("欢迎您："+param.userName+"，你好。")
+        $("#user-name-3").text("欢迎您："+param.userName+"，你好。")
+        console.log($("#user-name").text())
+    })
+
+</script>
 <body id="mimin" class="dashboard">
 <!-- start: Header -->
 <nav class="navbar navbar-default header navbar-fixed-top">
@@ -26,7 +41,7 @@
             </div>
             <a href="newsManager_index.html" class="navbar-brand"> <b>首页</b> </a>
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span><%=username%></span></li>
+                <li class="user-name"><span id="user-name">新闻管理员</span></li>
                 <li class="dropdown avatar-dropdown">
                     <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
@@ -80,7 +95,7 @@
         <div class="panel">
             <div class="panel-body">
                 <div class="col-md-6 col-sm-12">
-                    <h3 class="animated fadeInLeft">欢迎您：<%=username%></h3>
+                    <h3 class="animated fadeInLeft" id="user-name-2">欢迎您：新闻管理员</h3>
                     <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 首页</p>
                 </div>
             </div>
@@ -224,7 +239,7 @@
                         <div class="panel box-v2">
                             <div class="panel-heading padding-0"> <img src="../asset/img/bg2.jpg" class="box-v2-cover img-responsive"/>
                                 <div class="box-v2-detail"> <img src="../asset/img/avatar.jpg" class="img-responsive"/>
-                                    <h4><%=username%></h4>
+                                    <h4 id="user-name-3">新闻管理员</h4>
                                 </div>
                             </div>
                             <div class="panel-body">

@@ -7,6 +7,15 @@
     <meta name="keyword" content="xxxxx">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新闻列表</title>
+
+    <script src="../js/jQuery/jquery-3.4.1.min.js"></script>
+
+    <script src="../utilJs/commentUtil.js"></script>
+
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script src="../js/vue.js"></script>
+
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="../asset/css/bootstrap.min.css">
     <!-- plugins -->
@@ -109,18 +118,7 @@
                                                     <th class="sorting"  style="width: 64px;">点击审核</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody>
-                                                <%
-                                                for (News news:newsList){%>
-                                                <tr role="row" class="odd">
-                                                    <td class="sorting_1"><%=news.getNewsitem()%></td>
-                                                    <td><%=news.getNewsauthor()%></td>
-                                                    <td><%=news.getNewsdate()%></td>
-                                                    <td><%=news.getNewsreadnum()%></td>
-                                                    <td><a href="Audit_newsitem.html">审核</a></td>
-                                                    <!--?newsid=<%=news.getNewsid()%>-->
-                                                </tr>
-                                                <%}%>
+                                                <tbody id="auditNewslist">
                                                 </tbody>
                                             </table>
                                         </div>
@@ -135,6 +133,25 @@
     </div>
     <!-- end: content -->
 </div>
+<script src="js/jQuery/jquery.cookie.js"></script>
+
+<!--<script>-->
+
+    <!--$(function () {-->
+        <!--ajaxPost("/getAllAuditNewslist", null, function (res) {-->
+
+            <!--for (var i = 0; i < res.data.length; i++) {-->
+                <!--$("#mediaList").append(`<tr role="row" class="odd" >-->
+                                                    <!--<td class="sorting_1">` + res.data[i].userName + `</td>-->
+                                                    <!--<td>` + res.data[i].email + `</td>-->
+                                                    <!--<td><img src="` + res.data[i].applyQualification + `" alt="" style="height: 10%"></td>-->
+                                                    <!--<td><a href="/Media_newsList.html?mediaId=` + res.data[i].mediaId + `">审核</a></td>-->
+                                                <!--</tr>`)-->
+            <!--}-->
+        <!--})-->
+    <!--})-->
+<!--</script>-->
+
 <!-- start: Javascript -->
 <script src="../asset/js/jquery.min.js"></script>
 <script src="../asset/js/jquery.ui.min.js"></script>

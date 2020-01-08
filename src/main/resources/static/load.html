@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>登陆</title>
-		<meta charset="utf-8">
-		<link href="css/style.css" rel='stylesheet' type='text/css' />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-         <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-		<script type="text/javascript" src="js/login.js"></script>
-	<link rel="stylesheet" href="layui/css/layui.css">
-	<script src="layui/layui.js"></script>
-	<script src="utilJs/jquery-cookie.js"></script>
-	<script src="utilJs/commentUtil.js"></script>
+    <title>登陆</title>
+    <meta charset="utf-8">
+    <link href="css/style.css" rel='stylesheet' type='text/css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+    <script src="js/jQuery/jquery.cookie.js"></script>
+    <script src="utilJs/commentUtil.js"></script>
 </head>
 <body>
 <script>
-	$(function () {
+    $(function () {
 
 		$("#loginBtn").click(function () {
 			console.log($("#password").val())
@@ -39,41 +39,41 @@
 						layui.use('layer', function () {
 							var layer = layui.layer;
 
-							layer.alert('媒体你好，登录成功');
-							setTimeout(function () {
-								window.location = "/media_index.html?userName=" + res.data.media.userName
-							}, 3000)
-						});
-					}
-					if (res.data.flag == 3) {
-						if (res.data.manager.type === "news_manager") {
-							setCookies("token", res.data.token)
-							layui.use('layer', function () {
-								var layer = layui.layer;
-								layer.alert('新闻管理员你好，登录成功');
-								setTimeout(function () {
-									window.location = "newsManager/newsManager_index.html"
-								}, 3000)
-							});
-						}
-						if (res.data.manager.type === "user_manager") {
-							setCookies("token", res.data.token)
-							layui.use('layer', function () {
-								var layer = layui.layer;
-								layer.alert('账号管理员你好，登录成功');
-								setTimeout(function () {
-									window.location = "user_manager_index.html"
-								}, 3000)
-							});
-						}
-					}
-				} else {
-					console.log("失败");
-				}
-			})
-		})
+                            layer.alert('媒体你好，登录成功');
+                            setTimeout(function () {
+                                window.location = "/Media_index.html"
+                            }, 3000)
+                        });
+                    }
+                    if (res.data.flag == 3) {
+                        if (res.data.manager.type === "news_manager") {
+                            setCookies("token", res.data.token)
+                            layui.use('layer', function () {
+                                var layer = layui.layer;
+                                layer.alert('新闻管理员你好，登录成功');
+                                setTimeout(function () {
+                                    window.location = "newsManager/newsManager_index.html?userName=" + res.data.manager.userName
+                                }, 3000)
+                            });
+                        }
+                        if (res.data.manager.type === "user_manager") {
+                            setCookies("token", res.data.token)
+                            layui.use('layer', function () {
+                                var layer = layui.layer;
+                                layer.alert('账号管理员你好，登录成功');
+                                setTimeout(function () {
+                                    window.location = "user_manager_index.html"
+                                }, 3000)
+                            });
+                        }
+                    }
+                } else {
+                    console.log("失败");
+                }
+            })
+        })
 
-	})
+    })
 </script>
 	 <div class="main">
 		<div class="login-form">
@@ -91,7 +91,7 @@
     						height: 40%;
    							">
 						<input type="button" class="layui-btn" value="登陆" id="loginBtn">
-					</div>	
+					</div>
 					<p>
 						<a href="#">忘记密码 ?</a> &nbsp;&nbsp;&nbsp;
 						<a href="login.html">注册</a>
