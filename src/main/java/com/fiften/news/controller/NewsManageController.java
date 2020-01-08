@@ -17,4 +17,9 @@ public class NewsManageController {
         return newsManageService.getAuditNum();
     }
 
+    @PostMapping("/getAllAuditNewslist")
+    public Result getAllAuditNewslist(){
+        return newsManageService.getAllAuditNewslist();
+    }
+
 }

@@ -6,6 +6,10 @@ import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class NewsManageServiceImpl implements NewsManageService {
     /**
@@ -20,5 +24,11 @@ public class NewsManageServiceImpl implements NewsManageService {
     public Result getAuditNum() {
         int auditNum = newsManageMapper.getAuditNum();
         return Result.createSuccessResult(auditNum);
+    }
+
+    @Override
+    public Result getAllAuditNewslist() {
+        List<HashMap> newsMap = newsManageMapper.getAllAuditNewslist();
+        return Result.createSuccessResult(newsMap.size(),newsMap);
     }
 }
