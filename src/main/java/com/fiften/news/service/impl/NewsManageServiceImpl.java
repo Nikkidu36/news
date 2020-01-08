@@ -1,7 +1,9 @@
 package com.fiften.news.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fiften.news.dao.NewsDetailMapper;
 import com.fiften.news.dao.NewsManageMapper;
+import com.fiften.news.model.NewsDetail;
 import com.fiften.news.service.NewsManageService;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class NewsManageServiceImpl implements NewsManageService {
     @Autowired
     NewsManageMapper newsManageMapper;
 
+    @Autowired
+    NewsDetailMapper newsDetailMapper;
+
     @Override
     public Result getIndexNewsNum() {
 
@@ -44,5 +49,11 @@ public class NewsManageServiceImpl implements NewsManageService {
     public Result getAllAuditNewslist() {
         List<HashMap> newsMap = newsManageMapper.getAllAuditNewslist();
         return Result.createSuccessResult(newsMap.size(),newsMap);
+    }
+
+    @Override
+    public Result getOneNews(Integer ID) {
+        NewsDetail newsDetail=newsDetailMapper.selectByPrimaryKey(ID);
+        return Result.createSuccessResult(newsDetail);
     }
 }
