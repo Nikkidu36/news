@@ -16,12 +16,14 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Result doReport(int  media_id,int  news_id,String reason){
         ReportList reportList = new ReportList();
+
         reportList.setMediaId(media_id);
         reportList.setNewsId(news_id);
         reportList.setReason(reason);
 
+        return Result.createSuccessResult(reportListMapper.ReportNews(media_id,news_id,reason));
 
-        return null;
+
     }
 
 }
