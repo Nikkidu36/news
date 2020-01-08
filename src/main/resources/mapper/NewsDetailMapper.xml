@@ -197,7 +197,14 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <insert id = "insertTitleAndKeyAndDetailToNewsDetail" parameterType="com.fiften.news.model.NewsDetail">
-      insert into news_detail(title,key,detail)values()
+  <insert id="UploadNews" parameterType="com.fiften.news.model.NewsDetail">
+    insert into news_detail(title,key,detail,submit_Date) values(title=#(title),key=#{key},detail=#{detail})
   </insert>
+
+
+  <select id="getAllMyNews" resultType="hashmap">
+    select news_id,media_id,title,key,submit_Date,publish_Datae,detail,news_image,media.user_name,news_manager.publish_status
+    from news_detail,media,news_manager
+    where news_detail.media_id=media.media_id
+  </select>
 </mapper>

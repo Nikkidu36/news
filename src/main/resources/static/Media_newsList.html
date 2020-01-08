@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="../utilJs/jquery-cookie.js"></script>
 
     <!-- end: Css -->
 
@@ -138,9 +139,7 @@
                                                                 <th class="sorting"  style="width: 61px;">点击查看</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody>
-                                                            <%
-                                                            for (News news:newsList){%>
+                                                            <tbody id="AllMyNews">
                                                             <tr role="row" class="odd">
                                                                 <td class="sorting_1"><%=news.getNewsitem()%></td>
                                                                 <td><%=news.getNewsauthor()%></td>
@@ -150,7 +149,6 @@
                                                                 <td><h7>已发布</h7></td>
                                                                 <td><a href="media_newsdetail.html">查看</a></td>
                                                             </tr>
-                                                            <%}%>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -171,6 +169,29 @@
     <!-- end: content -->
 </div>
 <!-- start: Javascript -->
+<script>
+
+    $(function () {
+        ajaxPost("/getAllMyNews",null,function (res) {
+            if (res.code == 0 ){
+
+                for (let i = 0; i < res.data.length; i++) {
+                    $("#AllMyNews").append(`<tr role="row" class="odd" >
+                                                    <td class="sorting_1">`+res.data[i].title+`</td>
+                                                    <td>`+res.data[i].user_name+`</td>
+                                                    <td>`+res.data[i].publish_Date+`</td>
+                                                    <td>`+res.data[i].key+`</td>
+                                                    <td>`+res.data[i].publish_Status`</td>
+                                                    <td><a href="/Media_newsdetail.html?newId=`+res.data[i].news_id+`">查看</a></td>
+                                                </tr>`)
+
+                }
+            }else {
+                alert("不太行")
+            }
+        })
+    })
+</script>
 <script src="asset/js/jquery.min.js"></script>
 <script src="asset/js/jquery.ui.min.js"></script>
 <script src="asset/js/bootstrap.min.js"></script>

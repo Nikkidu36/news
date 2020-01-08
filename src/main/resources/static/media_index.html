@@ -23,13 +23,17 @@
     $(function () {
         var param =  RequestParameter()
         console.log(param.userName)
-        $("#user-name").text(param.userName)
-        $("#user-name-2").text("欢迎您："+param.userName)
-        $("#user-name-3").text(param.userName)
+        $("#user-name").text(param.userName+"，你好。")
+        $("#user-name-2").text("欢迎您："+param.userName+"，你好。")
+        $("#user-name-3").text("欢迎您："+param.userName+"，你好。")
         console.log($("#user-name").text())
     })
 
 </script>
+
+
+
+
 <body id="mimin" class="dashboard">
 <!-- start: Header -->
 <nav class="navbar navbar-default header navbar-fixed-top">
@@ -81,7 +85,7 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                     </a>
                     <ul class="nav nav-list tree">
-                        <li><a href="media_newslist.html">新闻列表</a></li>
+                        <li id="newsList"><a href="media_newslist.html">新闻列表</a></li>
                         <li><a href="media_newsupload.html">发表新闻</a></li>
                         <!--<li><a href="Media_newsList.html">我的新闻</a></li>-->
 

@@ -2,6 +2,10 @@ package com.fiften.news.dao;
 
 import com.fiften.news.model.NewsDetail;
 import com.fiften.news.model.NewsDetailWithBLOBs;
+import com.fiften.news.util.Result;
+
+import java.util.HashMap;
+import java.util.List;
 
 public interface NewsDetailMapper {
     /**
@@ -60,5 +64,7 @@ public interface NewsDetailMapper {
      */
     int updateByPrimaryKey(NewsDetail record);
 
-    NewsDetail insertTitleAndKeyAndDetailToNewsDetail(String title,String key,String detail);
+    NewsDetail UploadNews(NewsDetail newsDetail);
+
+    List<HashMap> getAllMyNews();
 }
