@@ -35,7 +35,10 @@
         $('#searchBtn').click(function () {
             ajaxPost("/search",{searchContent:$("#searchContent").val()},function (res) {
                 if(res.code==0){
-
+                    console.log(res)
+                    window.location="/users/users_newsdetail.html?news_id="+res.data.ID
+                }else {
+                    alert("???")
                 }
             })
         })

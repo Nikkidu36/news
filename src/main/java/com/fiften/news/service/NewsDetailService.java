@@ -1,5 +1,6 @@
 package com.fiften.news.service;
 
+import com.fiften.news.model.NewsDetail;
 import com.fiften.news.util.Result;
 
 public interface NewsDetailService {

@@ -165,4 +165,9 @@
       news_image = #{newsImage,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+  <select id="searchNewsByTitle" parameterType="com.fiften.news.model.NewsDetail" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from news_detail
+    where detail like `%${title}%`
+  </select>
 </mapper>
