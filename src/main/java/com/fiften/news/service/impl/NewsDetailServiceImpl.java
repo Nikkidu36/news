@@ -49,8 +49,8 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     }
 
     @Override
-    public Result showNewsListById(int id) {
-        List<HashMap> NewsDetailList=newsDetailMapper.showNewsListById(id);
+    public Result showNewsListById() {
+        List<HashMap> NewsDetailList=newsDetailMapper.showNewsListById();
 
         return Result.createSuccessResult(NewsDetailList.size(),NewsDetailList);
     }

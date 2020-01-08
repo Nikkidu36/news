@@ -202,9 +202,10 @@ where nd.media_id = m.media_id AND m.media_id = #{id} and nm.news_id=nd.ID
       where nd.ID=#{id} and nd.media_id=media.media_id and collection.news_id=#{id} and nm.audit_status="Y" and nm.audit_result="Y" and nm.publish_status="Y" and nm.news_id=#{id}
       group by collection.news_id
   </select>
-  <select id="showNewsListById" parameterType="integer" resultType="hashmap">
+  <select id="showNewsListById"  resultType="hashmap">
     select nd.title,media.user_name,nd.publish_Date
-    from news_detail as nd,media
-    where nd.ID=#{id} and nd.media_id=media.media_id
+    from news_detail as nd,media,news_manage as nm
+    where nm.news_id=nd.ID and nd.media_id=media.media_id and nm.audit_status="Y" and nm.audit_result="Y" and nm.publish_status="Y"
+
   </select>
 </mapper>
