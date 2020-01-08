@@ -20,4 +20,6 @@ public interface NewsManageService {
     Result getNewsReports(Integer ID);
 
     Boolean publishNewsByID(Integer ID);
+
+    Result deleteReportedNewsByID(Integer ID);
 }

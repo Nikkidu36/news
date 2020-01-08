@@ -66,6 +66,11 @@ public class NewsManageController {
         }
     }
 
+    @PostMapping("/deleteReportedNews")
+    public Result deleteReportedNewsByID(@RequestParam("ID") Integer ID){
+        return newsManageService.deleteReportedNewsByID(ID);
+    }
+
 
 
 }

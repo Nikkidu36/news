@@ -44,6 +44,10 @@
     delete from news_manage
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteReportedNewsByID" parameterType="java.lang.Integer">
+    delete from news_manage
+    where news_id = #{oooppp}
+  </delete>
 
   <insert id="insert" parameterType="com.fiften.news.model.NewsManage" >
     <!--

@@ -76,4 +76,6 @@ public interface NewsManageMapper {
     List<HashMap> getAllWaitRejectNewslist();
 
     boolean publishNewsByID(@Param("ID") Integer ID);
+
+    int deleteReportedNewsByID(@Param("oooppp") Integer ID);
 }
