@@ -1,5 +1,6 @@
 package com.fiften.news.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fiften.news.dao.NewsManageMapper;
 import com.fiften.news.service.NewsManageService;
 import com.fiften.news.util.Result;
@@ -24,17 +25,19 @@ public class NewsManageServiceImpl implements NewsManageService {
     NewsManageMapper newsManageMapper;
 
     @Override
-    public Result getAuditNum() {
-        ArrayList<Integer> nums = new ArrayList<Integer>();
+    public Result getIndexNewsNum() {
+
+        JSONObject res = new JSONObject();
+
         Integer auitNum = newsManageMapper.getAuditNum();
-        Integer num2 = newsManageMapper.getAuditNum2();
-        Integer num3 = newsManageMapper.getAuditNum3();
+        Integer waitPublishNum = newsManageMapper.getWaitPublishNum();
+        Integer waitRejectNum = newsManageMapper.getWaitRejectNum();
 
-        nums.add(auitNum);
-        nums.add(num2);
-        nums.add(num3);
+        res.put("auitNum",auitNum);
+        res.put("waitPublishNum",waitPublishNum);
+        res.put("waitRejectNum",waitRejectNum);
 
-        return Result.createSuccessResult(Result.createSuccessResult(nums));
+        return Result.createSuccessResult(res);
     }
 
     @Override
