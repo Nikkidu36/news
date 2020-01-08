@@ -154,11 +154,12 @@
                                                     <td>`+res.data[i].news_key+`</td>
                                                     <td>`+res.data[i].submit_Date+`</td>
                                                     <td><a><h7>通过</h7></a></td>
-                                                    <td><a href="../newsitem.html?newsid=<%=news.getNewsid()%>">发布</a></td>
+                                                    <td><a href="/publishNewsByID?newsId=`+res.data[i].news_id+`">发布</a></td>
                                                 </tr>`)
                 }
             }else {
                 alert("请求失败")
+
             }
         })
     })

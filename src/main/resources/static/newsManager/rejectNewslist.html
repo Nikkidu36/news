@@ -157,7 +157,7 @@
                                                     <td>`+res.data[i].news_key+`</td>
                                                     <td>`+res.data[i].submit_Date+`</td>
                                                     <td><a style="color: red"><h7>未通过</h7></a></td>
-                                                    <td><a href="../newsitem.html?newsid=<%=news.getNewsid()%>">驳回</a></td>
+                                                    <td><a href="../newsitem.html?news_Id=`+res.data[i].news_id+`">驳回</a></td>
                                                 </tr>`)
                 }
             }else {

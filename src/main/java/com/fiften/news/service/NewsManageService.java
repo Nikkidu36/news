@@ -16,4 +16,8 @@ public interface NewsManageService {
     Result getAllWaitPublishNewslist();
 
     Result getAllWaitRejectNewslist();
+
+    Result getNewsReports(Integer ID);
+
+    Boolean publishNewsByID(Integer ID);
 }
