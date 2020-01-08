@@ -160,4 +160,10 @@
     from media
     where password = #{password} and user_name = #{userName}
   </select>
+
+  <select id="selectAllNotAvailableMedia" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from  media
+    where available_status = "N"
+  </select>
 </mapper>
