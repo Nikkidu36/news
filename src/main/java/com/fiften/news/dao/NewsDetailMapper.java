@@ -9,6 +9,9 @@ import com.fiften.news.util.Result;
 import java.util.HashMap;
 import java.util.List;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Mapper
 @Repository
 public interface NewsDetailMapper {
@@ -64,4 +67,8 @@ public interface NewsDetailMapper {
     NewsDetail UploadNews(NewsDetail newsDetail);
 
     List<HashMap> getAllMyNews(@Param("id") Integer id);
+    HashMap getOneNewsByID(Integer ID);
+
+    boolean updateSubmitDateByID(Integer ID);
+
 }

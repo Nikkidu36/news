@@ -178,4 +178,17 @@
 from news_detail as nd,media as m,news_manage as nm
 where nd.media_id = m.media_id AND m.media_id = #{id} and nm.news_id=nd.ID
   </select>
+  <select id="getOneNewsByID" resultType="java.util.HashMap">
+    select nd.*,m.user_name
+    from news_detail as nd ,media as m
+    where ID = #{id,jdbcType=INTEGER} and m.media_id = nd.media_id
+  </select>
+
+  <update id="updateSubmitDateByID">
+    update news_detail
+    set publish_Date = NOW()
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+
 </mapper>
