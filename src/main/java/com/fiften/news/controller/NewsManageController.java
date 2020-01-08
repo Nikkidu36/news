@@ -66,6 +66,23 @@ public class NewsManageController {
         }
     }
 
+    @GetMapping("/rejectNewsByID")
+    public String rejectNewsByID(@RequestParam("newsId") Integer newsId){
+        boolean flag = newsManageService.rejectNewsByID(newsId);
+//        Boolean flag = false;
+        System.out.println(newsId);
+        if(flag==true){
+            return "<script>alert(\"驳回成功\") ;window.location = \"http://localhost:8080/newsManager/rejectNewslist.html\"</script>";
+        } else {
+            return "<script>alert(\"驳回失败\") ;window.location = \"http://localhost:8080/newsManager/rejectNewslist.html\"</script>";
+        }
+    }
+
+    @PostMapping("/deleteReportedNews")
+    public Result deleteReportedNewsByID(@RequestParam("ID") Integer ID){
+        return newsManageService.deleteReportedNewsByID(ID);
+    }
+
 
 
 }

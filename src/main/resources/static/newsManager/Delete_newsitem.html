@@ -17,6 +17,8 @@
     <link href="../asset/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
     <script src="../utilJs/commentUtil.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../layui/layui.js"></script>
 
 </head>
 <script>
@@ -33,7 +35,7 @@
             <div class="opener-left-menu is-open"> <span class="top"></span> <span class="middle"></span> <span class="bottom"></span> </div>
             <a href="../index.html" class="navbar-brand"> <b>返回首页</b> </a>
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span><%=username%></span></li>
+                <li class="user-name"><span id="user-name"></span></li>
                 <li class="dropdown avatar-dropdown"> <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
                         <li><a href="#"><p value="<%=username%>" id="backli" onclick="back()"><span class="fa fa-power-off"></span> 退出登录</p></a></li>
@@ -133,7 +135,7 @@
         </div>
     </div>
     <div style="margin-left:42%">
-        <button class="layui-btn" lay-submit="" lay-filter="demo1" style="background-color: red">删除新闻</button>
+        <button class="layui-btn" lay-submit="" lay-filter="demo1" style="background-color: red" id="delete">删除新闻</button>
     </div>
 </div>
 <!-- end: content -->
@@ -189,20 +191,21 @@
             }
         })
 
-        $("#submit_auditResult").click(function () {
-
-            ajaxPost("/deleteReportedNews", {auditResult: $("#audit_result").val(),ID:param.news_Id},function (res) {
+        $("#delete").click(function () {
+            console.log("delete")
+            ajaxPost("/deleteReportedNews", {ID:param.news_Id},function (res) {
                 if (res.code == 0 ){
                     layui.use('layer', function () {
                         var layer = layui.layer;
 
                         layer.alert('删除成功！');
+                        window.location="deleteNewslist.html";
 
                     });
                 }else {
                     layui.use('layer', function () {
                         var layer = layui.layer;
-                        layer.alert('审核失败，请再次操作！');
+                        layer.alert('删除失败，请再次操作！');
                         setTimeout(3000);
                     });
                 }
@@ -219,7 +222,6 @@
 <script src="../asset/js/moment.js"></script>
 <script src="../js/Confim.js"></script>
 <!-- end: Javascript -->
-<script src="layui.js" charset="utf-8"></script>
 <script>
     $("#left-menu-2").click() ;
 </script>

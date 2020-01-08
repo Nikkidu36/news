@@ -114,4 +114,17 @@ public class NewsManageServiceImpl implements NewsManageService {
         }
         return publish_news;
     }
+    @Override
+    public Result deleteReportedNewsByID(Integer ID){
+        if (newsManageMapper.deleteReportedNewsByID(ID)>0){
+            return Result.createSuccessResult();
+        }
+        return Result.createByFailure();
+    }
+
+    @Override
+    public Boolean rejectNewsByID(Integer ID){
+        Boolean publish_news = newsManageMapper.rejectNewsByID(ID);
+        return publish_news;
+    }
 }
