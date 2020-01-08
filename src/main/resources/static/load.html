@@ -14,66 +14,66 @@
 </head>
 <body>
 <script>
-    $(function(){
+	$(function () {
 
-        $("#loginBtn").click(function(){
-            console.log($("#password").val())
-			ajaxPost("/login",{userName:$("#username").val(),password:$("#password1").val()},function (res) {
+		$("#loginBtn").click(function () {
+			console.log($("#password").val())
+			ajaxPost("/login", {userName: $("#username").val(), password: $("#password1").val()}, function (res) {
 
-				if(res.code == 0){
+				if (res.code == 0) {
 					console.log(res)
-					if (res.data.flag == 1){
-						setCookies("token",res.data.token)
+					if (res.data.flag == 1) {
+						setCookies("token", res.data.token)
 
-						layui.use('layer', function(){
+						layui.use('layer', function () {
 							var layer = layui.layer;
 
 							layer.alert('用户你好，登录成功');
 							setTimeout(function () {
-								window.location = "/users/users_index.html?userName="+res.data.user.userName
-							},3000)
+								window.location = "/users/users_index.html?userName=" + res.data.user.userName
+							}, 3000)
 						});
 					}
-					if (res.data.flag == 2){
-						setCookies("token",res.data.token)
-						layui.use('layer', function(){
+					if (res.data.flag == 2) {
+						setCookies("token", res.data.token)
+						layui.use('layer', function () {
 							var layer = layui.layer;
 
 							layer.alert('媒体你好，登录成功');
 							setTimeout(function () {
-								window.location = "/Media_index.html"
-							},3000)
+								window.location = "/media_index.html?userName=" + res.data.media.userName
+							}, 3000)
 						});
 					}
-					if (res.data.flag == 3){
-						if(res.data.manager.type==="news_manager"){
-							setCookies("token",res.data.token)
-							layui.use('layer', function(){
+					if (res.data.flag == 3) {
+						if (res.data.manager.type === "news_manager") {
+							setCookies("token", res.data.token)
+							layui.use('layer', function () {
 								var layer = layui.layer;
 								layer.alert('新闻管理员你好，登录成功');
 								setTimeout(function () {
 									window.location = "newsManager/newsManager_index.html"
-								},3000)
+								}, 3000)
 							});
 						}
-						if(res.data.manager.type==="user_manager"){
-							setCookies("token",res.data.token)
-							layui.use('layer', function(){
+						if (res.data.manager.type === "user_manager") {
+							setCookies("token", res.data.token)
+							layui.use('layer', function () {
 								var layer = layui.layer;
 								layer.alert('账号管理员你好，登录成功');
 								setTimeout(function () {
 									window.location = "user_manager_index.html"
-								},3000)
+								}, 3000)
 							});
 						}
 					}
-				}else{
+				} else {
 					console.log("失败");
 				}
 			})
-        })
+		})
 
-    })
+	})
 </script>
 	 <div class="main">
 		<div class="login-form">

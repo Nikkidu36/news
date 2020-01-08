@@ -18,6 +18,29 @@
     <link href="../asset/css/style.css" rel="stylesheet">
 </head>
 <body id="mimin" class="dashboard">
+
+    <!--<script>-->
+        <!--$('#collectionButt').click(function () {-->
+            <!--var param =  RequestParameter();-->
+            <!--ajaxPost("/collection",{userId:param.userId},function (res) {-->
+                <!--if(res.code==0){-->
+                    <!--console.log(res)-->
+                    <!--if(res.type==1){-->
+                        <!--layui.use('layer', function(){-->
+                            <!--var layer = layui.layer;-->
+                            <!--layer.alert('已在收藏列表中');-->
+                        <!--});-->
+                    <!--}else if(res.type==2){-->
+                        <!--layui.use('layer', function(){-->
+                            <!--var layer = layui.layer;-->
+                            <!--layer.alert('未在收藏列表中');-->
+                        <!--});-->
+                    <!--}-->
+                <!--}-->
+            <!--})-->
+        <!--})-->
+    <!--</script>-->
+
     <!-- start: Header -->
     <nav class="navbar navbar-default header navbar-fixed-top">
         <div class="col-md-12 nav-wrapper">
@@ -69,7 +92,7 @@
                                 <h3>作为IP，《小时代》能留下什么？</h3>
                                 <p>作者：网易娱乐&nbsp;&nbsp;&nbsp;&nbsp;发表日期：2020-01-07&nbsp;18:40:06&nbsp;&nbsp;&nbsp;&nbsp;收藏次数：269</p>
                             </div>
-                            <button type="button" class="layui-btn layui-btn-normal">收藏</button>
+                            <button type="button" class="layui-btn layui-btn-normal" id="collectionButt">收藏</button>
                             <button type="button" class="layui-btn layui-btn-normal">举报</button>
                             <div class="panel-body" style="padding-bottom:30px;">
                                 <div class="panel-body-main">
