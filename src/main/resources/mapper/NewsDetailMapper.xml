@@ -167,4 +167,17 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="getOneNewsByID" resultType="java.util.HashMap">
+    select nd.*,m.user_name
+    from news_detail as nd ,media as m
+    where ID = #{id,jdbcType=INTEGER} and m.media_id = nd.media_id
+  </select>
+
+  <update id="updateSubmitDateByID">
+    update news_detail
+    set publish_Date = NOW()
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+
 </mapper>
