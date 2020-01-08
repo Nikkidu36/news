@@ -4,6 +4,7 @@ import com.fiften.news.service.NewsManageService;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,8 +24,13 @@ public class NewsManageController {
     }
 
     @PostMapping("/getOneNewsByID")
-    public Result getOneNews(Integer ID){
+    public Result getOneNews(@RequestParam("ID")Integer ID){
         return newsManageService.getOneNews(ID);
+    }
+
+    @PostMapping("/saveAuditResult")
+    public Result saveAuditResult(@RequestParam("auditResult") String auditResult,@RequestParam("ID") Integer ID){
+        return newsManageService.saveAuditResult(auditResult,ID);
     }
 
 }

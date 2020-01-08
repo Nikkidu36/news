@@ -4,6 +4,7 @@ import com.fiften.news.service.MediaService;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -18,7 +19,18 @@ public class MediaController {
     MediaService mediaService;
 
     @PostMapping("/getAllNotAvailableMedia")
-    Result getUser(){
+    Result getUser() {
         return mediaService.getAllNotAvailableMedia();
+
+
+    }
+    @PostMapping("/getMediaById")
+     public Result getMediaById(@RequestParam("mediaId") Integer mediaId){
+        return  mediaService.getMediaById(mediaId);
+    }
+
+    @PostMapping("/passMediaById")
+    public Result passMediaById(@RequestParam("mediaId") Integer mediaId){
+        return mediaService.passMediaById(mediaId);
     }
 }

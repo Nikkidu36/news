@@ -53,7 +53,19 @@ public class NewsManageServiceImpl implements NewsManageService {
 
     @Override
     public Result getOneNews(Integer ID) {
-        NewsDetail newsDetail=newsDetailMapper.selectByPrimaryKey(ID);
-        return Result.createSuccessResult(newsDetail);
+        HashMap news=newsDetailMapper.getOneNewsByID(ID);
+        return Result.createSuccessResult(news);
+    }
+
+    @Override
+    public Result saveAuditResult(String auditResult,Integer ID){
+        boolean yn;
+        if(auditResult.equals("通过")){
+            newsDetailMapper.updateSubmitDateByID(ID);
+            yn= newsManageMapper.savePassAuditResult(ID);
+        }else{
+            yn = newsManageMapper.saveNotAuditResult(ID);
+        }
+        return Result.createSuccessResult(yn);
     }
 }

@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Mapper
 @Repository
 public interface NewsDetailMapper {
@@ -55,5 +58,9 @@ public interface NewsDetailMapper {
      * @mbggenerated Wed Jan 08 16:32:46 CST 2020
      */
     int updateByPrimaryKey(NewsDetail record);
+
+    HashMap getOneNewsByID(Integer ID);
+
+    boolean updateSubmitDateByID(Integer ID);
 
 }

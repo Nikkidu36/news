@@ -63,4 +63,8 @@ public interface NewsManageMapper {
     int getWaitRejectNum();
 
     List<HashMap> getAllAuditNewslist();
+
+    boolean savePassAuditResult(Integer ID);
+
+    boolean saveNotAuditResult(Integer ID);
 }

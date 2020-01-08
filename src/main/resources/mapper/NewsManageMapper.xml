@@ -182,5 +182,19 @@
     order by nd.submit_Date desc
   </select>
 
+  <update id="savePassAuditResult">
+   update news_manage
+   set audit_status = "Y",
+      audit_result = "Y"
+   where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="saveNotAuditResult">
+   update news_manage
+   set audit_status = "Y",
+      audit_result = "N"
+   where ID = #{id,jdbcType=INTEGER}
+  </update>
+
 
 </mapper>
