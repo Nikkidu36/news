@@ -52,7 +52,7 @@
                                 var layer = layui.layer;
                                 layer.alert('新闻管理员你好，登录成功');
                                 setTimeout(function () {
-                                    window.location = "newsManager/newsManager_index.html"
+                                    window.location = "newsManager/newsManager_index.html?userName=" + res.data.manager.userName
                                 }, 3000)
                             });
                         }
