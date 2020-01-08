@@ -59,8 +59,8 @@ public interface NewsManageMapper {
     int updateByPrimaryKey(NewsManage record);
 
     int getAuditNum();
-    int getAuditNum2();
-    int getAuditNum3();
+    int getWaitPublishNum();
+    int getWaitRejectNum();
 
     List<HashMap> getAllAuditNewslist();
 }

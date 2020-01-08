@@ -16,9 +16,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+    <script src="utilJs/commentUtil.js"></script>
 
 </head>
 <body>
+<script>
+
+    $(function () {
+        $("#email").click(function () {
+            $("#email").val("");
+        })
+
+        $("#code").click(function () {
+
+            $("#code").val("");
+        })
+
+
+        $("#onSentCode").click(function () {
+            ajaxPost("/sentEmailCode",{email:$("#email").val()},function (res) {
+                if (res.code == 0){
+                        layui.use('layer',function () {
+                            var layer = layui.layer;
+                            layer.alert("发送成功");
+                        })
+                      $("#baseCode").val(res.data)
+
+                } else {
+                    alert("错误"+res.msg);
+                }
+            })
+        })
+
+        $("#media_register").click(function () {
+                if ($("#baseCode").val() == $("#code").val()){
+
+                } else {
+                    layui.use("layer",function () {
+                        var layer = layui.layer;
+                        layer.msg("验证码有误，请检查")
+                    })
+                }
+        })
+    })
+</script>
 <div class="main">
     <div class="login-form">
         <h1>媒体注册</h1>
@@ -31,17 +72,22 @@
                 <input type="text" id="username" class="text" value="用户名" name="username">
                 <input type="text" id="password" name="password" value="密码">
                 <input type="password" id="password1" name="password1" style="display: none;">
-                <input type="text" id="password2" name="password2" value="邮箱">
-                <input type="password" id="password3" name="password3" style="display: none;">
+                <input type="text" id="email" class="text" value="邮箱" name="username" >
+                <input type="text" id="code" class="text" value="验证码" name="username" style="width: 60%;float: left" >
+                <input type="hidden" id="baseCode">
+                <button type="button" class="layui-btn layui-btn-sm"  style="margin-top: 7px;margin-left: 50px" id="onSentCode">验证码</button>
+
+
                 <div class="layui-upload">
                     <button type="button" class="layui-btn" id="test1">上传媒体资质</button>
                     <div class="layui-upload-list" style="float: right">
-                        <img style="width: 50px;height: 50px;" class="layui-upload-img" id="demo1" src="http://img4.imgtn.bdimg.com/it/u=839439295,519633807&fm=11&gp=0.jpg">
+                        <img style="width: 50px;height: 50px;" class="layui-upload-img" id="demo1" src="http://pic.baike.soso.com/p/20090111/20090111120000-104768.jpg">
+                        <input type="hidden" id="imgUrl">
                         <p id="demoText"></p>
                     </div>
                 </div>
                 <div style="width: 340px; margin: 0;">
-                    <a href="media_login.html"><button type="button" class="layui-btn layui-btn-fluid">媒体注册</button></a>
+                    <button type="button" class="layui-btn layui-btn-fluid" id="media_register">媒体注册</button>
                 </div>
                 <p>
                     <a href="#">忘记密码 ?</a> &nbsp;&nbsp;&nbsp;
@@ -74,6 +120,12 @@
                 if (res.code !== 0) {
                     return layer.msg('上传失败');
                     console.log(res.data);
+                }else {
+
+                    $("#imgUrl").val(res.data);
+
+                    alert($("#imgUrl").val())
+
                 }
                 //上传成功
             }

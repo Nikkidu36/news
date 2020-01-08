@@ -26,6 +26,16 @@
         $("#user-name-2").text("欢迎您："+param.userName+"，你好。")
         $("#user-name-3").text("欢迎您："+param.userName+"，你好。")
         console.log($("#user-name").text())
+
+        ajaxPost("/getIndexNewsNum",null,function (res) {
+            if(res.code==0){
+                $("#auditNum").text(res.data.auitNum+"");
+                $("#waitPublishNum").text(res.data.waitPublishNum+"");
+                $("#waitRejectNum").text(res.data.waitRejectNum+"");
+            }else{
+                alert("找學長")
+            }
+        })
     })
 
 </script>
@@ -245,15 +255,15 @@
                             <div class="panel-body">
                                 <div class="col-md-12 padding-0 text-center">
                                     <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                        <h3>2000</h3>
+                                        <h3 id="auditNum">2000</h3>
                                         <p>待审核新闻</p>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                        <h3>1000</h3>
+                                        <h3 id="waitPublishNum">1000</h3>
                                         <p>待发布新闻</p>
                                     </div>
                                     <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                        <h3>1000</h3>
+                                        <h3 id="waitRejectNum">1000</h3>
                                         <p>待驳回新闻</p>
                                     </div>
                                 </div>

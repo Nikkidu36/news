@@ -19,7 +19,6 @@ public class MediaController {
 
     @PostMapping("/getAllNotAvailableMedia")
     Result getUser(){
-
         return mediaService.getAllNotAvailableMedia();
     }
 }
