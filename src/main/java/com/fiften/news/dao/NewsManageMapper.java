@@ -50,4 +50,6 @@ public interface NewsManageMapper {
      * @mbggenerated Tue Jan 07 19:18:18 CST 2020
      */
     int updateByPrimaryKey(NewsManage record);
+
+    int getAuditNum();
 }
