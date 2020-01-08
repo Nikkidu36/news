@@ -12,9 +12,9 @@ public class NewsManageController {
     @Autowired
     NewsManageService newsManageService;
 
-    @PostMapping("/getAuditNum")
-    Result getAuditNum(){
-        return newsManageService.getAuditNum();
+    @PostMapping("/getIndexNewsNum")
+    Result getIndexNum(){
+        return newsManageService.getIndexNewsNum();
     }
 
     @PostMapping("/getAllAuditNewslist")

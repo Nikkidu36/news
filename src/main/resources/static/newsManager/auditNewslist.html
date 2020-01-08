@@ -118,13 +118,13 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="auditNewslist">
-                                                <tr role="row" class="odd" >
-                                                    <td class="sorting_1">qweqwe</td>
-                                                    <td>asdasd</td>
-                                                    <td>asasdasd</td>
-                                                    <td>asdasd</td>
-                                                    <td><a href="/Media_newsList.html">审核</a></td>
-                                                </tr>
+                                                <!--<tr role="row" class="odd" >-->
+                                                    <!--<td class="sorting_1">qweqwe</td>-->
+                                                    <!--<td>asdasd</td>-->
+                                                    <!--<td>asasdasd</td>-->
+                                                    <!--<td>asdasd</td>-->
+                                                    <!--<td><a href="/Media_newsList.html">审核</a></td>-->
+                                                <!--</tr>-->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -149,11 +149,11 @@
 
                 for (let i = 0; i < res.data.length; i++) {
                     $("#auditNewslist").append(`<tr role="row" class="odd" >
-                                                    <td class="sorting_1">`+res.data[i].title+`</td>
+                                                    <td class="sorting_1" style="width: 300px;">`+res.data[i].title+`</td>
                                                     <td>`+res.data[i].user_name+`</td>
-                                                    <td>asasdasd</td>
-                                                    <td>asdasd</td>
-                                                    <td><a href="/Media_newsList.html?newId=`+res.data[i].news_id+`">审核</a></td>
+                                                    <td>`+res.data[i].key+`</td>
+                                                    <td>`+res.data[i].submit_Date+`</td>
+                                                    <td><a href="Audit_newsitem.html?news_Id=`+res.data[i].news_id+`">审核</a></td>
                                                 </tr>`)
 
                 }
