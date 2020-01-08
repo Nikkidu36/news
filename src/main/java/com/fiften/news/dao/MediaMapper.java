@@ -3,6 +3,7 @@ package com.fiften.news.dao;
 import com.fiften.news.model.Media;
 import com.fiften.news.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -62,4 +63,5 @@ public interface MediaMapper {
 
     List<Media> selectAllNotAvailableMedia();
 
+    Media selectByEamil(@Param("email") String email);
 }

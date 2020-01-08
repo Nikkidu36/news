@@ -2,6 +2,7 @@ package com.fiften.news.controller;
 
 
 
+import com.fiften.news.model.Media;
 import com.fiften.news.model.User;
 import com.fiften.news.service.LoginService;
 import com.fiften.news.service.UserService;
@@ -28,9 +29,9 @@ public class LoginController {
     }
 
 
-    @PostMapping("/register")
-    public Result register(){
-        return null;
+    @PostMapping("/registerMedia")
+    public Result register(Media media){
+        return loginService.register(media);
     }
 
     @PostMapping("/sentEmailCode")
