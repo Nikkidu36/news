@@ -78,7 +78,7 @@
             </ul>
         </div>
     </div>
-    <form action="NewsUploadServlet" method="post" enctype="multipart/form-data">
+    <form  method="post" enctype="multipart/form-data">
         <div id="content">
             <div class="panel">
                 <div class="panel-body">
@@ -103,9 +103,9 @@
                                             <input type="text" class="form-control" style="display: none;">
                                         </div>
                                         <div class="layui-form-item">
-                                            <label class="layui-form-label">举报类型</label>
+                                            <label class="layui-form-label" >举报理由</label>
                                             <div class="layui-input-block">
-                                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入举报类型" class="layui-input">
+                                                <input id="reportReason" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入举报理由" class="layui-input">
                                             </div>
                                         </div>
                                         <!--<div class="layui-form-item">-->
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                         <div class="col-md-12 text-center" style="margin:20px; margin-left: -70px;">
-                            <input class="submit btn btn-danger" type="submit" value="上传">
+                            <input id="reportSubmit" class="submit btn btn-danger" type="submit" value="上传">
                         </div>
                     </div>
                 </div>
@@ -169,6 +169,22 @@
     <!-- end: content -->
 </div>
 <!-- start: Javascript -->
+
+<script>
+    $(function () {
+        var param = RequestParameter()
+        ajaxPost("/ReportNews", {news_id: param.news_id,reason:$("#reportReason")}, function (res) {
+                if (res.code ==0 ){
+                    layui.use("use",function () {
+                        var layer = layui.layer;
+                        layer.alert("举报成功")
+                    })
+
+                }
+        })
+    })
+</script>
+
 <script src="asset/js/jquery.min.js"></script>
 <script src="asset/js/jquery.ui.min.js"></script>
 <script src="asset/js/bootstrap.min.js"></script>

@@ -55,5 +55,5 @@ public interface ReportListMapper {
      */
     int updateByPrimaryKey(ReportList record);
 
-    ReportList ReportNews(int media_id,int news_id,String reason);
+
 }
