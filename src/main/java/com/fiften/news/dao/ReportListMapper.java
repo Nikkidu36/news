@@ -63,6 +63,7 @@ public interface ReportListMapper {
 
     ReportList ReportNews();
 
+
     Integer getReportCountByMediaId(@Param("mediaId") Integer mediaId);
 
     List<ReportList> getReportByMediaId(@Param("mediaId") Integer mediaId);
