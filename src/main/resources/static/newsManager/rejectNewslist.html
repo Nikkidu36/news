@@ -121,14 +121,6 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="waitRejectNewsList">
-                                                <!--<tr role="row" class="odd">-->
-                                                    <!--<td class="sorting_1"><%=news.getNewsitem()%></td>-->
-                                                    <!--<td><%=news.getNewsauthor()%></td>-->
-                                                    <!--<td><%=news.getNewsdate()%></td>-->
-                                                    <!--<td><%=news.getNewsreadnum()%></td>-->
-                                                    <!--<td><a style="color: red"><h7>未通过</h7></a></td>-->
-                                                    <!--<td><a href="../newsitem.html?newsid=<%=news.getNewsid()%>">驳回</a></td>-->
-                                                <!--</tr>-->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -157,11 +149,11 @@
                                                     <td>`+res.data[i].news_key+`</td>
                                                     <td>`+res.data[i].submit_Date+`</td>
                                                     <td><a style="color: red"><h7>未通过</h7></a></td>
-                                                    <td><a href="../newsitem.html?newsid=<%=news.getNewsid()%>">驳回</a></td>
+                                                    <td><a href="/rejectNewsByID?newsId=`+res.data[i].news_id+`">驳回</a></td>
                                                 </tr>`)
                 }
             }else {
-                alert("请求失败")
+                alert("请求错误")
             }
         })
     })

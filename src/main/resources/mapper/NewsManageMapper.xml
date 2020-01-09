@@ -44,6 +44,11 @@
     delete from news_manage
     where ID = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteReportedNewsByID" parameterType="java.lang.Integer">
+    delete from news_manage
+    where news_id = #{oooppp}
+  </delete>
+
   <insert id="insert" parameterType="com.fiften.news.model.NewsManage" >
     <!--
       WARNING - @mbggenerated
@@ -166,13 +171,13 @@
   <select id="getWaitPublishNum" resultType="java.lang.Integer">
    select count(*)
    from news_manage
-   where audit_status="Y" and audit_result="Y"
+   where audit_status="Y" and audit_result="Y" and  publish_status="N"
   </select>
 
   <select id="getWaitRejectNum" resultType="java.lang.Integer">
    select count(*)
    from news_manage
-   where audit_status="Y" and audit_result="N"
+   where audit_status="Y" and audit_result="N" and reject_status="N"
   </select>
 
   <select id="getAllAuditNewslist" resultType="hashmap">
@@ -196,24 +201,35 @@
    where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getAllDeleteNewslist" resultType="hashmap">
+  <update id="publishNewsByID" parameterType="java.lang.Integer">
+    update news_manage
+    set publish_status = "Y"
+    where news_id = #{ID} AND audit_status = "Y" AND audit_result = "Y"
+  </update>
+    <update id="rejectNewsByID">
+    update news_manage
+    set reject_status = "Y"
+    where ID = #{ID,jdbcType=INTEGER} AND audit_status = "Y" AND audit_result = "N"
+    </update>
+
+    <select id="getAllDeleteNewslist" resultType="hashmap">
     select nd.*,nm.*,m.user_name
     from news_detail as nd ,news_manage as nm,media as m
-    where nm.report_status = "N" and  nm.news_id  = nd.ID and m.media_id = nd.media_id
+    where nm.report_status = "Y" and  nm.news_id  = nd.ID and m.media_id = nd.media_id
     order by nd.submit_Date
   </select>
 
   <select id="getAllWaitPublishNewslist" resultType="java.util.HashMap">
     select nd.*,nm.*,m.user_name
     from news_detail as nd ,news_manage as nm,media as m
-    where nm.audit_status = "Y" and nm.audit_result = "Y" and  nm.news_id  = nd.ID and m.media_id = nd.media_id
+    where nm.audit_status = "Y" and nm.audit_result = "Y" and nm.publish_status = "N" and  nm.news_id  = nd.ID and m.media_id = nd.media_id
     order by nd.submit_Date
   </select>
 
   <select id="getAllWaitRejectNewslist" resultType="java.util.HashMap">
     select nd.*,nm.*,m.user_name
     from news_detail as nd ,news_manage as nm,media as m
-    where nm.audit_status = "Y" and nm.audit_result = "N" and  nm.news_id  = nd.ID and m.media_id = nd.media_id
+    where nm.audit_status = "Y" and nm.audit_result = "N" and  nm.news_id  = nd.ID and m.media_id = nd.media_id and reject_status = "N"
     order by nd.submit_Date
   </select>
 

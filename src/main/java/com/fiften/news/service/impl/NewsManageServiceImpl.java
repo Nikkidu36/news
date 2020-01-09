@@ -3,6 +3,7 @@ package com.fiften.news.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.fiften.news.dao.NewsDetailMapper;
 import com.fiften.news.dao.NewsManageMapper;
+import com.fiften.news.dao.ReportListMapper;
 import com.fiften.news.model.NewsDetail;
 import com.fiften.news.service.NewsManageService;
 import com.fiften.news.util.Result;
@@ -28,6 +29,9 @@ public class NewsManageServiceImpl implements NewsManageService {
 
     @Autowired
     NewsDetailMapper newsDetailMapper;
+
+    @Autowired
+    ReportListMapper reportListMapper;
 
     @Override
     public Result getIndexNewsNum() {
@@ -64,12 +68,11 @@ public class NewsManageServiceImpl implements NewsManageService {
     public Result saveAuditResult(String auditResult,Integer ID){
         boolean yn;
         if(auditResult.equals("通过")){
-            newsDetailMapper.updateSubmitDateByID(ID);
             yn= newsManageMapper.savePassAuditResult(ID);
         }else if (auditResult.equals("未通过")){
             yn = newsManageMapper.saveNotAuditResult(ID);
         }else{
-            yn=false;
+            yn = false;
             return Result.createByFailure("审核失败！");
         }
         return Result.createSuccessResult(yn);
@@ -91,5 +94,37 @@ public class NewsManageServiceImpl implements NewsManageService {
     public Result getAllWaitRejectNewslist() {
         List<HashMap> newsMap = newsManageMapper.getAllWaitRejectNewslist();
         return Result.createSuccessResult(newsMap.size(),newsMap);
+    }
+
+    @Override
+    public Result getNewsReports(Integer ID){
+        List<HashMap> reportsMap = reportListMapper.getNewsReports(ID);
+        return Result.createSuccessResult(reportsMap.size(),reportsMap);
+    }
+
+    @Override
+    public Boolean publishNewsByID(Integer ID){
+        Boolean publish_news;
+        Boolean publish_news1 = newsManageMapper.publishNewsByID(ID);
+        Boolean publish_news2 = newsDetailMapper.updateSubmitDateByID(ID);
+        if (publish_news1==true && publish_news2==true){
+            publish_news=true;
+        }else{
+            publish_news=false;
+        }
+        return publish_news;
+    }
+    @Override
+    public Result deleteReportedNewsByID(Integer ID){
+        if (newsManageMapper.deleteReportedNewsByID(ID)>0){
+            return Result.createSuccessResult();
+        }
+        return Result.createByFailure();
+    }
+
+    @Override
+    public Boolean rejectNewsByID(Integer ID){
+        Boolean publish_news = newsManageMapper.rejectNewsByID(ID);
+        return publish_news;
     }
 }

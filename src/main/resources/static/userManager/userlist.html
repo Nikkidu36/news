@@ -6,7 +6,7 @@
     <meta name="author" content="xxxxx">
     <meta name="keyword" content="xxxxx">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>用户列表</title>
+    <title>申请成为媒体列表</title>
     <script src="../js/jQuery/jquery-3.4.1.min.js"></script>
 
 
@@ -28,7 +28,11 @@
     <!-- end: Css -->
 
 </head>
-
+<script>
+    $(function () {
+        $("#username").text(getCookies("username"))
+    })
+</script>
 <body id="mimin" class="dashboard">
 <!-- start: Header -->
 <nav class="navbar navbar-default header navbar-fixed-top">
@@ -38,7 +42,7 @@
                     class="bottom"></span></div>
             <a href="../index.html" class="navbar-brand"> <b>返回首页</b> </a>
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span><%=username%></span></li>
+                <li class="user-name"><span id="username"></span></li>
                 <li class="dropdown avatar-dropdown"><img src="../asset/img/avatar.jpg" class="img-circle avatar"
                                                           alt="user name" data-toggle="dropdown" aria-haspopup="true"
                                                           aria-expanded="true"/>

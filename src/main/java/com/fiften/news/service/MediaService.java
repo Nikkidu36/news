@@ -3,7 +3,7 @@ package com.fiften.news.service;
 import com.fiften.news.util.Result;
 
 /**
- * @author 刘佳昇
+ * @author
  * @Date 2020/1/8 0:28
  */
 
@@ -13,4 +13,14 @@ public interface MediaService {
     Result getMediaById(Integer mediaId);
 
     Result passMediaById(Integer mediaId);
+
+
+
+    //查看所有被举报超过5次的用户
+    Result getAllReportedMedia();
+
+
+    //封号
+    boolean logoutMedia(Integer media);
+
 }

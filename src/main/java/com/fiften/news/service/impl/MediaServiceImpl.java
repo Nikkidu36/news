@@ -1,12 +1,17 @@
 package com.fiften.news.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fiften.news.dao.MediaMapper;
+import com.fiften.news.dao.ReportListMapper;
 import com.fiften.news.model.Media;
 import com.fiften.news.service.MediaService;
 import com.fiften.news.util.Result;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +23,8 @@ import java.util.List;
 public class MediaServiceImpl implements MediaService {
     @Autowired
     MediaMapper mediaMapper;
-
+    @Autowired
+    ReportListMapper reportListMapper;
 
     @Override
     public Result getAllNotAvailableMedia() {
@@ -51,6 +57,51 @@ public class MediaServiceImpl implements MediaService {
             }
         }catch (Exception e){
             return Result.createByFailure(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Result getAllReportedMedia() {
+
+        List<Media> avaliMedias = mediaMapper.selectAllAvailableMedia();
+        ArrayList<JSONObject> res = new ArrayList<>();
+
+        for (Media media:avaliMedias) {
+
+            Integer reportNum = reportListMapper.getReportCountByMediaId(media.getMediaId());
+            if (reportNum != null){
+                if (reportNum>=5){
+                    JSONObject resItem = (JSONObject) JSONObject.toJSON(media);
+                    resItem.put("reportNums",reportNum);
+                    resItem.put("reportReason",reportListMapper.getReportByMediaId(media.getMediaId()).get(0).getReason());
+                    res.add(resItem);
+                }
+            }
+        }
+        return Result.createSuccessResult(res.size(),res);
+    }
+
+    @Override
+    public boolean logoutMedia(Integer media) {
+        try {
+
+            Media baseMedia = mediaMapper.selectByPrimaryKey(media);
+
+            if (baseMedia!=null) {
+                baseMedia.setAvailableStatus("N");
+                if (mediaMapper.updateByPrimaryKeySelective(baseMedia)>0){
+                    return true;
+                }else {
+                    return false;
+                }
+
+            }else {
+                return false;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
     }
 }

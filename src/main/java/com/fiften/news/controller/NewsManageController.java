@@ -3,6 +3,7 @@ package com.fiften.news.controller;
 import com.fiften.news.service.NewsManageService;
 import com.fiften.news.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +48,41 @@ public class NewsManageController {
     public Result getAllWaitRejectNewslist(){
         return newsManageService.getAllWaitRejectNewslist();
     }
+
+    @PostMapping("/getNewsReportlistByID")
+    public Result getNewsReportlistByID(@RequestParam("ID") Integer ID){
+        return newsManageService.getNewsReports(ID);
+    }
+
+    @GetMapping("/publishNewsByID")
+    public String publishNewsByID(@RequestParam("newsId") Integer newsId){
+        boolean flag = newsManageService.publishNewsByID(newsId);
+//        Boolean flag = false;
+        System.out.println(newsId);
+        if(flag==true){
+            return "<script>alert(\"发布成功\") ;window.location = \"http://localhost:8080/newsManager/publishNewslist.html\"</script>";
+        } else {
+            return "<script>alert(\"发布失败\") ;window.location = \"http://localhost:8080/newsManager/publishNewslist.html\"</script>";
+        }
+    }
+
+    @GetMapping("/rejectNewsByID")
+    public String rejectNewsByID(@RequestParam("newsId") Integer newsId){
+        boolean flag = newsManageService.rejectNewsByID(newsId);
+//        Boolean flag = false;
+        System.out.println(newsId);
+        if(flag==true){
+            return "<script>alert(\"驳回成功\") ;window.location = \"http://localhost:8080/newsManager/rejectNewslist.html\"</script>";
+        } else {
+            return "<script>alert(\"驳回失败\") ;window.location = \"http://localhost:8080/newsManager/rejectNewslist.html\"</script>";
+        }
+    }
+
+    @PostMapping("/deleteReportedNews")
+    public Result deleteReportedNewsByID(@RequestParam("ID") Integer ID){
+        return newsManageService.deleteReportedNewsByID(ID);
+    }
+
+
 
 }
