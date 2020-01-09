@@ -195,19 +195,12 @@
             console.log("delete")
             ajaxPost("/deleteReportedNews", {ID:param.news_Id},function (res) {
                 if (res.code == 0 ){
-                    layui.use('layer', function () {
-                        var layer = layui.layer;
-
-                        layer.alert('删除成功！');
-                        window.location="deleteNewslist.html";
-
-                    });
-                }else {
-                    layui.use('layer', function () {
-                        var layer = layui.layer;
-                        layer.alert('删除失败，请再次操作！');
-                        setTimeout(3000);
-                    });
+                    alert('删除成功！');
+                    setTimeout(3000);
+                    window.location="deleteNewslist.html";
+                }else{
+                    alert('删除失败，请再次操作！');
+                    setTimeout(3000);
                 }
             } )
         })
