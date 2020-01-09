@@ -104,4 +104,9 @@ public class MediaServiceImpl implements MediaService {
             return false;
         }
     }
+
+    @Override
+    public Result getIdByUserName(String userName){
+        return Result.createSuccessResult(mediaMapper.selectIdByUserName(userName));
+    }
 }

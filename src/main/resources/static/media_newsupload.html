@@ -20,7 +20,11 @@
     <link rel="stylesheet" type="text/css" href="asset/css/plugins/fullcalendar.min.css"/>
     <link href="asset/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="utilJs/commentUtil.js"></script>
+    <script src="layui/layui.js"></script>
 
+    <script src="js/jQuery/jquery-3.4.1.min.js"></script>
 
 </head>
 
@@ -78,7 +82,7 @@
             </ul>
         </div>
     </div>
-    <form action="NewsUploadServlet" method="post" enctype="multipart/form-data">
+    <form  method="post" enctype="multipart/form-data">
         <div id="content">
             <div class="panel">
                 <div class="panel-body">
@@ -171,14 +175,18 @@
       <!-- start: Javascript -->
 <script>
     $(function () {
-
         $("#UploadBtn").click(function () {
-            ajaxPost("/UploadNews", {title: $("#title").val(), key: $("#key").val(),detail:$("#detail")}, function (res) {
-                if(res.code==0){
-                    alert("上传成功")
+            var param = RequestParameter()
+            ajaxPost("/UploadNews", {userName: param.userName,title:$("#title").val(),key:$("#key").val(),detail:$("#detail").val()}, function (res) {
+                if (res.code ==0 ){
+                    layui.use("use",function () {
+                        var layer = layui.layer;
+                        layer.alert("上传成功")
+                    })
                 }
             })
         })
+
 
     })
 </script>

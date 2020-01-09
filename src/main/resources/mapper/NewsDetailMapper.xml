@@ -205,4 +205,6 @@ where nd.media_id = m.media_id AND m.media_id = #{id} and nm.news_id=nd.ID
     where nm.news_id=nd.ID and nd.media_id=media.media_id and nm.audit_status="Y" and nm.audit_result="Y" and nm.publish_status="Y"
 
   </select>
+
+
 </mapper>

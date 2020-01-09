@@ -20,8 +20,8 @@ public class NewsDetailController {
     }
 
     @PostMapping("/UploadNews")
-    public Result UploadNews(String title, String key, String detail){
-        return newsDetailService.doUpload(title,key,detail);
+    public Result UploadNews(String userName,String title,String key,String detail){
+        return newsDetailService.doUpload(userName,title,key,detail);
     }
     @PostMapping("/search")
     Result searchNewsByTitle(@RequestParam("searchContent") String title){

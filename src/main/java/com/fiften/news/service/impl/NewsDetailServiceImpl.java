@@ -1,8 +1,11 @@
 package com.fiften.news.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fiften.news.dao.MediaMapper;
 import com.fiften.news.dao.NewsDetailMapper;
+import com.fiften.news.dao.NewsManageMapper;
 import com.fiften.news.model.NewsDetail;
+import com.fiften.news.model.NewsManage;
 import com.fiften.news.service.NewsDetailService;
 import com.fiften.news.dao.NewsDetailMapper;
 import com.fiften.news.model.NewsDetail;
@@ -25,6 +28,9 @@ public class NewsDetailServiceImpl implements NewsDetailService {
 
     @Autowired
     NewsDetailMapper newsDetailMapper;
+
+    @Autowired
+    NewsManageMapper newsManageMapper;
 
     @Override
     public Result searchNewsByTitle(String title) {
@@ -61,14 +67,19 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    MediaMapper mediaMapper;
+
     @Override
-    public Result doUpload(String title, String key, String detail) {
+    public Result doUpload(String userName,String title,String key,String detail) {
         NewsDetail newsDetail = new NewsDetail();
         newsDetail.setTitle(title);
         newsDetail.setKey(key);
         newsDetail.setDetail(detail);
-
+        int media_id=mediaMapper.selectIdByUserName(userName);
+        newsDetail.setMediaId(media_id);
         newsDetail.setSubmitDate(commentUtil.getCurTime());
+        NewsManage newsManage=new NewsManage();
         return Result.createSuccessResult(newsDetailMapper.insertSelective(newsDetail));
     }
 
