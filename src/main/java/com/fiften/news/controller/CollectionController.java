@@ -14,9 +14,14 @@ public class CollectionController {
     @Autowired
     CollectionService collectionService;
 
-    @PostMapping("/collection")
-    Result collection(@RequestParam("userId") int userId,@RequestParam("newsId") int newsId){
-        return collectionService.isCollection(userId,newsId);
+    @PostMapping("/isCollection")
+    Result isCollection(@RequestParam("userName") String userName,@RequestParam("news_id") int newsId){
+        return collectionService.isCollection(userName,newsId);
+    }
+
+    @PostMapping("/addCollection")
+    Result addCollection(@RequestParam("news_id") int nid,@RequestParam("user_id") int uid){
+        return collectionService.addCollection(uid,nid);
     }
 
     @PostMapping("/getMyCollectionList")

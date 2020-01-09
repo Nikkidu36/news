@@ -108,11 +108,11 @@
       news_id = #{newsId,jdbcType=INTEGER}
     where collection_id = #{collectionId,jdbcType=INTEGER}
   </update>
-  <select id="selectCollectionByUidAndNid" parameterType="com.fiften.news.model.Collection" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List" />
-    from collection
-    where user_id=#{userId} and news_id=#{newsId}
-
+  <select id="selectCollectionByUsernameAndNid" resultType="hashmap">
+    select COUNT(*) as times
+    from collection,user
+    where user.user_id=collection.user_id and collection.news_id=#{nid} and user.user_name=#{username}
+    group by collection.user_id
   </select>
   <select id="getMyCollectionList" resultType="hashmap" parameterType="integer">
     select nd.title,nd.publish_Date,media.user_name
@@ -125,5 +125,10 @@
     where collection.user_id=#{id}
     group by collection.user_id
   </select>
-
+  <select id="isInCollectionByNid" parameterType="integer" resultType="integer">
+    select COUNT(*) as times
+    from collection
+    where news_id=#{id}
+    group by collection.news_id
+  </select>
 </mapper>

@@ -201,10 +201,10 @@
    where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <update id="publishNewsByID">
+  <update id="publishNewsByID" parameterType="java.lang.Integer">
     update news_manage
     set publish_status = "Y"
-    where ID = #{ID,jdbcType=INTEGER} AND audit_status = "Y" AND audit_result = "Y"
+    where news_id = #{ID} AND audit_status = "Y" AND audit_result = "Y"
   </update>
     <update id="rejectNewsByID">
     update news_manage
