@@ -80,4 +80,7 @@ public interface NewsManageMapper {
     boolean rejectNewsByID(@Param("ID") Integer ID);
 
     int deleteReportedNewsByID(@Param("oooppp") Integer ID);
+
+    HashMap getOneNewsByID(Integer ID);
+
 }

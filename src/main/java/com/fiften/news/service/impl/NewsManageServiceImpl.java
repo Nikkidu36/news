@@ -60,7 +60,7 @@ public class NewsManageServiceImpl implements NewsManageService {
 
     @Override
     public Result getOneNews(Integer ID) {
-        HashMap news=newsDetailMapper.getOneNewsByID(ID);
+        HashMap news=newsManageMapper.getOneNewsByID(ID);
         return Result.createSuccessResult(news);
     }
 
