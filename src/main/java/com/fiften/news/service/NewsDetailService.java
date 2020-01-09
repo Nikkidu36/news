@@ -6,7 +6,7 @@ import com.fiften.news.util.Result;
 import javax.servlet.http.HttpServletRequest;
 
 public interface NewsDetailService {
-    NewsDetail doUpload(String title, String key, String detail);
+    Result doUpload(String userName,String title,String key,String detail);
 
     Result getAllMyNews(HttpServletRequest httpServletRequest);
 

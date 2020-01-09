@@ -20,7 +20,9 @@ public interface MediaService {
     Result getAllReportedMedia();
 
 
-    //封号
+    //注销账号
     boolean logoutMedia(Integer media);
+
+    Result getIdByUserName(String userName);
 
 }
