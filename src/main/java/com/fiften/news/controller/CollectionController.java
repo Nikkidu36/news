@@ -15,7 +15,7 @@ public class CollectionController {
     CollectionService collectionService;
 
     @PostMapping("/isCollection")
-    Result isCollection(@RequestParam("userName") String userName,@RequestParam("newsId") int newsId){
+    Result isCollection(@RequestParam("userName") String userName,@RequestParam("news_id") int newsId){
         return collectionService.isCollection(userName,newsId);
     }
 

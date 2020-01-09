@@ -26,19 +26,20 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public Result isCollection(String userName,int nid) {
 
-        Collection baseCollection=collectionMapper.selectCollectionByUsernameAndNid(userName,nid);
+        List<HashMap> baseCollection=collectionMapper.selectCollectionByUsernameAndNid(userName,nid);
 
-        if(baseCollection!=null){
-            JSONObject res = new JSONObject();
-
-            res.put("type",1);
-            return Result.createSuccessResult(res);
-        }else{
-            JSONObject res = new JSONObject();
-            res.put("uid",baseCollection.getUserId());
-            res.put("type",2);
-            return Result.createSuccessResult(res);
-        }
+        return Result.createSuccessResult(baseCollection.size(),baseCollection);
+//        if(baseCollection!=null){
+//            JSONObject res = new JSONObject();
+//
+//            res.put("type",1);
+//            return Result.createSuccessResult(res);
+//        }else{
+//            JSONObject res = new JSONObject();
+//            res.put("uid",baseCollection.getUserId());
+//            res.put("type",2);
+//            return Result.createSuccessResult(res);
+//        }
     }
 
     @Override

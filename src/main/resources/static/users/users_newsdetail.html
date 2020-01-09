@@ -111,7 +111,8 @@
         ajaxPost("/showDetail", {news_id: param.news_id}, function (res) {
             console.log(res)
             if (res.code == 0) {
-                $("#details").append(`<div class="panel-heading" style="text-align: center;">
+                if(res.data[0].collectionTimes>0){
+                    $("#details").append(`<div class="panel-heading" style="text-align: center;">
                                 <h3>` + res.data[0].title + `</h3>
                                 <p>作者：` + res.data[0].user_name + `&nbsp;&nbsp;&nbsp;&nbsp;发表日期：` + res.data[0].publish_Date + `&nbsp;&nbsp;&nbsp;&nbsp;收藏次数：` + res.data[0].collectionTimes + `</p>
                             </div>
@@ -123,6 +124,21 @@
                                 </div>
                                 <hr>
                             </div>`)
+                }else{
+                    $("#details").append(`<div class="panel-heading" style="text-align: center;">
+                                <h3>` + res.data[0].title + `</h3>
+                                <p>作者：` + res.data[0].user_name + `&nbsp;&nbsp;&nbsp;&nbsp;发表日期：` + res.data[0].publish_Date + `&nbsp;&nbsp;&nbsp;&nbsp;收藏次数：0</p>
+                            </div>
+                            <button type="button" class="layui-btn layui-btn-normal" id="collectionBtn">收藏</button>
+                            <button type="button" class="layui-btn layui-btn-normal" ><a href="../user_report.html?news_id=`+RequestParameter().news_id+`">举报</a></button>
+                            <div class="panel-body" style="padding-bottom:30px;">
+                                <div class="panel-body-main">
+                                    <p>` + res.data[0].detail + `</p>
+                                </div>
+                                <hr>
+                            </div>`)
+                }
+
             } else {
                 alert("???")
             }
@@ -135,7 +151,7 @@
         $("#collectionBtn").click(function () {
             ajaxPost("/isCollection",{news_id:param.news_id,userName:param.userName},function (res) {
                 if(res.code==0){
-                    if(res.data.type==2){
+                    if(res.count==0){
                         ajaxPost("/addCollection",{news_id:param.news_id,user_id:res.data.uid},function (res1) {
                             if(res1.code==0){
                                 layui.use('layer', function () {
@@ -145,9 +161,13 @@
                                     setTimeout(function () {
                                         window.location.reload()
                                     }, 1000)
-                                }
+                                })
+                            }else{
+                                alert("2222")
                             }
                         })
+                    }else{
+                        alert("1111")
                     }
                 }
 

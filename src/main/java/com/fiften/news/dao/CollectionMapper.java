@@ -61,9 +61,11 @@ public interface CollectionMapper {
      */
     int updateByPrimaryKey(Collection record);
 
-    Collection selectCollectionByUsernameAndNid(@Param("username") String userName,@Param("nid") Integer nid);
+    List<HashMap> selectCollectionByUsernameAndNid(@Param("username") String userName,@Param("nid") Integer nid);
 
     List<HashMap> getMyCollectionList(@Param("id") Integer id);
 
     List<HashMap> totalCollection(@Param("id") Integer id);
+
+    Integer isInCollectionByNid(@Param("id") Integer id);
 }
