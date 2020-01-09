@@ -68,4 +68,6 @@ public interface CollectionMapper {
     List<HashMap> totalCollection(@Param("id") Integer id);
 
     Integer isInCollectionByNid(@Param("id") Integer id);
+
+    int delCollection(@Param("nid") Integer nid,@Param("uid") Integer uid);
 }
