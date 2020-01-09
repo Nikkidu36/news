@@ -75,8 +75,8 @@
       <if test="title != null" >
         title,
       </if>
-      <if test="news_key != null" >
-        news_key,
+      <if test="key != null" >
+        key,
       </if>
       <if test="submitDate != null" >
         submit_Date,
@@ -159,7 +159,7 @@
     update news_detail
     set media_id = #{mediaId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
-      news_key = #{news_key,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
       submit_Date = #{submitDate,jdbcType=VARCHAR},
       publish_Date = #{publishDate,jdbcType=VARCHAR},
       detail = #{detail,jdbcType=VARCHAR},
