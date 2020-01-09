@@ -48,12 +48,12 @@ public class MediaController {
     public String logoutMedia(@RequestParam("mediaId") Integer mediaId){
         if (mediaService.logoutMedia(mediaId)){
             return "<script>\n" +
-                    "    alert(\"封号成功\");\n" +
+                    "    alert(\"注销成功\");\n" +
                     "    window.location = \"/userManager/useredit.html\"\n" +
                     "</script>";
         }else {
             return "<script>\n" +
-                    "    alert(\"封号失败\");\n" +
+                    "    alert(\"注销失败\");\n" +
                     "    window.location = \"/userManager/useredit.html\"\n" +
                     "</script>";
         }
