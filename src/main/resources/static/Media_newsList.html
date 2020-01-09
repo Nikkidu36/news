@@ -34,7 +34,19 @@
     <!--<script src="js/jQuery/jquery.cookie.js"></script>-->
     <!--<script src="js/jQuery/carhartl-jquery-cookie-92b7715/jquery.cookie.js"></script>-->
 
+    <script>
+        $(function () {
+            var param =  RequestParameter()
+            console.log(param.userName)
+            $("#user-name").text(param.userName)
+            $("#user-name-2").text("欢迎您："+param.userName+"，你好。")
+            $("#user-name-3").text("欢迎您："+param.userName+"，你好。")
+            console.log($("#user-name").text())
+        })
 
+
+
+    </script>
     <!-- end: Css -->
 
 </head>
@@ -48,7 +60,7 @@
             <div class="opener-left-menu is-open"> <span class="top"></span> <span class="middle"></span> <span class="bottom"></span> </div>
             <a href="index.html" class="navbar-brand"> <b>返回首页</b> </a>
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span><%=username%></span></li>
+                <li id="user-name" class="user-name">你好<span></span></li>
                 <li class="dropdown avatar-dropdown"> <img src="asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
                         <li><a href="#"><p value="<%=username%>" id="backli" onclick="back()"><span class="fa fa-power-off"></span> 退出登录</p></a></li>
@@ -176,7 +188,6 @@
 <script>
 
     $(function () {
-
         $.ajax({
             url: "/getAllMyNews",
             type: "post",

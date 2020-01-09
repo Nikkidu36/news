@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 public interface CollectionService {
     Result isCollection(String userName,int nid);
 
-    Result addCollection(int uid,int nid);
+    Result addCollection(int nid,HttpServletRequest httpServletRequest);
+
+    Result delCollection(int nid,HttpServletRequest httpServletRequest);
 
     Result getMyCollectionList(HttpServletRequest httpServletRequest);
 

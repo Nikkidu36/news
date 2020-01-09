@@ -131,4 +131,8 @@
     where news_id=#{id}
     group by collection.news_id
   </select>
+  <delete id="delCollection" parameterType="java.lang.Integer">
+    delete from collection
+    where user_id = #{uid} and news_id=#{nid}
+  </delete>
 </mapper>

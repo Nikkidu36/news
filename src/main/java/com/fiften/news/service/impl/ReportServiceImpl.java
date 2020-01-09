@@ -18,7 +18,7 @@ public class ReportServiceImpl implements ReportService {
     NewsDetailMapper newsDetailMapper;
 
     @Override
-    public Result doReport(int  news_id,String reason){
+    public Result doReport(int news_id,String reason){
         ReportList reportList = new ReportList();
         reportList.setNewsId(news_id);
         reportList.setReason(reason);

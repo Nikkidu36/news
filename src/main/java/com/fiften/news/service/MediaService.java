@@ -23,4 +23,6 @@ public interface MediaService {
     //注销账号
     boolean logoutMedia(Integer media);
 
+    Result getIdByUserName(String userName);
+
 }

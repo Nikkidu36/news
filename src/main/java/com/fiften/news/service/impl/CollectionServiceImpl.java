@@ -43,13 +43,21 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public Result addCollection(int uid, int nid) {
+    public Result addCollection(int nid,HttpServletRequest httpServletRequest) {
+
+        Integer uid = Integer.parseInt(tokenService.getUserId(httpServletRequest));
 
         Collection collection = new Collection();
         collection.setNewsId(nid);
         collection.setUserId(uid);
 
         return Result.createSuccessResult(collectionMapper.insertSelective(collection));
+    }
+
+    @Override
+    public Result delCollection(int nid, HttpServletRequest httpServletRequest) {
+        Integer uid = Integer.parseInt(tokenService.getUserId(httpServletRequest));
+        return Result.createSuccessResult(collectionMapper.delCollection(nid,uid));
     }
 
     @Override

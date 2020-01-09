@@ -20,8 +20,13 @@ public class CollectionController {
     }
 
     @PostMapping("/addCollection")
-    Result addCollection(@RequestParam("news_id") int nid,@RequestParam("user_id") int uid){
-        return collectionService.addCollection(uid,nid);
+    Result addCollection(@RequestParam("news_id") int nid,HttpServletRequest httpServletRequest){
+        return collectionService.addCollection(nid,httpServletRequest);
+    }
+
+    @PostMapping("/delCollection")
+    Result delCollection(@RequestParam("news_id") int nid,HttpServletRequest httpServletRequest){
+        return collectionService.delCollection(nid,httpServletRequest);
     }
 
     @PostMapping("/getMyCollectionList")

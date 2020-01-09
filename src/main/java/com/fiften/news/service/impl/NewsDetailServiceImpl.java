@@ -1,9 +1,13 @@
 package com.fiften.news.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fiften.news.dao.MediaMapper;
 import com.fiften.news.dao.CollectionMapper;
 import com.fiften.news.dao.NewsDetailMapper;
+import com.fiften.news.dao.NewsManageMapper;
+import com.fiften.news.model.Media;
 import com.fiften.news.model.NewsDetail;
+import com.fiften.news.model.NewsManage;
 import com.fiften.news.service.NewsDetailService;
 import com.fiften.news.dao.NewsDetailMapper;
 import com.fiften.news.model.NewsDetail;
@@ -26,6 +30,9 @@ public class NewsDetailServiceImpl implements NewsDetailService {
 
     @Autowired
     NewsDetailMapper newsDetailMapper;
+
+    @Autowired
+    NewsManageMapper newsManageMapper;
 
     @Autowired
     CollectionMapper collectionMapper;
@@ -70,17 +77,27 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     @Autowired
     TokenService tokenService;
 
+    @Autowired
+    MediaMapper mediaMapper;
+
     @Override
-    public NewsDetail doUpload(String title, String key, String detail) {
+    public Result doUpload(String userName,String title,String key,String detail) {
         NewsDetail newsDetail = new NewsDetail();
         newsDetail.setTitle(title);
         newsDetail.setKey(key);
         newsDetail.setDetail(detail);
 
         newsDetail.setSubmitDate(commentUtil.getCurTime());
-
-
-        return newsDetail;
+        NewsManage newsManage=new NewsManage();
+        newsDetailMapper.insertSelective(newsDetail);
+        newsManage.setNewsId(newsDetail.getId());
+        newsManage.setAuditStatus("N");
+        newsManage.setAuditResult("N");
+        newsManage.setPublishStatus("N");
+        newsManage.setRejectStatus("N");
+        newsManage.setReportStatus("N");
+        newsManageMapper.insert(newsManage);
+        return Result.createSuccessResult(newsDetail);
     }
 
     @Override
