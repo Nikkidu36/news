@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fiften.news.dao.MediaMapper;
 import com.fiften.news.dao.NewsDetailMapper;
 import com.fiften.news.dao.NewsManageMapper;
+import com.fiften.news.model.Media;
 import com.fiften.news.model.NewsDetail;
 import com.fiften.news.model.NewsManage;
 import com.fiften.news.service.NewsDetailService;
@@ -76,11 +77,19 @@ public class NewsDetailServiceImpl implements NewsDetailService {
         newsDetail.setTitle(title);
         newsDetail.setKey(key);
         newsDetail.setDetail(detail);
-        int media_id=mediaMapper.selectIdByUserName(userName);
-        newsDetail.setMediaId(media_id);
+        Media media =mediaMapper.selectIdByUserName(userName);
+        newsDetail.setMediaId(media.getMediaId());
         newsDetail.setSubmitDate(commentUtil.getCurTime());
         NewsManage newsManage=new NewsManage();
-        return Result.createSuccessResult(newsDetailMapper.insertSelective(newsDetail));
+        newsDetailMapper.insertSelective(newsDetail);
+        newsManage.setNewsId(newsDetail.getId());
+        newsManage.setAuditStatus("N");
+        newsManage.setAuditResult("N");
+        newsManage.setPublishStatus("N");
+        newsManage.setRejectStatus("N");
+        newsManage.setReportStatus("N");
+        newsManageMapper.insert(newsManage);
+        return Result.createSuccessResult(newsDetail);
     }
 
     @Override

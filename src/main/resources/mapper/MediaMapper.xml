@@ -178,7 +178,7 @@
     where available_status = "Y"
   </select>
 
-  <select id="selectIdByUserName" resultMap="BaseResultMap">
-    SELECT media_id from media where user_name=#{userName}
-     </select>
+  <select id="selectIdByUserName" resultMap="BaseResultMap" parameterType="string">
+    SELECT * from media where user_name=#{userName}
+   </select>
 </mapper>

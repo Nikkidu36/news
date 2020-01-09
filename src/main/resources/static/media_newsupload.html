@@ -82,7 +82,7 @@
             </ul>
         </div>
     </div>
-    <form  method="post" enctype="multipart/form-data">
+    <form>
         <div id="content">
             <div class="panel">
                 <div class="panel-body">
@@ -132,7 +132,7 @@
                                         </div>
                                         <div class="layui-form-item">
                                             <div class="layui-input-block">
-                                                <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1" >上传</button>
+                                                <button type="button"  id="UploadButtonn" class="layui-btn" lay-submit="" lay-filter="demo1" >上传</button>
                                                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                             </div>
                                         </div>
@@ -162,8 +162,9 @@
                             </div>
                         </div>
                         <div class="col-md-12 text-center" style="margin:20px; margin-left: -70px;">
-                            <input id="UploadBtn" class="submit btn btn-danger" type="submit" value="上传">
+                            <!--<button id="UploadButtonn" class="submit btn btn-danger" type="button" value="上传"></button>-->
                         </div>
+                        <!--<button id="UploadButtonn">上传啊啊</button>-->
                     </div>
                 </div>
             </div>
@@ -175,9 +176,10 @@
       <!-- start: Javascript -->
 <script>
     $(function () {
-        $("#UploadBtn").click(function () {
+        $("#UploadButtonn").click(function () {
+            console.log("sdasd")
             var param = RequestParameter()
-            ajaxPost("/UploadNews", {userName: param.userName,title:$("#title").val(),key:$("#key").val(),detail:$("#detail").val()}, function (res) {
+            ajaxPost("/UploadNews", {userName: getCookies("username"),title:$("#title").val(),key:$("#key").val(),detail:$("#detail").val()}, function (res) {
                 if (res.code ==0 ){
                     layui.use("use",function () {
                         var layer = layui.layer;

@@ -67,7 +67,7 @@ public interface MediaMapper {
 
     List<Media> selectAllAvailableMedia();
 
-    int selectIdByUserName(String userName);
+    Media selectIdByUserName(String userName);
 
 
 }
