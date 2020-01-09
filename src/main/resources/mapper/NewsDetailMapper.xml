@@ -205,6 +205,11 @@ where nd.media_id = m.media_id AND m.media_id = #{id} and nm.news_id=nd.ID
     where nm.news_id=nd.ID and nd.media_id=media.media_id and nm.audit_status="Y" and nm.audit_result="Y" and nm.publish_status="Y"
 
   </select>
+  <select id="showNewsByIdWithoutCollect" parameterType="integer" resultType="hashmap">
+    select nd.title,nd.news_key,nd.publish_Date,nd.detail,nd.news_image,media.user_name
+      from news_detail as nd,media,news_manage as nm
+      where nd.ID=#{id} and nd.media_id=media.media_id and nm.audit_status="Y" and nm.audit_result="Y" and nm.publish_status="Y" and nm.news_id=#{id}
+  </select>
 
 
 </mapper>

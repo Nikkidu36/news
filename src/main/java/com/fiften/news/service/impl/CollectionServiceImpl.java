@@ -3,6 +3,7 @@ package com.fiften.news.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.fiften.news.dao.CollectionMapper;
 import com.fiften.news.model.Collection;
+import com.fiften.news.model.User;
 import com.fiften.news.service.CollectionService;
 import com.fiften.news.service.TokenService;
 import com.fiften.news.util.Result;
@@ -23,23 +24,40 @@ public class CollectionServiceImpl implements CollectionService {
     TokenService tokenService;
 
     @Override
-    public Result isCollection(int uid,int nid) {
+    public Result isCollection(String userName,int nid) {
 
-        Collection collection=new Collection();
-        collection.setUserId(uid);
+        List<HashMap> baseCollection=collectionMapper.selectCollectionByUsernameAndNid(userName,nid);
+
+        return Result.createSuccessResult(baseCollection.size(),baseCollection);
+//        if(baseCollection!=null){
+//            JSONObject res = new JSONObject();
+//
+//            res.put("type",1);
+//            return Result.createSuccessResult(res);
+//        }else{
+//            JSONObject res = new JSONObject();
+//            res.put("uid",baseCollection.getUserId());
+//            res.put("type",2);
+//            return Result.createSuccessResult(res);
+//        }
+    }
+
+    @Override
+    public Result addCollection(int nid,HttpServletRequest httpServletRequest) {
+
+        Integer uid = Integer.parseInt(tokenService.getUserId(httpServletRequest));
+
+        Collection collection = new Collection();
         collection.setNewsId(nid);
+        collection.setUserId(uid);
 
-        Collection baseCollection=collectionMapper.selectCollectionByUidAndNid(collection);
+        return Result.createSuccessResult(collectionMapper.insertSelective(collection));
+    }
 
-        if(baseCollection!=null){
-            JSONObject res = new JSONObject();
-            res.put("type",1);
-            return Result.createSuccessResult(res);
-        }else{
-            JSONObject res = new JSONObject();
-            res.put("type",2);
-            return Result.createSuccessResult(res);
-        }
+    @Override
+    public Result delCollection(int nid, HttpServletRequest httpServletRequest) {
+        Integer uid = Integer.parseInt(tokenService.getUserId(httpServletRequest));
+        return Result.createSuccessResult(collectionMapper.delCollection(nid,uid));
     }
 
     @Override

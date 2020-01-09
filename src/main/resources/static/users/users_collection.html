@@ -23,6 +23,16 @@
 <body id="mimin" class="dashboard">
 
     <script>
+        <!--显示登陆用户的用户名-->
+        $(function () {
+            var param =  RequestParameter()
+            console.log(param.userName)
+            console.log(param)
+            $("#user-name").text(param.userName)
+            $("#user-name-2").text("欢迎您："+param.userName)
+            console.log($("#user-name").text())
+        })
+
         $(function () {
             $.ajax({
                 url: "/getMyCollectionList",
@@ -62,7 +72,7 @@
                 </div>
                 <a href="/users/users_collection.html" class="navbar-brand"> <b>用户收藏</b> </a>
                 <ul class="nav navbar-nav navbar-right user-nav">
-                    <li class="user-name"><span>美丽的小姐</span></li>
+                    <li class="user-name"><span id="user-name">美丽的小姐</span></li>
                     <li class="dropdown avatar-dropdown">
                         <img src="../asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                         <ul class="dropdown-menu user-dropdown">
@@ -96,7 +106,7 @@
             <div class="panel">
                 <div class="panel-body">
                     <div class="col-md-6 col-sm-12">
-                        <h3 class="animated fadeInLeft">欢迎您：美丽的小姐</h3>
+                        <h3 class="animated fadeInLeft" id="user-name-2">欢迎您：美丽的小姐</h3>
                         <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> 用户收藏</p>
                     </div>
                 </div>

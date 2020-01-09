@@ -2,6 +2,7 @@ package com.fiften.news.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fiften.news.dao.MediaMapper;
+import com.fiften.news.dao.CollectionMapper;
 import com.fiften.news.dao.NewsDetailMapper;
 import com.fiften.news.dao.NewsManageMapper;
 import com.fiften.news.model.Media;
@@ -33,6 +34,9 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     @Autowired
     NewsManageMapper newsManageMapper;
 
+    @Autowired
+    CollectionMapper collectionMapper;
+
     @Override
     public Result searchNewsByTitle(String title) {
 
@@ -50,9 +54,14 @@ public class NewsDetailServiceImpl implements NewsDetailService {
     @Override
     public Result showNewsById(int id) {
 
-        List<HashMap> NewsDetailList=newsDetailMapper.showNewsById(id);
-
-        return Result.createSuccessResult(NewsDetailList.size(),NewsDetailList);
+        List<HashMap> NewsDetailList;
+        List<HashMap> NewsDetailList1;
+        if(collectionMapper.isInCollectionByNid(id)==null){
+            NewsDetailList=newsDetailMapper.showNewsByIdWithoutCollect(id);
+            return Result.createSuccessResult(NewsDetailList.size(),NewsDetailList);
+        }
+        NewsDetailList1=newsDetailMapper.showNewsById(id);
+        return Result.createSuccessResult(NewsDetailList1.size(),NewsDetailList1);
     }
 
     @Override
@@ -77,8 +86,7 @@ public class NewsDetailServiceImpl implements NewsDetailService {
         newsDetail.setTitle(title);
         newsDetail.setKey(key);
         newsDetail.setDetail(detail);
-        Media media =mediaMapper.selectIdByUserName(userName);
-        newsDetail.setMediaId(media.getMediaId());
+
         newsDetail.setSubmitDate(commentUtil.getCurTime());
         NewsManage newsManage=new NewsManage();
         newsDetailMapper.insertSelective(newsDetail);
