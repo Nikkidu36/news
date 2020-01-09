@@ -68,6 +68,7 @@ public interface NewsDetailMapper {
 
 
     List<HashMap> getAllMyNews(@Param("id") Integer id);
+
     HashMap getOneNewsByID(Integer ID);
 
     boolean updateSubmitDateByID(Integer ID);
